@@ -40,6 +40,25 @@ endif
 let g:clang2_placeholder_next = ''
 let g:clang2_placeholder_prev = ''
 
+" additional plugins
+let g:spacevim_custom_plugins = []
+call add(
+      \ g:spacevim_custom_plugins,
+      \ [ 'christoomey/vim-tmux-navigator', {
+      \     'lazy' : 1,
+      \     'on_cmd' : ['TmuxNavigateLeft', 'TmuxNavigateDown', 'TmuxNavigateUp', 'TmuxNavigateRight', 'TmuxNavigatePrevious'],
+      \   },
+      \ ])
+
+" 不希望map <C-\>，因此自行map
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <c-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <c-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
+
 " set SpaceVim colorscheme
 let g:spacevim_colorscheme = 'solarized'
 let g:spacevim_enable_guicolors = 0
+

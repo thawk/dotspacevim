@@ -90,7 +90,11 @@ let g:spacevim_colorscheme_bg = 'dark'
 let g:spacevim_enable_guicolors = 0
 
 " set the guifont
-let g:spacevim_guifont = 'DejaVu\ Sans\ Mono\ for\ Powerline\ 12'
+"let g:spacevim_guifont = 'DejaVu\ Sans\ Mono\ for\ Powerline\ 12'
+if WINDOWS()
+  " use fontlink to map fonts into Consolas, so just use Consolas is OK
+    let g:spacevim_guifont = 'Consolas:h13:cANSI:qDRAFT'
+endif
 " }}}
 
 " Addtional mappings {{{

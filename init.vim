@@ -27,6 +27,9 @@ let g:spacevim_disabled_plugins=[]
 
 " Settings {{{
 let g:spacevim_enable_debug = 1
+" Enable/Disable key frequency catching of SpaceVim
+let g:spacevim_enable_key_frequency = 1
+
 let g:spacevim_realtime_leader_guide = 1
 let g:spacevim_enable_vimfiler_welcome = 1
 
@@ -51,7 +54,7 @@ let g:clang2_placeholder_next = ''
 let g:clang2_placeholder_prev = ''
 " }}}
 
-" additional plugins {{{
+" Additional plugins {{{
 let g:spacevim_custom_plugins = []
 
 "" vim-tmux-navigator {{{
@@ -82,6 +85,11 @@ let g:asciidoc_fold_style = 'nested'
 let g:asciidoc_fold_override_foldtext = 1
 "" }}}
 
+"" vim-bracketed-paste {{{
+call add(g:spacevim_custom_plugins, [ 'ConradIrwin/vim-bracketed-paste' ])
+let g:bracketed_paste_tmux_wrap = 0
+"" }}}
+
 " }}}
 
 " Colorscheme && Fonts {{{
@@ -97,7 +105,11 @@ if WINDOWS()
 endif
 " }}}
 
-" Addtional mappings {{{
+" Key mappings {{{
+" Set unite work flow shortcut leader [Unite], default is `f`
+let g:spacevim_unite_leader = '\f'
+let g:spacevim_denite_leader = '\F'
+
 " call SpaceVim#custom#SPCGroupName(['G'], '+TestGroup')
 " call SpaceVim#custom#SPC('nore', ['G', 't'], 'echom 1', 'echomessage 1', 1)]])
 

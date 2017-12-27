@@ -93,9 +93,9 @@ let g:bracketed_paste_tmux_wrap = 0
 " }}}
 
 " Colorscheme && Fonts {{{
-let g:spacevim_colorscheme = 'solarized'
+let g:spacevim_colorscheme = 'NeoSolarized'
 let g:spacevim_colorscheme_bg = 'dark'
-let g:spacevim_enable_guicolors = 0
+"let g:spacevim_enable_guicolors = 0
 
 " set the guifont
 "let g:spacevim_guifont = 'DejaVu\ Sans\ Mono\ for\ Powerline\ 12'

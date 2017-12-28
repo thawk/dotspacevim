@@ -1,0 +1,101 @@
+snippet if
+if (${1})
+{
+	${0}
+}
+endsnippet
+
+snippet else
+else
+{
+	${0}
+}    
+endsnippet
+
+snippet elseif
+else if (${1})
+{
+	${0}
+}
+endsnippet
+
+snippet ifelse
+if (${1})
+{
+	${2}
+}
+else
+{
+	${3}
+}
+endsnippet
+
+snippet for
+for (${1} = 0; $1 < ${2}; ++$1)
+{
+	${0}
+}
+endsnippet
+
+snippet while
+while (${1})
+{
+	${0}
+}
+endsnippet
+
+snippet do
+do
+{
+	${0}
+}
+while (${1});
+endsnippet
+
+snippet switch
+switch (${1})
+{
+case ${2}:
+	${0}
+	break;
+}
+endsnippet
+
+snippet func
+${1:void} ${2}(${3})
+{
+	${0}
+}
+endsnippet
+
+snippet struct
+struct ${1}
+{
+	${0}
+};
+endsnippet
+
+# Typedef struct
+snippet struct_typedef
+typedef struct ${1}
+{
+	${0}
+};
+endsnippet
+
+snippet enum
+enum ${1}
+{
+	${0}
+};
+endsnippet
+
+# hard-tab is necessary; C indent doesn't support this.
+snippet main
+int main(int argc, char const* argv[])
+{
+	${0}
+	return 0;
+}
+endsnippet
+

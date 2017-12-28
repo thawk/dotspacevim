@@ -1,0 +1,60 @@
+snippet reveal "Reveal.js" b
+// vim: set filetype=asciidoc fileencoding=utf-8:
+= ${1:`expand("%:t:r")`}
+:imagesdir: images
+
+${0}
+== 双列1
+
+[width="400",float="left"]
+image::https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg[]
+
+--
+* 第一项
+* 第二项
+* 第三项
+--
+
+== 递进
+[%step]
+* First point
+* Second point
+* Final point
+
+[%notitle]
+== No title slide
+
+Using `[%notitle]`
+
+[background-color="yellow"]
+== Slide Three
+
+黄色背景
+
+[%notitle]
+
+[transition=zoom, %notitle]
+== Zoom zoom
+
+This slide will override the presentation transition and zoom!
+
+[transition-speed=fast, %notitle]
+== Speed
+
+Choose from three transition speeds: default, fast or slow!
+
+== Speaker View
+
+Hello World - Good Bye Cruel World
+
+[NOTE.speaker]
+--
+Actually things aren't that bad
+--
+endsnippet
+
+snippet ifbackend "ifdef::backend" b
+ifdef::backend-${1:revealjs}[${2:=== !}]
+
+${0}
+endsnippet

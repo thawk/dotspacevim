@@ -1,0 +1,149 @@
+snippet skel
+// vim: set filetype=asciidoc fileencoding=utf-8:
+= ${1:`!v expand("%:t:r")`}
+:numbered:
+:encoding: UTF-8
+:toc: macro
+:toc-title: `!v "\u76ee\u5f55"`
+:icons: font
+:data-uri:
+
+toc::[]
+
+${0}
+endsnippet
+
+snippet src "source list" b
+[source,${1}]
+----
+${VISUAL}${2}
+----
+${0}
+endsnippet
+
+snippet -- "open block" b
+--
+${VISUAL}$1
+--
+${0}
+endsnippet
+
+snippet table "table" b
+[cols="${1:${2:2}*}", options="${3:header}"]
+|===
+|${VISUAL/\n\s*/\n|/g}${4}
+|===
+${0}
+endsnippet
+
+snippet quote "Quote Block" b
+[quote${1:,${2:author}${3:,${4:source}}}]
+____
+${VISUAL}$5
+____
+${0}
+endsnippet
+
+snippet verse "Verse Block" b
+[verse,${1:author},${2:source}]
+____
+${VISUAL}$3
+____
+${0}
+endsnippet
+
+snippet comment "Comment Block" b
+////
+${VISUAL}$1
+////
+${0}
+endsnippet
+
+snippet passthrough "Passthrough Block" b
+++++
+${VISUAL}$1
+++++
+${0}
+endsnippet
+
+snippet listing "Listing Block" b
+----
+${VISUAL}$1
+----
+${0}
+endsnippet
+
+snippet literal "Literal Block" b
+....
+${VISUAL}$1
+....
+${0}
+endsnippet
+
+snippet sidebar "Sidebar Block" b
+****
+${VISUAL}$1
+****
+${0}
+endsnippet
+
+snippet example "Example Block" b
+====
+${VISUAL}$1
+====
+${0}
+endsnippet
+
+snippet note "Note admonition" b
+[NOTE]
+.${1:Title}
+====
+${VISUAL}$2
+====
+${0}
+endsnippet
+
+snippet style "text with style (class, like red/red-background/big/small/underline/overline/line-through)"
+[${1:red}]#${VISUAL}$2#${0}
+endsnippet
+
+snippet footnote "Footnote"
+footnote:[${1:${VISUAL:text}}]${0}
+endsnippet
+
+snippet anchor-macro "Hypertext link target"
+anchor:${1:${VISUAL:id}}[${2:label}]${0}
+endsnippet
+
+snippet anchor "Hypertext link target"
+[[${1:id}${2:,label}]]`!p snip.rv='#'+snip.v.text+'#' if snip.v.text else ''`${0}
+endsnippet
+
+snippet [[ "Hypertext link target"
+[[${1:id}${2:,label}]]`!p snip.rv='#'+snip.v.text+'#' if snip.v.text else ''`${0}
+endsnippet
+
+snippet xref-macro "Link to hypertext anchor"
+xref:${1:${VISUAL:id}}[${2:caption}]${0}
+endsnippet
+
+snippet xref "Link to hypertext anchor"
+<<${1:id}${2:,caption}>>${0}
+endsnippet
+
+snippet << "Link to hypertext anchor"
+<<${1:id}${2:,caption}>>${0}
+endsnippet
+
+snippet image-inline "Inline Image"
+image:${1:url}[${2:alt="${VISUAL:$3}"}]${0}
+endsnippet
+
+snippet image-block "Block Image"
+image::${1:url}[${2:alt="${VISUAL:$3}"}]${0}
+endsnippet
+
+snippet link "Link to URL"
+link:${1:url}[${2:${VISUAL:title}}]${0}
+endsnippet
+

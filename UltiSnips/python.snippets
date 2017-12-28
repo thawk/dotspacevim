@@ -1,0 +1,139 @@
+snippet attr "attribute with sphinx docstring" b
+#: ${3:type: TODO}
+self.${1:attr} = ${2:$1}
+${0}
+endsnippet
+
+snippet catch-keyboard "Catch KeyboardInterrupt" b
+try:
+	${VISUAL}${0}
+
+except KeyboardInterrupt:
+	pass
+
+finally:
+	pass
+endsnippet
+
+#! header
+snippet #! "Shebang header for python scripts" b
+#!/usr/bin/env python${1:}
+# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+
+$0
+endsnippet
+
+snippet modeline "VIM modeline for python scripts" b
+# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+endsnippet
+
+snippet context
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import ${1:sample}
+endsnippet
+
+snippet skel2 "skel with argparse for python2" b
+#!/usr/bin/env python2
+# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+
+# Imports
+import argparse
+import codecs
+import locale
+import logging
+import sys
+
+VERSION=u'`!v strftime("%Y%m%d")`'
+
+def main(**args):
+	${0:pass}
+
+if __name__ == '__main__':
+	reload(sys)
+	sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+	sys.stderr = codecs.getwriter(locale.getpreferredencoding())(sys.stderr)
+	sys.setdefaultencoding(locale.getpreferredencoding())
+
+	parser = argparse.ArgumentParser(
+		description=u'''\
+${1:description}''')
+
+	parser.add_argument('-v', '--verbose', action='count', dest='verbose', help=u'Be moderatery verbose')
+	parser.add_argument('-q', '--quiet', action='store_true', dest='quiet', default=False, help=u'Only show warning and errors')
+	parser.add_argument('--version', action='version', version=VERSION, help=u'Show version and quit')
+	parser.add_argument('gateway_id', nargs='1', help=u'Gateway ID')
+
+	args = parser.parse_args()
+
+	# 对解释出来的参数进行编码转换
+	for k in vars(args):
+		v = getattr(args, k)
+		if isinstance(v, str):
+			setattr(args, k, unicode(v, locale.getpreferredencoding()).strip())
+		elif isinstance(v, list):
+			setattr(
+				args, k,
+				[unicode(s, locale.getpreferredencoding()).strip() if isinstance(s, str) else s for s in v])
+
+	if not args.verbose:
+		args.verbose = 0
+
+	# 日志初始化
+	log_format = u'%(asctime)s %(levelname)s %(message)s'
+
+	if args.quiet:
+		logging.basicConfig(level=logging.WARNING, format=log_format)
+	elif args.verbose > 0:
+		logging.basicConfig(level=logging.DEBUG, format=log_format)
+	else:
+		logging.basicConfig(level=logging.INFO, format=log_format)
+
+	main(**vars(args))
+endsnippet
+
+snippet skel3 "skel with argparse for python3" b
+#!/usr/bin/env python3
+# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+
+# Imports
+import argparse
+import codecs
+import locale
+import logging
+
+VERSION=u'`!v strftime("%Y%m%d")`'
+
+def main(**args):
+	${0:pass}
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser(
+		description=u'''\
+${1:description}''')
+
+	parser.add_argument('-v', '--verbose', action='count', dest='verbose', help=u'Be moderatery verbose')
+	parser.add_argument('-q', '--quiet', action='store_true', dest='quiet', default=False, help=u'Only show warning and errors')
+	parser.add_argument('--version', action='version', version=VERSION, help=u'Show version and quit')
+	parser.add_argument('gateway_id', nargs=1, help=u'Gateway ID')
+
+	args = parser.parse_args()
+
+	if not args.verbose:
+		args.verbose = 0
+
+	# 日志初始化
+	log_format = u'%(asctime)s %(levelname)s %(message)s'
+
+	if args.quiet:
+		logging.basicConfig(level=logging.WARNING, format=log_format)
+	elif args.verbose > 0:
+		logging.basicConfig(level=logging.DEBUG, format=log_format)
+	else:
+		logging.basicConfig(level=logging.INFO, format=log_format)
+
+	main(**vars(args))
+endsnippet
+

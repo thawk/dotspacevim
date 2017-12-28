@@ -1,0 +1,14 @@
+snippet nb "NeoBundle" b
+" ${1/^(?:.*\/)([^\/]*)$/$1/}: ${2:description} {{{
+NeoBundle '${1}'
+${0}
+" }}}
+endsnippet
+
+snippet nbl "NeoBundleLazy" b
+" ${1/^(?:.*\/)([^\/]*)$/$1/}: ${2:description} {{{
+NeoBundleLazy '${1}', {
+            \ ${0}
+            \ }
+" }}}
+endsnippet

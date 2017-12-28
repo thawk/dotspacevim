@@ -1,0 +1,67 @@
+snippet skel "Basic getopt skel"
+#!/bin/sh
+
+function EchoUsage()
+{
+	echo "
+Usage: $(basename "\$0") [options] <module_id>
+
+	Options:
+		-h [ --help ]            show this screen
+		-V [ --version ]         show program version
+		-v [ --verbose=<level> ] Set log level. 0: trace, 1: debug, 2:info ...
+" >&2
+}
+
+TEMP=$(getopt -o h,V,v:: --long help,version,verbose:: -- "$@")
+
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+
+# Note the quotes around `$TEMP': they are essential!
+eval set -- "$TEMP"
+
+show_version=
+args=
+
+while true ; do
+	case "\$1" in
+		-h|--help)
+			EchoUsage
+			exit 1
+			;;
+		-V|--version)
+			show_version=1
+			shift 1
+			break
+			;;
+		-v|--verbose)
+			args="${args} --verbose \$2"
+			shift 2
+			;;
+		--)
+			shift 1
+			break
+			;;
+		*) 
+			echo "Unknown parameter '\$1'!"
+			exit 1
+			;;
+	esac
+done
+
+# 参数最小为1
+if [ $# -lt 1 ]
+then
+	EchoUsage
+	exit 1
+fi
+
+module_id=\$1
+
+# 显示版本
+if [ ! -z "${show_version}" ]
+then
+	echo "Version"
+	exit 0
+fi
+endsnippet

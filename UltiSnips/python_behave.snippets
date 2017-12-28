@@ -1,0 +1,26 @@
+snippet step "Behave step_impl" b
+@${1:given}(u'${2:content}')
+def step_impl(context):
+	$0
+endsnippet
+
+snippet behave "behave steps skel" b
+# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+from behave import *
+
+$0
+endsnippet
+
+snippet step_table "Behave step_impl with table" b
+@${1:given}(u'${2:content}')
+def step_impl(context):
+	for row in context.table:
+		$0
+endsnippet
+
+snippet step_match "Behave step_impl with matching" b
+@${1:given}(u'${2:matching {text}}')
+def step_impl(context, ${3:text}):
+	$0
+endsnippet
+

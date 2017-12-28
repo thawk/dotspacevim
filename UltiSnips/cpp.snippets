@@ -1,0 +1,64 @@
+snippet try
+try
+{
+    ${1}
+}
+catch (${2:...})
+{
+    ${3}
+}
+endsnippet
+
+snippet fori
+for (${1:size_t} ${2:i}=${3:0}; $2 < ${4}; ++$2)
+{
+    ${0}
+}
+endsnippet
+
+# range based for ( C++11 feature )
+snippet fore
+for (${1:auto} ${2:i} : ${3:container})
+{
+    ${4}
+}
+endsnippet
+
+snippet namespace
+namespace ${1:#:name}
+{
+
+${0}
+
+}   // namespace $1
+endsnippet
+
+snippet mfun
+${4:void} ${1:`substitute(substitute(expand("%:t:r"), "^\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`}::${2:MemberFunction}(${3})
+{
+    ${0}
+}
+endsnippet
+
+snippet helloworld
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const* argv[])
+{
+    ${0:cout << "hello, world!" << endl;}
+
+    return 0;
+}
+endsnippet
+
+snippet log
+LOG_${1:INFO}(
+    ${2:kInfo},
+    format(translate(${3}))
+    % ${4},
+    ${5:""});
+
+${0}
+endsnippet
+

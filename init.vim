@@ -51,7 +51,10 @@ endif
 if has('python3')
     let g:ctrlp_map = ''
     nnoremap <silent> <C-p> :Denite file_rec<CR>
+else
+    call SpaceVim#custom#SPC('nnoremap', ['f', 'f'], 'UniteWithBufferDir file', 'Find files in the directory of the current buffer', 1)
 endif
+
 let g:clang2_placeholder_next = ''
 let g:clang2_placeholder_prev = ''
 

@@ -28,9 +28,10 @@ let g:spacevim_disabled_plugins=[]
 " }}}
 
 " Settings {{{
-let g:spacevim_enable_debug = 1
+let g:spacevim_enable_debug = 0
 " Enable/Disable key frequency catching of SpaceVim
 let g:spacevim_enable_key_frequency = 1
+let g:spacevim_default_indent = 4
 
 let g:spacevim_realtime_leader_guide = 1
 let g:spacevim_enable_vimfiler_welcome = 1

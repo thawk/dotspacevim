@@ -30,6 +30,8 @@ let g:spacevim_disabled_plugins=[]
 " Native settings {{{
 set ignorecase
 set smartcase
+set wildmode=longest:full,full
+set wildmenu
 " }}}
 
 " Settings {{{

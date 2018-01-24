@@ -27,6 +27,11 @@ call SpaceVim#layers#load('tools#screensaver')
 let g:spacevim_disabled_plugins=[]
 " }}}
 
+" Native settings {{{
+set ignorecase
+set smartcase
+" }}}
+
 " Settings {{{
 let g:spacevim_enable_debug = 0
 " Enable/Disable key frequency catching of SpaceVim

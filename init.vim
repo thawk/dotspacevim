@@ -83,11 +83,11 @@ let g:spacevim_custom_plugins = []
 
 "" vim-tmux-navigator {{{
 call add(g:spacevim_custom_plugins,
-      \ [ 'christoomey/vim-tmux-navigator', {
-      \     'lazy' : 1,
-      \     'on_cmd' : ['TmuxNavigateLeft', 'TmuxNavigateDown', 'TmuxNavigateUp', 'TmuxNavigateRight', 'TmuxNavigatePrevious'],
-      \   },
-      \ ])
+            \ [ 'christoomey/vim-tmux-navigator', {
+            \     'lazy' : 1,
+            \     'on_cmd' : ['TmuxNavigateLeft', 'TmuxNavigateDown', 'TmuxNavigateUp', 'TmuxNavigateRight', 'TmuxNavigatePrevious'],
+            \   },
+            \ ])
 
 " 不希望map <C-\>，因此自行map
 let g:tmux_navigator_no_mappings = 1
@@ -100,11 +100,11 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
 
 "" vim-asciidoc-folding {{{
 call add(g:spacevim_custom_plugins,
-      \ [ 'thawk/vim-asciidoc-folding', {
-      \     'lazy' : 1,
-      \     'on_ft' : 'asciidoc',
-      \   },
-      \ ])
+            \ [ 'thawk/vim-asciidoc-folding', {
+            \     'lazy' : 1,
+            \     'on_ft' : 'asciidoc',
+            \   },
+            \ ])
 let g:asciidoc_fold_style = 'nested'
 let g:asciidoc_fold_override_foldtext = 1
 "" }}}
@@ -114,6 +114,45 @@ call add(g:spacevim_custom_plugins, [ 'ConradIrwin/vim-bracketed-paste' ])
 let g:bracketed_paste_tmux_wrap = 0
 "" }}}
 
+"" vim-fswitch {{{
+call add(g:spacevim_custom_plugins, [ 'derekwyatt/vim-fswitch', {
+            \ 'lazy' : 1,
+            \ 'on_func' : ['FSwitch'],
+            \ 'on_cmd' : ['FSHere','FSRight','FSSplitRight','FSLeft','FSSplitLeft','FSAbove','FSSplitAbove','FSBelow','FSSplitBelow'],
+            \ }])
+
+    let g:fsnonewfiles=1
+    " 可以用:A在.h/.cpp间切换
+    command! A :call FSwitch('%', '')
+
+    augroup fswitch
+        autocmd!
+
+        autocmd! BufEnter *.h,*.hpp
+                    \  let b:fswitchdst='cpp,c,ipp,cxx'
+                    \| let b:fswitchlocs='reg:/include/src/,reg:/include.*/src/,ifrel:|/include/|../src|,reg:!\<include/\w\+/!src/!,reg:!\<include/\(\w\+/\)\{2}!src/!,reg:!\<include/\(\w\+/\)\{3}!src/!,reg:!\<include/\(\w\+/\)\{4}!src/!,reg:!sscc\(/[^/]\+\|\)/.*!libs\1/**!'
+        autocmd! BufEnter *.c,*.cpp,cxx,*.ipp
+                    \  let b:fswitchdst='h,hpp'
+                    \| let b:fswitchlocs='reg:/src/include/,reg:|/src|/include/**|,ifrel:|/src/|../include|,reg:|libs/.*|**|'
+        autocmd! BufEnter *.xml
+                    \  let b:fswitchdst='rnc'
+                    \| let b:fswitchlocs='./'
+        autocmd! BufEnter *.rnc
+                    \  let b:fswitchdst='xml'
+                    \| let b:fswitchlocs='./'
+
+    augroup END
+
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'a'], 'FSHere', 'Switch to the file and load it into the current window', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'A'], 'FSSplitRight', 'Switch to the file and load it into a new window split on the right', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'l'], 'FSRight', 'Switch to the file and load it into the window on the right', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'L'], 'FSSplitRight', 'Switch to the file and load it into a new window split on the right', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'h'], 'FSLeft', 'Switch to the file and load it into the window on the left', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'H'], 'FSSplitLeft', 'Switch to the file and load it into a new window split on the left', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'k'], 'FSAbove', 'Switch to the file and load it into the window above', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'K'], 'FSSplitAbove', 'Switch to the file and load it into a new window split above', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'j'], 'FSBelow', 'Switch to the file and load it into the window below', 1)
+    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'J'], 'FSSplitBelow', 'Switch to the file and load it into a new window split below', 1)
 " }}}
 
 " Colorscheme && Fonts {{{
@@ -124,7 +163,7 @@ let g:spacevim_colorscheme_bg = 'dark'
 " set the guifont
 "let g:spacevim_guifont = 'DejaVu\ Sans\ Mono\ for\ Powerline\ 12'
 if WINDOWS()
-  " use fontlink to map fonts into Consolas, so just use Consolas is OK
+    " use fontlink to map fonts into Consolas, so just use Consolas is OK
     let g:spacevim_guifont = 'Consolas:h13:cANSI:qDRAFT'
 endif
 " }}}

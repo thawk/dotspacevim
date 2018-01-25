@@ -54,7 +54,35 @@ let g:spacevim_enable_statusline_display_mode = 0
 let g:spacevim_enable_os_fileformat_icon = 1
 let g:spacevim_buffer_index_type = 1
 
-"" Neomake settings {{{
+if has('python3')
+    let g:ctrlp_map = ''
+    nnoremap <silent> <C-p> :Denite file_rec<CR>
+else
+    call SpaceVim#custom#SPC('nnoremap', ['f', 'f'], 'UniteWithBufferDir file', 'Find files in the directory of the current buffer', 1)
+endif
+
+let g:spacevim_snippet_engine = 'ultisnips'
+" }}}
+
+" Plugin settings {{{
+
+"" Projectionist {{{
+let g:projectionist_heuristics = {
+            \ 'Makefile': {
+            \   '*': {'make': 'make'},
+            \ },
+            \ 'Jamroot|Jamroot.v2': {
+            \   '*': {'make': 'b2'},
+            \ },
+            \ }
+"" }}}
+
+"" clang2 {{{
+let g:clang2_placeholder_next = ''
+let g:clang2_placeholder_prev = ''
+"" }}}
+
+"" Neomake {{{
 let g:neomake_vim_enabled_makers = []
 
 if executable('vimlint')
@@ -65,17 +93,6 @@ if executable('vint')
 endif
 "" }}}
 
-if has('python3')
-    let g:ctrlp_map = ''
-    nnoremap <silent> <C-p> :Denite file_rec<CR>
-else
-    call SpaceVim#custom#SPC('nnoremap', ['f', 'f'], 'UniteWithBufferDir file', 'Find files in the directory of the current buffer', 1)
-endif
-
-let g:clang2_placeholder_next = ''
-let g:clang2_placeholder_prev = ''
-
-let g:spacevim_snippet_engine = 'ultisnips'
 " }}}
 
 " Additional plugins {{{

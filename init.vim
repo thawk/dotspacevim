@@ -40,6 +40,11 @@ let g:spacevim_enable_debug = 0
 let g:spacevim_enable_key_frequency = 1
 let g:spacevim_default_indent = 4
 
+"" Wildignore {{{
+let g:spacevim_wildignore .= ',.*/'  " 忽略隐藏目录
+let g:spacevim_wildignore .= ',bin*/**/gcc-*/'
+"" }}}
+
 let g:spacevim_realtime_leader_guide = 1
 let g:spacevim_enable_vimfiler_welcome = 1
 
@@ -48,6 +53,8 @@ let g:spacevim_enable_tabline_filetype_icon = 1
 let g:spacevim_enable_statusline_display_mode = 0
 let g:spacevim_enable_os_fileformat_icon = 1
 let g:spacevim_buffer_index_type = 1
+
+"" Neomake settings {{{
 let g:neomake_vim_enabled_makers = []
 
 if executable('vimlint')
@@ -56,6 +63,8 @@ endif
 if executable('vint')
     call add(g:neomake_vim_enabled_makers, 'vint')
 endif
+"" }}}
+
 if has('python3')
     let g:ctrlp_map = ''
     nnoremap <silent> <C-p> :Denite file_rec<CR>

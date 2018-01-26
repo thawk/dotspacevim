@@ -195,3 +195,6 @@ let g:spacevim_denite_leader = '\F'
 
 call SpaceVim#custom#SPC('nnoremap', ['j', 'i'], 'Denite outline unite:outline', 'jump to a definition in buffer', 1)
 " }}}
+
+runtime cpp_path_settings.vim
+

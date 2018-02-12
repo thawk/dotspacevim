@@ -1,0 +1,198 @@
+snippet skel "skel with argparse for python" b
+#!/usr/bin/env python
+# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+"""{0:描述本程序的作用}
+"""
+
+# Imports
+import argparse
+try:
+    import cPickle as pickle
+except:
+    import pickle
+import logging
+import os
+import sys
+
+if sys.version_info[0] < 3:
+	import codecs
+	import locale
+
+
+VERSION = u'`!v strftime("%Y%m%d")`'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+# 存放结果的目录
+DEFAULT_OUTPUT_DIR = 'result'
+
+
+def parse(args):
+    """解释输入文件
+
+    Args:
+        args (Namespace): 命令行参数
+
+    Returns (Dict[string, pd.DataFrame]): 解释结果
+    """
+    return dict()
+
+
+def analyze(result, args):
+    """分析解释结果
+
+    Args:
+        result (Dict[string, pd.DataFrame]): 解释结果
+        args (Namespace): 命令行参数
+    """
+    pass
+
+
+def load_result(pickle_file):
+    """载入解释结果
+
+    Args:
+        pickle_file (string): pickle文件路径
+
+    Returns (Dict[string, pd.DataFrame]): 解释结果
+    """
+    logging.info(u'Loading Pickle file "%s"...', pickle_file)
+
+    with open(pickle_file, 'r') as _:
+        return pickle.load(_)
+
+    logging.info(u'  Done.')
+
+
+def export_result(pickle_file, result):
+    """导出解释结果
+
+    Args:
+        pickle_file (string): pickle文件路径
+        result (Dict[string, pd.DataFrame]): 解释结果
+    """
+    logging.info(u'Exporting to "%s"...', pickle_file)
+
+    if not os.path.exists(os.path.dirname(pickle_file)):
+        os.path.mkpath(os.path.dirname(pickle_file))
+
+    with open(pickle_file, 'w') as _:
+        pickle.dump(result, _, pickle.HIGHEST_PROTOCOL)
+
+    logging.info(u'  Done.')
+
+
+def init_locale():
+    """初始化locale信息"""
+	if sys.version_info[0] < 3:
+        sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+        sys.stderr = codecs.getwriter(locale.getpreferredencoding())(sys.stderr)
+
+
+def locale_args(args):
+    """对解释出来的命令行参数进行编码转换
+
+    Args:
+        args (Namespace): 解释结果
+
+    Returns (Namespace): 转换为unicode的解释结果
+    """
+    # 对解释出来的参数进行编码转换
+    for key in vars(args):
+        value = getattr(args, key)
+        if isinstance(value, str):
+            setattr(
+                args, key,
+                unicode(value, locale.getpreferredencoding()).strip())
+        elif isinstance(value, list):
+            setattr(
+                args, key,
+                [
+                    unicode(s, locale.getpreferredencoding()).strip()
+                    if isinstance(s, str) else s for s in value
+                ])
+
+    return args
+
+
+def init_logger(args):
+    """日志初始化
+
+    Args:
+        args (Namespace): 命令行参数
+    """
+    log_format = u'%(asctime)s %(levelname)s %(message)s'
+
+    if args.quiet:
+        logging.basicConfig(level=logging.WARNING, format=log_format)
+    elif args.verbose:
+        logging.basicConfig(level=logging.DEBUG, format=log_format)
+    else:
+        logging.basicConfig(level=logging.INFO, format=log_format)
+
+
+def main(argv):
+    """程序主入口
+
+    Args:
+        args (Namespace): 命令行参数
+    """
+    init_locale()
+    args = init_args(argv)
+
+    if hasattr(args, 'load') and args.load:
+        result = load_result(args.load)
+    else:
+        result = parse(args)
+
+        if hasattr(args, 'export') and args.export:
+            export_result(args.export, result)
+
+    analyze(result, args)
+
+
+def init_args(argv):
+    """解释命令行参数
+
+    Args:
+        argv (List[string]): 命令行参数（sys.argv[1:]）
+
+    Returns (Namespace): 解释结果
+    """
+    parser = argparse.ArgumentParser(
+        description=u'''\
+${1:description}''')
+
+    parser.add_argument(
+        '-v', '--verbose', action='store_true', dest='verbose', default=False,
+        help=u'显示调试日志')
+    parser.add_argument(
+        '-q', '--quiet', action='store_true', dest='quiet', default=False,
+        help=u'只显示警告以上级别的日志')
+    parser.add_argument(
+        '--version', action='version', version=VERSION,
+        help=u'显示程序版本号后退出')
+    parser.add_argument(
+        '-o', '--output', action='store', dest='output_dir',
+        default=DEFAULT_OUTPUT_DIR, help=u'结果存放目录')
+    parser.add_argument(
+        '--load', action='store', dest='load', metavar='PICKLE_FILE',
+        help=u'从pickle文件中载入数据而不是从日志中分析')
+    parser.add_argument(
+        '--export', action='store', dest='export', default=False,
+        help=u'保存各结果为pickle文件')
+    parser.add_argument(
+        '-c', '--concurrent', action='store', default='auto',
+        help=u'并发数')
+    #  parser.add_argument(
+    #      'logfile', nargs='*', help=u'日志文件路径')
+
+    args = parser.parse_args(argv)
+
+	if sys.version_info[0] < 3:
+		args = locale_args(args)
+
+	return args
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
+endsnippet

@@ -34,7 +34,7 @@ set wildmode=longest:full,full
 set wildmenu
 " }}}
 
-" Settings {{{
+" SpaceVim Settings {{{
 let g:spacevim_enable_debug = 0
 " Enable/Disable key frequency catching of SpaceVim
 let g:spacevim_enable_key_frequency = 1
@@ -93,6 +93,15 @@ if executable('vint')
 endif
 "" }}}
 
+"" ultisnips {{{
+let g:ultisnips_python_quoting_style = "single"
+let g:ultisnips_python_triple_quoting_style = "double"
+let g:ultisnips_python_style = "google"
+"" }}}
+
+"" vim-pydocstring {{{
+let g:pydocstring_templates_dir = '~/.SpaceVim.d/templates/pydocstring/google'
+"" }}}
 " }}}
 
 " Additional plugins {{{

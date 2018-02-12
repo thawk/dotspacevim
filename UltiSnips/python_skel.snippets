@@ -84,6 +84,9 @@ def export_result(pickle_file, result):
 def init_locale():
 	"""初始化locale信息"""
 	if sys.version_info[0] < 3:
+		reload(sys)
+		sys.setdefaultencoding('utf8')
+
 		encoding = locale.getpreferredencoding()
 		sys.stdout = codecs.getwriter(encoding)(sys.stdout)
 		sys.stderr = codecs.getwriter(encoding)(sys.stderr)

@@ -24,7 +24,7 @@ call SpaceVim#layers#load('tools#screensaver')
 
 " If there is a particular plugin you don't like, you can define this
 " variable to disable them entirely:
-let g:spacevim_disabled_plugins=[]
+let g:spacevim_disabled_plugins=['vim-gutentags']
 " }}}
 
 " Native settings {{{

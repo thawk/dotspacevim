@@ -1,0 +1,89 @@
+snippet mapreduce "Sync and Async map/reduce"
+import functools
+import itertools
+import multiprocessing
+
+
+def map_reduce(mapper, reducer, inputs, process_count='auto'):
+	"""把inputs通过mapper和reducer处理为结果
+
+	Args:
+		mapper (Function): 单参数的函数，依次对inputs进行处理
+		reducer (Function): 接受两个参数，返回一个结果
+		inputs (Sequence): 要处理的数据列表
+		process_count: 数字表示指定了进程数，''或'auto'使用CPU核数
+
+	Returns: 最终的结果
+
+	"""
+	# 确定进程数
+	if process_count == '' or process_count == 'auto':
+		# 如果只有一个核就直接用当前进程即可
+		if multiprocessing.cpu_count() > 1:
+			process_count = multiprocessing.cpu_count()
+		else:
+			process_count = 0
+	else:
+		process_count = int(process_count)
+
+	if process_count > 1:
+		try:
+			input_count = len(inputs)
+			if process_count > input_count:
+				process_count = input_count
+		except TypeError:  # Can't get len
+			pass
+
+		pool = multiprocessing.Pool(process_count)
+
+		result = functools.reduce(
+			reducer, pool.imap(mapper, inputs))
+
+		pool.close()
+		pool.join()
+	else:
+		result = functools.reduce(
+			reducer,
+			itertools.imap(mapper, inputs))
+
+	return result
+endsnippet
+
+snippet ip_in_network "Check if an ip is in network"
+import socket
+import struct
+
+def ip_in_network(ip, net):
+	"""Is an address in a network
+	Args:
+		ip: socket.inet_aton格式或x.x.x.x格式的字符串
+		net: 192.168.0.0/24格式的字符串
+	
+	Returns (Bool): ip是否在net中
+	"""
+	if len(ip) > 4:
+		ip = socket.inet_aton(ip)
+
+	ipaddr = struct.unpack('L', ip)[0]
+	netaddr, bits = net.split('/')
+	netmask = struct.unpack('L',socket.inet_aton(netaddr))[0] & ((2L<<int(bits)-1) - 1)
+	return ipaddr & netmask == netmask
+endsnippet
+
+snippet add_thousands_sep "Add thousands sep"
+def add_thousands_sep(num):
+    """把数字转换为带千位分隔符的字符串
+
+    Args:
+        num: 要转换的数字。如果是小数，则只为整数部分加上千位分隔符
+
+    Returns:
+        字符串，转换结果
+    """
+    parts = str(num).split('.')
+    s = parts[0][::-1] # 反转
+    parts[0] = ",".join([s[i:i+3] for i in range(0,len(s),3)])   # 每三个数字加一个逗号
+    parts[0] = parts[0][::-1] # 再反转为正常顺序
+
+    return ".".join(parts)
+endsnippet

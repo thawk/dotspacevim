@@ -2,7 +2,7 @@
 
 " layers {{{
 call SpaceVim#layers#load('autocomplete')
-call SpaceVim#layers#load('incsearch')
+call SpaceVim#layers#disable('incsearch')
 call SpaceVim#layers#load('lang#c')
 " call SpaceVim#layers#load('lang#elixir')
 call SpaceVim#layers#load('lang#go')
@@ -39,6 +39,7 @@ let g:spacevim_enable_debug = 0
 " Enable/Disable key frequency catching of SpaceVim
 let g:spacevim_enable_key_frequency = 1
 let g:spacevim_default_indent = 4
+let g:spacevim_windows_smartclose = ''  " 恢复q的正常用途
 
 "" Wildignore {{{
 let g:spacevim_wildignore .= ',.*/'  " 忽略隐藏目录
@@ -149,9 +150,7 @@ call add(g:spacevim_custom_plugins, [ 'derekwyatt/vim-fswitch', {
 
     let g:fsnonewfiles=1
     " 可以用:A在.h/.cpp间切换
-    command! A :call FSwitch('%', '')
-
-    augroup fswitch
+    augroup vimrc_fswitch
         autocmd!
 
         autocmd! BufEnter *.h,*.hpp
@@ -167,18 +166,20 @@ call add(g:spacevim_custom_plugins, [ 'derekwyatt/vim-fswitch', {
                     \  let b:fswitchdst='xml'
                     \| let b:fswitchlocs='./'
 
+        autocmd! FileType c,cpp,xml,rnc
+                    \  command! -buffer A :call FSwitch('%', '')
+                    \| call SpaceVim#custom#SPCGroupName(['l', 'j'], '+Jump')
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'a'], 'FSHere', 'Switch to the file and load it into the current window', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'A'], 'FSSplitRight', 'Switch to the file and load it into a new window split on the right', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'l'], 'FSRight', 'Switch to the file and load it into the window on the right', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'L'], 'FSSplitRight', 'Switch to the file and load it into a new window split on the right', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'h'], 'FSLeft', 'Switch to the file and load it into the window on the left', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'H'], 'FSSplitLeft', 'Switch to the file and load it into a new window split on the left', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'k'], 'FSAbove', 'Switch to the file and load it into the window above', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'K'], 'FSSplitAbove', 'Switch to the file and load it into a new window split above', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'j'], 'FSBelow', 'Switch to the file and load it into the window below', 1)
+                    \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'J'], 'FSSplitBelow', 'Switch to the file and load it into a new window split below', 1)
     augroup END
-
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'a'], 'FSHere', 'Switch to the file and load it into the current window', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'A'], 'FSSplitRight', 'Switch to the file and load it into a new window split on the right', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'l'], 'FSRight', 'Switch to the file and load it into the window on the right', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'L'], 'FSSplitRight', 'Switch to the file and load it into a new window split on the right', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'h'], 'FSLeft', 'Switch to the file and load it into the window on the left', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'H'], 'FSSplitLeft', 'Switch to the file and load it into a new window split on the left', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'k'], 'FSAbove', 'Switch to the file and load it into the window above', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'K'], 'FSSplitAbove', 'Switch to the file and load it into a new window split above', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'j'], 'FSBelow', 'Switch to the file and load it into the window below', 1)
-    call SpaceVim#custom#SPC('nnoremap', ['m', 'g', 'J'], 'FSSplitBelow', 'Switch to the file and load it into a new window split below', 1)
 " }}}
 
 " Colorscheme && Fonts {{{
@@ -198,6 +199,7 @@ endif
 " Set unite work flow shortcut leader [Unite], default is `f`
 let g:spacevim_unite_leader = '\f'
 let g:spacevim_denite_leader = '\F'
+"let g:spacevim_windows_leader = 's'
 
 " call SpaceVim#custom#SPCGroupName(['G'], '+TestGroup')
 " call SpaceVim#custom#SPC('nore', ['G', 't'], 'echom 1', 'echomessage 1', 1)]])

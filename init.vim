@@ -106,7 +106,7 @@ let g:ultisnips_python_style = "google"
 let g:pydocstring_templates_dir = '~/.SpaceVim.d/templates/pydocstring/google'
 "" }}}
 
-"" Tagbar {{
+"" Tagbar {{{
 let g:tagbar_autofocus = 1
 "" }}}
 
@@ -187,6 +187,33 @@ call add(g:spacevim_custom_plugins, [ 'derekwyatt/vim-fswitch', {
                     \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'j'], 'FSBelow', 'Switch to the file and load it into the window below', 1)
                     \| call SpaceVim#custom#SPC('nnoremap <buffer>', ['l', 'j', 'J'], 'FSSplitBelow', 'Switch to the file and load it into a new window split below', 1)
     augroup END
+" }}}
+
+"" patchreview-vim {{{
+call add(g:spacevim_custom_plugins, [ 'junkblocker/patchreview-vim', {
+            \ 'lazy' : 1,
+            \ 'on_cmd' : ['PatchReview','PatchReviewPersist','ReversePatchReview','ReversePatchReviewPersist','DiffReview','DiffReviewPersist'],
+            \ }])
+"" }}}
+
+"" CodeReviewer.vim {{{
+call add(g:spacevim_custom_plugins, [ 'vim-scripts/CodeReviewer.vim', {
+            \ 'lazy' : 1,
+            \ 'on_map': {'n': '<Plug>AddComment'},
+            \ 'on_cmd' : ['CheckReview','SortReviewFile'],
+            \ }])
+call SpaceVim#custom#SPC('nmap', ['i', 'c'], '<Plug>AddComment', 'Insert code review comment', 0)
+
+if $USER != ""
+    let g:CodeReviewer_reviewer = $USER
+elseif $USERNAME != ""
+    let g:CodeReviewer_reviewer = $USERNAME
+else
+    let g:CodeReviewer_reviewer = "Unknown"
+endif
+
+let g:CodeReviewer_reviewFile="review.rev"
+"" }}}
 " }}}
 
 " Colorscheme && Fonts {{{

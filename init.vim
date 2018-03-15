@@ -103,6 +103,11 @@ let g:ultisnips_python_style = "google"
 "" vim-pydocstring {{{
 let g:pydocstring_templates_dir = '~/.SpaceVim.d/templates/pydocstring/google'
 "" }}}
+
+"" Tagbar {{
+let g:tagbar_autofocus = 1
+"" }}}
+
 " }}}
 
 " Additional plugins {{{

@@ -43,7 +43,9 @@ let g:spacevim_windows_smartclose = ''  " 恢复q的正常用途
 
 "" Wildignore {{{
 let g:spacevim_wildignore .= ',.*/'  " 忽略隐藏目录
-let g:spacevim_wildignore .= ',bin*/**/gcc-*/'
+let g:spacevim_wildignore .= ',bin*/**/gcc-*/**'
+let g:spacevim_wildignore .= ',*.gcov'
+let g:spacevim_wildignore .= ',*.o'
 "" }}}
 
 let g:spacevim_realtime_leader_guide = 1

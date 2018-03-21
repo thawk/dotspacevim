@@ -19,7 +19,10 @@ call SpaceVim#layers#load('lang#python')
 call SpaceVim#layers#load('lang#tmux')
 call SpaceVim#layers#load('lang#vim')
 call SpaceVim#layers#load('lang#xml')
-call SpaceVim#layers#load('shell')
+call SpaceVim#layers#load('denite')
+call SpaceVim#layers#load('leaderf')
+call SpaceVim#layers#load('unite')
+" call SpaceVim#layers#load('shell')
 call SpaceVim#layers#load('tags')
 " call SpaceVim#layers#load('tools#screensaver')
 
@@ -239,7 +242,7 @@ endif
 " call SpaceVim#custom#SPCGroupName(['G'], '+TestGroup')
 " call SpaceVim#custom#SPC('nore', ['G', 't'], 'echom 1', 'echomessage 1', 1)]])
 
-call SpaceVim#custom#SPC('nnoremap', ['j', 'i'], 'Denite outline unite:outline', 'jump to a definition in buffer', 1)
+" call SpaceVim#custom#SPC('nnoremap', ['j', 'i'], 'Denite outline unite:outline', 'jump to a definition in buffer', 1)
 " }}}
 
 runtime cpp_path_settings.vim

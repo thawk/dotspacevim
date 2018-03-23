@@ -19,6 +19,8 @@ call SpaceVim#layers#load('lang#python')
 call SpaceVim#layers#load('lang#tmux')
 call SpaceVim#layers#load('lang#vim')
 call SpaceVim#layers#load('lang#xml')
+call SpaceVim#layers#load('tools')
+" call SpaceVim#layers#load('ctrlp')
 call SpaceVim#layers#load('denite')
 call SpaceVim#layers#load('leaderf')
 call SpaceVim#layers#load('unite')
@@ -69,6 +71,8 @@ let g:spacevim_buffer_index_type = 1
 " endif
 
 let g:spacevim_snippet_engine = 'ultisnips'
+
+let g:spacevim_src_root = '~/workspace/'
 " }}}
 
 " Plugin settings {{{

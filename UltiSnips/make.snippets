@@ -1,4 +1,4 @@
-snippet	skel "C++ base Makefile"
+snippet	skel_cpp "C++ base Makefile"
 TARGET = ${1:target}
 
 # Listing all sources
@@ -34,4 +34,18 @@ $(TARGET): $(SOURCES:.cpp=.o)
 
 # Include ".d"s for each .cpp
 -include $(SOURCES:.cpp=.d)
+endsnippet
+
+snippet	skel_python "Python base Makefile" t
+init:
+	pip install pipenv
+	pipenv install --dev
+
+test:
+	py.test tests
+
+run:
+	pipenv run python ${1:main}.py
+
+PHONY: init run test
 endsnippet

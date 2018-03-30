@@ -238,6 +238,14 @@ endif
 " }}}
 
 " Key mappings {{{
+augroup vimrc_jam
+    autocmd!
+    autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2,*.jam :set filetype=jam
+    autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2 :setlocal makeprg=b2
+augroup END
+" }}}
+
+" Key mappings {{{
 " Set unite work flow shortcut leader [Unite], default is `f`
 " let g:spacevim_unite_leader = '\f'
 " let g:spacevim_denite_leader = '\F'

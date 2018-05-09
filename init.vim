@@ -222,6 +222,13 @@ endif
 
 let g:CodeReviewer_reviewFile="review.rev"
 "" }}}
+
+"" colorizer: 彩色显示#RRGGBB {{{
+call add(g:spacevim_custom_plugins, [ 'lilydjwg/colorizer' ])
+" let g:colorizer_nomap = 1
+" let g:colorizer_startup = 0
+"" }}}
+
 " }}}
 
 " Colorscheme && Fonts {{{
@@ -256,6 +263,4 @@ augroup END
 
 " call SpaceVim#custom#SPC('nnoremap', ['j', 'i'], 'Denite outline unite:outline', 'jump to a definition in buffer', 1)
 " }}}
-
-runtime cpp_path_settings.vim
 

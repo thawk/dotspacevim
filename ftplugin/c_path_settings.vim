@@ -1,3 +1,9 @@
+" Only do this when not done yet for this buffer
+if exists("b:did_ftplugin")
+    finish
+endif
+let b:did_ftplugin = 1
+
 let s:cpp_include_path_ready = 0
 let s:cpp_include_path = []
 
@@ -156,7 +162,5 @@ function! SetupEnvironment()
     call s:AddCppDefaultIncludePath()
 endfunction
 
-augroup vim_path_setting
-    autocmd BufReadPre,BufNewFile *.h,*.hpp,*.cpp,*.c,*.ipp call SetupEnvironment()
-augroup end
+call SetupEnvironment()
 " vim: filetype=vim fileencoding=utf-8

@@ -1,8 +1,7 @@
-snippet	skel_cpp "C++ base Makefile"
+snippet	skel_cpp "C++ base Makefile" bt
 TARGET = ${1:target}
 
-# Listing all sources
-SOURCES = $(wildcard *.cpp)
+# Listing all sources SOURCES = $(wildcard *.cpp)
 
 CXXFLAGS = -std=c++11
 # depended libraries
@@ -36,7 +35,7 @@ $(TARGET): $(SOURCES:.cpp=.o)
 -include $(SOURCES:.cpp=.d)
 endsnippet
 
-snippet	skel_python "Python base Makefile" t
+snippet	skel_python "Python base Makefile" bt
 init:
 	pip install pipenv
 	pipenv install --dev

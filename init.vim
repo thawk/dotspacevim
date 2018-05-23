@@ -119,6 +119,10 @@ let g:pydocstring_templates_dir = '~/.SpaceVim.d/templates/pydocstring/google'
 let g:tagbar_autofocus = 1
 "" }}}
 
+"" Startify {{{
+let g:startify_custom_header = ['   Welcome to SpaceVim!']
+"" }}}
+
 " }}}
 
 " Additional plugins {{{

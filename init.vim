@@ -13,7 +13,9 @@ endif
 if executable('go')
     call SpaceVim#layers#load('lang#go')
 endif
-" call SpaceVim#layers#load('lang#haskell')
+if executable('ghc')
+    call SpaceVim#layers#load('lang#haskell')
+endif
 if executable('javac')
     call SpaceVim#layers#load('lang#java')
 endif

@@ -132,6 +132,24 @@ let g:tagbar_autofocus = 1
 let g:startify_custom_header = ['   Welcome to SpaceVim!']
 "" }}}
 
+"" Unite {{{
+if exists('*unite#custom#source')
+    call unite#custom#source(
+                \ 'file_rec,file_rec/async,grep',
+                \ 'ignore_pattern',
+                \ join([
+                \ '\%(^\|/\)\.$',
+                \ '\~$',
+                \ '\.\%(o\|a\|exe\|dll\|bak\|DS_Store\|zwc\|pyc\|sw[po]\|class\|gcno\|gcda\|gcov\)$',
+                \ '\%(^\|/\)gcc-[0-9]\+\%(\.[0-9]\+\)*/',
+                \ '\%(^\|/\)doc/html/',
+                \ '\%(^\|/\)stage/',
+                \ '\%(^\|/\)boost\%(\|_\w\+\)/',
+                \ '\%(^\|/\)\%(\.hg\|\.git\|\.bzr\|\.svn\|tags\%(-.*\)\?\)\%($\|/\)',
+                \ ], '\|'))
+endif
+    
+"" }}}
 " }}}
 
 " Additional plugins {{{

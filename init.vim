@@ -87,6 +87,11 @@ let g:spacevim_src_root = '~/workspace/'
 
 " Plugin settings {{{
 
+"" dein.vim {{{
+" Do a shallow clone
+let g:dein#types#git#clone_depth = 1
+"" }}}
+
 "" Projectionist {{{
 let g:projectionist_heuristics = {
             \ 'Makefile': {

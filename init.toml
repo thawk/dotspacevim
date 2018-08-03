@@ -1,0 +1,154 @@
+# All SpaceVim option below [option] section
+[options]
+    bootstrap_before = "myspacevim#before"
+    bootstrap_after = "myspacevim#after"
+
+    # set spacevim theme. by default colorscheme layer is not loaded,
+    # if you want to use more colorscheme, please load the colorscheme
+    # layer
+    colorscheme = "NeoSolarized"
+    background = "dark"
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = true
+
+    # use fontlink to map fonts into Consolas, so just use Consolas is OK
+    guifont = 'Consolas:h13:cANSI:qDRAFT'
+
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "arrow"
+    statusline_inactive_separator = "arrow"
+    buffer_index_type = 4
+    enable_tabline_filetype_icon = true
+    enable_statusline_display_mode = false
+
+    # If there is a particular plugin you don't like, you can define this
+    # variable to disable them entirely:
+    disabled_plugins=['vim-gutentags']
+    
+    default_indent = 4
+    # 恢复q的正常用途
+    windows_smartclose = ''
+    
+    # Wildignore
+    wildignore = '*/tmp/*,*.so,*.swp,*.zip,*.class,tags,*.jpg,*.ttf,*.TTF,*.png,*/target/*,.git,.svn,.hg,.DS_Store,*.svg,.*/,bin*/**/gcc-*/**,*.gcov,*.o'
+    
+    realtime_leader_guide = 1
+    enable_vimfiler_welcome = 1
+    
+    enable_tabline_filetype_icon = 1
+    enable_statusline_display_mode = 0
+    enable_os_fileformat_icon = 1
+    buffer_index_type = 1
+    
+    snippet_engine = 'ultisnips'
+    
+    src_root = '~/workspace/'
+
+[[layers]]
+name = 'VersionControl'
+
+[[layers]]
+name = 'autocomplete'
+auto-completion-return-key-behavior = "complete"
+auto-completion-tab-key-behavior = "smart"
+
+[[layers]]
+name = 'colorscheme'
+
+[[layers]]
+name = 'denite'
+
+[[layers]]
+name = 'incsearch'
+enable = false
+
+[[layers]]
+name = 'lang#c'
+
+[[layers]]
+name = 'lang#clojure'
+
+[[layers]]
+name = 'lang#go'
+enable = false
+
+[[layers]]
+name = 'lang#haskell'
+enable = false
+
+[[layers]]
+name = 'lang#java'
+
+[[layers]]
+name = 'lang#javascript'
+
+[[layers]]
+name = 'lang#python'
+
+[[layers]]
+name = 'lang#tmux'
+
+[[layers]]
+name = 'lang#toml'
+
+[[layers]]
+name = 'lang#vim'
+
+[[layers]]
+name = 'lang#xml'
+
+[[layers]]
+name = 'leaderf'
+
+[[layers]]
+name = 'shell'
+default_position = 'bottom'
+default_height = 30
+
+[[layers]]
+name = 'tags'
+
+[[layers]]
+name = 'tools'
+
+[[layers]]
+name = 'unite'
+
+[[custom_plugins]]
+# 彩色显示#RRGGBB
+name = 'lilydjwg/colorizer'
+merged = 0
+
+[[custom_plugins]]
+name = 'christoomey/vim-tmux-navigator'
+lazy' = 1
+on_cmd' = ['TmuxNavigateLeft', 'TmuxNavigateDown', 'TmuxNavigateUp', 'TmuxNavigateRight', 'TmuxNavigatePrevious']
+
+[[custom_plugins]]
+name ='thawk/vim-asciidoc-folding'
+lazy = 1
+on_ft = 'asciidoc'
+
+[[custom_plugins]]
+name = 'ConradIrwin/vim-bracketed-paste'
+
+[[custom_plugins]]
+name = 'derekwyatt/vim-fswitch'
+lazy = 1
+on_func = ['FSwitch']
+on_cmd = ['FSHere','FSRight','FSSplitRight','FSLeft','FSSplitLeft','FSAbove','FSSplitAbove','FSBelow','FSSplitBelow']
+
+[[custom_plugins]]
+name = 'junkblocker/patchreview-vim'
+lazy = 1
+on_cmd = ['PatchReview','PatchReviewPersist','ReversePatchReview','ReversePatchReviewPersist','DiffReview','DiffReviewPersist']
+
+[[custom_plugins]]
+name = 'vim-scripts/CodeReviewer.vim'
+lazy = 1
+on_cmd = ['CheckReview','SortReviewFile']
+  [custom_plugins.on_map]
+  n = '<Plug>AddComment'
+

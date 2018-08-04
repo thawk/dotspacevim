@@ -122,11 +122,6 @@ name = 'lilydjwg/colorizer'
 merged = 0
 
 [[custom_plugins]]
-name = 'christoomey/vim-tmux-navigator'
-lazy' = 1
-on_cmd' = ['TmuxNavigateLeft', 'TmuxNavigateDown', 'TmuxNavigateUp', 'TmuxNavigateRight', 'TmuxNavigatePrevious']
-
-[[custom_plugins]]
 name ='thawk/vim-asciidoc-folding'
 lazy = 1
 on_ft = 'asciidoc'

@@ -73,16 +73,6 @@ function! myspacevim#before() abort
     endif
     "" }}}
 
-    "" vim-tmux-navigator {{{
-    " 不希望map <C-\>，因此自行map
-    let g:tmux_navigator_no_mappings = 1
-
-    nnoremap <silent> <c-h> :TmuxNavigateLeft<CR>
-    nnoremap <silent> <c-j> :TmuxNavigateDown<CR>
-    nnoremap <silent> <c-k> :TmuxNavigateUp<CR>
-    nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
-    "" }}}
-
     "" vim-asciidoc-folding {{{
     let g:asciidoc_fold_style = 'nested'
     let g:asciidoc_fold_override_foldtext = 1

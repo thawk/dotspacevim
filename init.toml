@@ -88,9 +88,6 @@ name = 'lang#javascript'
 name = 'lang#python'
 
 [[layers]]
-name = 'lang#tmux'
-
-[[layers]]
 name = 'lang#toml'
 
 [[layers]]
@@ -109,6 +106,9 @@ default_height = 30
 
 [[layers]]
 name = 'tags'
+
+[[layers]]
+name = 'tmux'
 
 [[layers]]
 name = 'tools'

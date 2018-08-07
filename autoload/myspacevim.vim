@@ -150,7 +150,7 @@ endfunction
 
 function! myspacevim#IncludePathHook(config)
     if has_key(a:config, 'c_include_path')
-        p = a:config['c_include_path']
+        let p = a:config['c_include_path']
         if type(p) == type("")
             let raw_path = has('win32') ? tr(p, '\', '/') : p
             let paths = split(escape(p, ' '), '[;:]\([\/]\)\@!')

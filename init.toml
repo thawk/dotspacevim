@@ -1,50 +1,50 @@
 # All SpaceVim option below [option] section
 [options]
-    bootstrap_before = "myspacevim#before"
-    bootstrap_after = "myspacevim#after"
+bootstrap_before = "myspacevim#before"
+bootstrap_after = "myspacevim#after"
 
-    # set spacevim theme. by default colorscheme layer is not loaded,
-    # if you want to use more colorscheme, please load the colorscheme
-    # layer
-    colorscheme = "NeoSolarized"
-    background = "dark"
-    # Disable guicolors in basic mode, many terminal do not support 24bit
-    # true colors
-    enable_guicolors = true
+# set spacevim theme. by default colorscheme layer is not loaded,
+# if you want to use more colorscheme, please load the colorscheme
+# layer
+colorscheme = "NeoSolarized"
+background = "dark"
+# Disable guicolors in basic mode, many terminal do not support 24bit
+# true colors
+enable_guicolors = true
 
-    # use fontlink to map fonts into Consolas, so just use Consolas is OK
-    guifont = 'Consolas:h13:cANSI:qDRAFT'
+# use fontlink to map fonts into Consolas, so just use Consolas is OK
+guifont = 'Consolas:h13:cANSI:qDRAFT'
 
-    # Disable statusline separator, if you want to use other value, please
-    # install nerd fonts
-    statusline_separator = "arrow"
-    statusline_inactive_separator = "arrow"
-    buffer_index_type = 4
-    enable_tabline_filetype_icon = true
-    enable_statusline_display_mode = false
+# Disable statusline separator, if you want to use other value, please
+# install nerd fonts
+statusline_separator = "arrow"
+statusline_inactive_separator = "arrow"
+buffer_index_type = 4
+enable_tabline_filetype_icon = true
+enable_statusline_display_mode = false
 
-    # If there is a particular plugin you don't like, you can define this
-    # variable to disable them entirely:
-    disabled_plugins=['vim-gutentags']
-    
-    default_indent = 4
-    # 恢复q的正常用途
-    windows_smartclose = ''
-    
-    # Wildignore
-    wildignore = '*/tmp/*,*.so,*.swp,*.zip,*.class,tags,*.jpg,*.ttf,*.TTF,*.png,*/target/*,.git,.svn,.hg,.DS_Store,*.svg,.*/,bin*/**/gcc-*/**,*.gcov,*.o'
-    
-    realtime_leader_guide = 1
-    enable_vimfiler_welcome = 1
-    
-    enable_tabline_filetype_icon = 1
-    enable_statusline_display_mode = 0
-    enable_os_fileformat_icon = 1
-    buffer_index_type = 1
-    
-    snippet_engine = 'ultisnips'
-    
-    src_root = '~/workspace/'
+# If there is a particular plugin you don't like, you can define this
+# variable to disable them entirely:
+disabled_plugins=['vim-gutentags']
+
+default_indent = 4
+# 恢复q的正常用途
+windows_smartclose = ''
+
+# Wildignore
+wildignore = '*/tmp/*,*.so,*.swp,*.zip,*.class,tags,*.jpg,*.ttf,*.TTF,*.png,*/target/*,.git,.svn,.hg,.DS_Store,*.svg,.*/,bin*/**/gcc-*/**,*.gcov,*.o'
+
+realtime_leader_guide = 1
+enable_vimfiler_welcome = 1
+
+enable_tabline_filetype_icon = 1
+enable_statusline_display_mode = 0
+enable_os_fileformat_icon = 1
+buffer_index_type = 1
+
+snippet_engine = 'ultisnips'
+
+src_root = '~/workspace/'
 
 [[layers]]
 name = 'VersionControl'

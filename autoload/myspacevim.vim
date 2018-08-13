@@ -146,6 +146,12 @@ function! myspacevim#after() abort
     set wildmenu
 
     call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
+
+    " Goyo, Distraction-free writing in Vim
+    augroup myspacevim_goyo
+        autocmd! User GoyoEnter nested call <SID>goyo_enter()
+        autocmd! User GoyoLeave nested call <SID>goyo_leave()
+    augroup END
 endfunction
 
 function! myspacevim#IncludePathHook(config)
@@ -158,3 +164,19 @@ function! myspacevim#IncludePathHook(config)
         endif
     endif
 endfunction
+
+function! s:goyo_enter()
+    if executable('tmux')
+        silent !tmux set status off
+        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    endif
+endfunction
+
+function! s:goyo_leave()
+    if executable('tmux')
+        silent !tmux set status on
+        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    endif
+endfunction
+
+

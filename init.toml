@@ -28,6 +28,8 @@ buffer_index_type = 4
 # 0: 1 ➛ ➊ 1: 1 ➛ ➀ 2: 1 ➛ ⓵ 3: 1 ➛ 1
 windows_index_type = 3
 
+statusline_unicode_symbols = 1
+
 # If there is a particular plugin you don't like, you can define this
 # variable to disable them entirely:
 disabled_plugins=['vim-gutentags']

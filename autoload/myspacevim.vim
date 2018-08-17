@@ -102,17 +102,17 @@ function! myspacevim#before() abort
                     \| let b:fswitchlocs='./'
 
         autocmd! FileType c,cpp,xml,rnc
-                    \  command! -buffer A :call FSwitch('%', '')
-                    \| nnoremap <buffer> [SPC]lja :FSHere
-                    \| nnoremap <buffer> [SPC]ljA :FSSplitRight
-                    \| nnoremap <buffer> [SPC]ljl :FSRight
-                    \| nnoremap <buffer> [SPC]ljL :FSSplitRight
-                    \| nnoremap <buffer> [SPC]ljh :FSLeft
-                    \| nnoremap <buffer> [SPC]ljH :FSSplitLeft
-                    \| nnoremap <buffer> [SPC]ljk :FSAbove
-                    \| nnoremap <buffer> [SPC]ljK :FSSplitAbove
-                    \| nnoremap <buffer> [SPC]ljj :FSBelow
-                    \| nnoremap <buffer> [SPC]ljJ :FSSplitBelow
+                    \  nnoremap <buffer> [SPC]lja :FSHere<CR>
+                    \| nnoremap <buffer> [SPC]ljA :FSSplitRight<CR>
+                    \| nnoremap <buffer> [SPC]ljl :FSRight<CR>
+                    \| nnoremap <buffer> [SPC]ljL :FSSplitRight<CR>
+                    \| nnoremap <buffer> [SPC]ljh :FSLeft<CR>
+                    \| nnoremap <buffer> [SPC]ljH :FSSplitLeft<CR>
+                    \| nnoremap <buffer> [SPC]ljk :FSAbove<CR>
+                    \| nnoremap <buffer> [SPC]ljK :FSSplitAbove<CR>
+                    \| nnoremap <buffer> [SPC]ljj :FSBelow<CR>
+                    \| nnoremap <buffer> [SPC]ljJ :FSSplitBelow<CR>
+                    \| command! -buffer A :call FSwitch('%', '')
     augroup END
     "" }}}
 
@@ -135,7 +135,17 @@ function! myspacevim#before() abort
     augroup myspacevim_jam
         autocmd!
         autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2,*.jam :set filetype=jam
-        autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2 :setlocal makeprg=b2
+        autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2 :compiler b2
+        autocmd! FileType jam
+                    \  nnoremap <buffer> [SPC]lb :make<CR>
+                    \| nnoremap <buffer> [SPC]lt :make unittest<CR>
+    augroup END
+
+    augroup myspacevim_cpp
+        autocmd!
+        autocmd! FileType c,cpp
+                    \  nnoremap <buffer> [SPC]lb :make<CR>
+                    \| nnoremap <buffer> [SPC]lt :make unittest<CR>
     augroup END
 endfunction
 

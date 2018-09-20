@@ -85,7 +85,7 @@ name = 'lang#clojure'
 
 [[layers]]
 name = 'lang#go'
-enable = false
+enable = true
 
 [[layers]]
 name = 'lang#haskell'

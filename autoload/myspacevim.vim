@@ -162,6 +162,14 @@ function! myspacevim#after() abort
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
     augroup END
+
+    if exists('*unite#filters#matcher_default#use')
+        call unite#filters#matcher_default#use(['matcher_context'])
+    endif
+
+    if exists('*denite#custom#source')
+        call denite#custom#source('_', 'matchers', ['matcher/regex'])
+    endif
 endfunction
 
 function! myspacevim#IncludePathHook(config)

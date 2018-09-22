@@ -167,4 +167,4 @@ on_cmd = ['CheckReview','SortReviewFile']
 [[custom_plugins]]
 name = 'thawk/vim-pcet'
 lazy = 1
-on_source = ['unite-outline']
+on_path = 'pcet_.*\.xml'

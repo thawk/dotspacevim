@@ -165,6 +165,13 @@ on_cmd = ['CheckReview','SortReviewFile']
   n = '<Plug>AddComment'
 
 [[custom_plugins]]
+name = 'haya14busa/dein-command.vim'
+lazy = 1
+on_cmd = ['Dein']
+
+# The following plugins is for my personal file formats
+[[custom_plugins]]
 name = 'thawk/vim-pcet'
 lazy = 1
 on_path = 'pcet_.*\.xml'
+

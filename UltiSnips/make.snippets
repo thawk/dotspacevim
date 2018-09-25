@@ -49,3 +49,24 @@ run:
 
 PHONY: init run test
 endsnippet
+
+snippet skel_go_pkg "Go package Makefile" bt
+include $(GOROOT)/src/Make.inc
+
+TARG=${1:package}
+GOFILES=\
+	$1.go\
+	$0
+
+include $(GOROOT)/src/Make.pkg
+endsnippet
+
+snippet skel_go_prg "Go program Makefile" bt
+include $(GOROOT)/src/Make.inc
+TARG=${1:program}
+GOFILES=\
+	$1.go\
+	$0
+
+include $(GOROOT)/src/Make.cmd
+endsnippet

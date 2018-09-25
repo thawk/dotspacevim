@@ -130,6 +130,10 @@ function! myspacevim#before() abort
     let g:CodeReviewer_reviewFile="review.rev"
     "" }}}
 
+    "" plugin/NERD_commenter.vim {{{
+    call SpaceVim#mapping#space#def('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0, 1)
+    "" }}}
+
     " }}}
 
     augroup myspacevim_jam
@@ -168,7 +172,7 @@ function! myspacevim#after() abort
     endif
 
     if exists('*denite#custom#source')
-        call denite#custom#source('_', 'matchers', ['matcher/regex'])
+        call denite#custom#source('_', 'matchers', ['matcher/regexp'])
     endif
 endfunction
 

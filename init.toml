@@ -78,6 +78,9 @@ name = 'incsearch'
 enable = false
 
 [[layers]]
+name = 'lang#asciidoc'
+
+[[layers]]
 name = 'lang#c'
 
 [[layers]]

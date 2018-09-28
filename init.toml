@@ -172,6 +172,12 @@ name = 'haya14busa/dein-command.vim'
 lazy = 1
 on_cmd = ['Dein']
 
+[[custom_plugins]]
+name = 'vernonrj/Mark--Karkat'
+lazy = 1
+on_cmd = ['Mark', 'MarkClear', 'Marks', 'MarkLoad', 'MarkSave', 'MarkPalette']
+on_map = ['<Plug>Mark']
+
 # The following plugins is for my personal file formats
 [[custom_plugins]]
 name = 'thawk/vim-pcet'

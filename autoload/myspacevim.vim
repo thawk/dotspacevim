@@ -133,7 +133,6 @@ function! myspacevim#before() abort
     "" plugin/NERD_commenter.vim {{{
     call SpaceVim#mapping#space#def('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0, 1)
     "" }}}
-
     " }}}
 
     augroup myspacevim_jam
@@ -174,6 +173,30 @@ function! myspacevim#after() abort
     if exists('*denite#custom#source')
         call denite#custom#source('_', 'matchers', ['matcher/regexp'])
     endif
+
+    "" Mark--Karkat {{{
+    nmap <silent><unique> <Leader>mm <Plug>MarkSet
+    xmap <silent><unique> <Leader>mm <Plug>MarkSet
+    nmap <silent><unique> <Leader>mr <Plug>MarkRegex
+    xmap <silent><unique> <Leader>mr <Plug>MarkRegex
+    nmap <silent><unique> <Leader>mc <Plug>MarkClear
+    nmap <silent><unique> <Leader>mM <Plug>MarkToggle
+    nmap <silent><unique> <Leader>mC <Plug>MarkAllClear
+
+    nmap <silent><unique> <Leader>mn <Plug>MarkSearchCurrentNext
+    nmap <silent><unique> <Leader>mp <Plug>MarkSearchCurrentPrev
+    nmap <silent><unique> <Leader>mN <Plug>MarkSearchAnyNext
+    nmap <silent><unique> <Leader>mP <Plug>MarkSearchAnyPrev
+    nmap <silent><unique> <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+    nmap <silent><unique> <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+
+    highlight MarkWord1 ctermbg=DarkCyan    ctermfg=Black guibg=#8CCBEA guifg=Black |
+    highlight MarkWord2 ctermbg=DarkMagenta ctermfg=Black guibg=#FF7272 guifg=Black |
+    highlight MarkWord3 ctermbg=DarkYellow  ctermfg=Black guibg=#FFDB72 guifg=Black |
+    highlight MarkWord4 ctermbg=DarkGreen   ctermfg=Black guibg=#FFB3FF guifg=Black |
+    highlight MarkWord5 ctermbg=DarkRed     ctermfg=Black guibg=#9999FF guifg=Black |
+    highlight MarkWord6 ctermbg=DarkBlue    ctermfg=Black guibg=#A4E57E guifg=Black
+    "" }}}
 endfunction
 
 function! myspacevim#IncludePathHook(config)

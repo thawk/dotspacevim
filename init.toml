@@ -121,6 +121,9 @@ default_position = 'bottom'
 default_height = 30
 
 [[layers]]
+name = 'sudo'
+
+[[layers]]
 name = 'tags'
 
 [[layers]]

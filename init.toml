@@ -59,28 +59,44 @@ snippet_engine = 'ultisnips'
 
 src_root = '~/workspace/'
 
-[[layers]]
-name = 'VersionControl'
-enable = true
-
+# default layers
 [[layers]]
 name = 'autocomplete'
-enable = true
 auto-completion-return-key-behavior = "complete"
 auto-completion-tab-key-behavior = "smart"
 
 [[layers]]
+name = 'leaderf'
+
+[[layers]]
+name = 'shell'
+default_position = 'bottom'
+default_height = 30
+
+[[layers]]
+name = 'sudo'
+
+# additional layers
+[[layers]]
+name = 'VersionControl'
+
+[[layers]]
 name = 'colorscheme'
-enable = true
 
 [[layers]]
 name = 'denite'
-enable = true
 
 [[layers]]
 name = 'incsearch'
 enable = false
 
+[[layers]]
+name = 'tools'
+
+[[layers]]
+name = 'unite'
+
+# begin optional layers
 [[layers]]
 name = 'lang#asciidoc'
 enable = true
@@ -126,20 +142,6 @@ name = 'lang#xml'
 enable = true
 
 [[layers]]
-name = 'leaderf'
-enable = true
-
-[[layers]]
-name = 'shell'
-enable = true
-default_position = 'bottom'
-default_height = 30
-
-[[layers]]
-name = 'sudo'
-enable = true
-
-[[layers]]
 name = 'tags'
 enable = true
 
@@ -147,13 +149,7 @@ enable = true
 name = 'tmux'
 enable = true
 
-[[layers]]
-name = 'tools'
-enable = true
-
-[[layers]]
-name = 'unite'
-enable = true
+# end optional layers
 
 [[custom_plugins]]
 # 彩色显示#RRGGBB

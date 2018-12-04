@@ -93,8 +93,8 @@ enable = false
 [[layers]]
 name = 'tools'
 
-[[layers]]
-name = 'unite'
+#[[layers]]
+#name = 'unite'
 
 # begin optional layers
 [[layers]]

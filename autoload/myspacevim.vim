@@ -172,8 +172,20 @@ function! myspacevim#after() abort
         call unite#filters#matcher_default#use(['matcher_context'])
     endif
 
+    if exists('*unite#custom#profile')
+        call unite#custom#profile('default', 'context', {
+                    \   'direction': 'botright',
+                    \ })
+    endif
+
     if exists('*denite#custom#source')
         call denite#custom#source('_', 'matchers', ['matcher/regexp'])
+    endif
+
+    if exists('*denite#custom#option')
+        call denite#custom#option('default', {
+                    \ 'direction' : 'botright',
+                    \ })
     endif
 
     "" Mark--Karkat {{{

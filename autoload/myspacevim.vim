@@ -133,10 +133,12 @@ function! myspacevim#before() abort
     "" }}}
 
     "" plugin/NERD_commenter.vim {{{
-    call SpaceVim#mapping#space#def('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0, 1)
+    call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
     "" }}}
+
     " }}}
 
+    " autocmds {{{
     augroup myspacevim_jam
         autocmd!
         autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2,*.jam :set filetype=jam
@@ -152,6 +154,7 @@ function! myspacevim#before() abort
                     \  nnoremap <buffer> [SPC]lb :make<CR>
                     \| nnoremap <buffer> [SPC]lt :make unittest<CR>
     augroup END
+    " }}}
 endfunction
 
 function! myspacevim#after() abort

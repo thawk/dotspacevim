@@ -163,8 +163,34 @@ snippet stemb "stem block" b
 ----
 ${0}
 ----
+
 endsnippet
 
 snippet stem "stem inline"
 stem:[${0}]
+endsnippet
+
+snippet uml "plantuml block" b
+[plantuml, "${1:filename}", ${2:svg}]
+----
+${0}
+----
+
+endsnippet
+
+snippet erd "plantuml block for ERD" b
+[plantuml, "${1:filename}", ${2:svg}]
+----
+!define Table(name) entity name as "<b>name</b>" << (T,#FFAAAA) >>
+!define Table(name,desc) entity name as "<b>name</b>\n desc" << (T,#FFAAAA) >>
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <i>x</i>
+!define unique(x) <color:green>x</color>
+!define not_null(x) <u>x</u>
+hide empty members
+hide stereotypes
+
+${0}
+----
+
 endsnippet

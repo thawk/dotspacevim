@@ -162,6 +162,8 @@ function! myspacevim#after() abort
     set smartcase
     set wildmode=longest:full,full
     set wildmenu
+    " Fix compatibility of CJK long lines.
+    set nolinebreak
 
     call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
 

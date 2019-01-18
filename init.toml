@@ -171,6 +171,11 @@ lazy = 1
 on_ft = 'asciidoc'
 
 [[custom_plugins]]
+name ='Chandlercjy/vim-markdown-folding'
+lazy = 1
+on_ft = 'markdown'
+
+[[custom_plugins]]
 name ='thawk/vim-b2'
 lazy = 0
 

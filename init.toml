@@ -131,6 +131,10 @@ name = 'lang#javascript'
 enable = true
 
 [[layers]]
+name = 'lang#markdown'
+enable = true
+
+[[layers]]
 name = 'lang#python'
 enable = true
 

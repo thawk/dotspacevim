@@ -6,7 +6,9 @@ bootstrap_after = "myspacevim#after"
 # set spacevim theme. by default colorscheme layer is not loaded,
 # if you want to use more colorscheme, please load the colorscheme
 # layer
-colorscheme = "NeoSolarized"
+# Detect colorscheme used by dynamic-colors and fallback to NeoSolarized
+colorscheme = ""
+colorscheme_default = "NeoSolarized"
 background = "dark"
 # Disable guicolors in basic mode, many terminal do not support 24bit
 # true colors

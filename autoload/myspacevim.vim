@@ -80,6 +80,12 @@ function! myspacevim#before() abort
     let g:asciidoc_fold_override_foldtext = 1
     "" }}}
 
+    "" vim-markdown {{{
+    "let g:markdown_default_mappings = 1
+    let g:vim_markdown_auto_insert_bullets = 0
+    "let g:markdown_hi_error = 1
+    "" }}}
+
     "" vim-markdown-folding {{{
     let g:markdown_fold_style = 'nested'
     let g:markdown_fold_override_foldtext = 1

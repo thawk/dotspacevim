@@ -80,6 +80,11 @@ function! myspacevim#before() abort
     let g:asciidoc_fold_override_foldtext = 1
     "" }}}
 
+    "" vim-markdown-folding {{{
+    let g:markdown_fold_style = 'nested'
+    let g:markdown_fold_override_foldtext = 1
+    "" }}}
+
     "" vim-bracketed-paste {{{
     let g:bracketed_paste_tmux_wrap = 0
     "" }}}
@@ -153,6 +158,18 @@ function! myspacevim#before() abort
         autocmd! FileType c,cpp
                     \  nnoremap <buffer> [SPC]lb :make<CR>
                     \| nnoremap <buffer> [SPC]lt :make unittest<CR>
+    augroup END
+
+    augroup myspacevim_asciidoc
+        autocmd!
+        autocmd! FileType asciidoc
+                    \  :set foldlevel=0
+    augroup END
+
+    augroup myspacevim_markdown
+        autocmd!
+        autocmd! FileType markdown
+                    \  :set foldlevel=1
     augroup END
     " }}}
 endfunction

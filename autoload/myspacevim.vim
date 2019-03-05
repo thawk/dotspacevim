@@ -1,5 +1,12 @@
-function! myspacevim#before() abort
+" vim: fileencoding=utf-8 foldmethod=marker foldlevel=0:
+
+function! myspacevim#before() abort " {{{
     call myspacevim#colorscheme#autoload()
+
+    " Mapping {{{
+    nnoremap zJ zjzx
+    nnoremap zK zkzx
+    " }}}
 
     " Plugin settings {{{
 
@@ -175,12 +182,12 @@ function! myspacevim#before() abort
     augroup myspacevim_markdown
         autocmd!
         autocmd! FileType markdown
-                    \  :set foldlevel=1
+                    \  :set foldlevel=1 shiftwidth=2
     augroup END
     " }}}
-endfunction
+endfunction " }}}
 
-function! myspacevim#after() abort
+function! myspacevim#after() abort " {{{
     set ignorecase
     set smartcase
     set wildmode=longest:full,full
@@ -239,9 +246,9 @@ function! myspacevim#after() abort
     highlight MarkWord5 ctermbg=DarkRed     ctermfg=Black guibg=#9999FF guifg=Black |
     highlight MarkWord6 ctermbg=DarkBlue    ctermfg=Black guibg=#A4E57E guifg=Black
     "" }}}
-endfunction
+endfunction " }}}
 
-function! myspacevim#IncludePathHook(config)
+function! myspacevim#IncludePathHook(config) " {{{
     if has_key(a:config, 'c_include_path')
         let p = a:config['c_include_path']
         if type(p) == type("")
@@ -250,19 +257,19 @@ function! myspacevim#IncludePathHook(config)
             let &l:path .= ',' . join(paths, ',')
         endif
     endif
-endfunction
+endfunction " }}}
 
-function! s:goyo_enter()
+function! s:goyo_enter() " {{{
     if executable('tmux')
         silent !tmux set status off
         silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
     endif
-endfunction
+endfunction " }}}
 
-function! s:goyo_leave()
+function! s:goyo_leave() " {{{
     if executable('tmux')
         silent !tmux set status on
         silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
     endif
-endfunction
+endfunction " }}}
 

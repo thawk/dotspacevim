@@ -183,6 +183,7 @@ function! myspacevim#before() abort " {{{
         autocmd!
         autocmd! FileType markdown
                     \  :set foldlevel=1 shiftwidth=2
+                    \| :command! -buffer -range=% ReBullet silent! %s/^\(  \(    \)*\)\* /\1- / <bar> silent! %s/^\(\(    \)*\)\- /\1* /
     augroup END
     " }}}
 endfunction " }}}

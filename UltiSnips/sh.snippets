@@ -8,6 +8,12 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 endsnippet
 
+snippet mktemp
+${1:tmpdir}=$(mktemp -d)
+trap "rm -rf '\$$1'" EXIT
+$0
+endsnippet
+
 snippet skel "Basic getopt skel"
 #!/bin/sh
 
@@ -27,7 +33,7 @@ TEMP=$(getopt -o h,V,v:: --long help,version,verbose:: -- "$@")
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
-# Note the quotes around `$TEMP': they are essential!
+# Note the quotes around $TEMP: they are essential!
 eval set -- "$TEMP"
 
 show_version=

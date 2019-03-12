@@ -22,18 +22,20 @@ function s:handle_dynamic_colors()
 
     let dc_colorscheme = readfile(colorscheme_file, '', 1)[0]
 
-    let m = matchlist(dc_colorscheme, '^\([^-]\+\)\([-_]\([^-]\+\)\(-.*\)\?\)\?$')
+    " handle 'solarized-dark'/'solarized-dark-desaturated'
+    " catch 'solarized' and 'dark'
+    let m = matchlist(dc_colorscheme, '^\([^-]\+\)\%([-_]\([^-]\+\)\(-.*\)\?\)\?$')
     if len(m) == 0
         return 0
     endif
     let name = m[1]
-    let bg = m[3]
+    let bg = m[2]
 
     let colorscheme = g:spacevim_colorscheme
 
     if name != ''
+        " Only use dynamic-colors colorscheme when colorscheme is not set in configuration file
         if colorscheme == ''
-            " If has same colorscheme with dynamic colors, use it
             let g:spacevim_colorscheme = name
             let colorscheme = g:spacevim_colorscheme
             if bg != ''

@@ -2,6 +2,7 @@
 
 function! myspacevim#before() abort " {{{
     call myspacevim#colorscheme#autoload()
+    call s:setup_lsp()
 
     " Mapping {{{
     nnoremap zJ zjzx
@@ -137,7 +138,7 @@ function! myspacevim#before() abort " {{{
     "" }}}
 
     "" CodeReviewer.vim {{{
-    call SpaceVim#custom#SPC('nmap', ['i', 'c'], '<Plug>AddComment', 'Insert code review comment', 0)
+    call SpaceVim#custom#SPC('nmap', ['i'], '<Plug>AddComment', 'Insert code review comment', 0)
 
     if $USER != ""
         let g:CodeReviewer_reviewer = $USER
@@ -151,7 +152,7 @@ function! myspacevim#before() abort " {{{
     "" }}}
 
     "" plugin/NERD_commenter.vim {{{
-    call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
+    call SpaceVim#custom#SPC('nmap', ['c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
     "" }}}
 
     " }}}
@@ -215,7 +216,7 @@ function! myspacevim#after() abort " {{{
     endif
 
     if exists('*denite#custom#source')
-        call denite#custom#source('_', 'matchers', ['matcher/regexp'])
+        call denite#custom#source('_'])
     endif
 
     if exists('*denite#custom#option')
@@ -254,7 +255,7 @@ function! myspacevim#IncludePathHook(config) " {{{
         let p = a:config['c_include_path']
         if type(p) == type("")
             let raw_path = has('win32') ? tr(p, '\', '/') : p
-            let paths = split(escape(p, ' '), '[;:]\([\/]\)\@!')
+            let paths = split(escape(p]\)\@!')
             let &l:path .= ',' . join(paths, ',')
         endif
     endif
@@ -274,3 +275,48 @@ function! s:goyo_leave() " {{{
     endif
 endfunction " }}}
 
+function! s:setup_lsp() " {{{
+    let lsp_servers = {
+                \ 'c' : 'clangd',
+                \ 'cpp' : 'clangd',
+                \ 'css' : 'css-languageserver',
+                \ 'dart' : 'dart_language_server',
+                \ 'dockerfile' : 'docker-langserver',
+                \ 'go' : 'go-langserver',
+                \ 'haskell' : 'hie-wrapper',
+                \ 'html' : 'html-languageserver',
+                \ 'javascript' : 'javascript-typescript-stdio',
+                \ 'julia' : 'julia',
+                \ 'objc' : 'clangd',
+                \ 'objcpp' : 'clangd',
+                \ 'php' : 'php',
+                \ 'purescript' : 'purescript-language-server',
+                \ 'python' : 'pyls',
+                \ 'rust' : 'rustup',
+                \ 'sh' : 'bash-language-server',
+                \ 'typescript' : 'typescript-language-server',
+                \ 'ruby' : 'solargraph.BAT',
+                \ 'vue' : 'vls',
+                \ }
+
+    let filetypes = []
+
+    for lang in keys(lsp_servers)
+        if executable(lsp_servers[lang])
+            call add(filetypes, lang)
+        endif
+    endfor
+
+    call SpaceVim#layers#lsp#set_variable({
+                \ 'filetypes' : filetypes,
+                \ })
+endfunction " }}}
+
+" command SyntaxId {{{
+function! s:syntax_id()
+    for id in synstack(line("."), col("."))
+        echo synIDattr(id, "name")
+    endfor
+endfunction
+command! SyntaxId echo s:syntax_id()
+" }}}

@@ -122,7 +122,7 @@ enable = true
 
 [[layers]]
 name = 'lang#haskell'
-enable = false
+enable = true
 
 [[layers]]
 name = 'lang#java'
@@ -150,6 +150,10 @@ enable = true
 
 [[layers]]
 name = 'lang#xml'
+enable = true
+
+[[layers]]
+name = 'lsp'
 enable = true
 
 [[layers]]

@@ -186,6 +186,12 @@ function! myspacevim#before() abort " {{{
                     \  :set foldlevel=1 shiftwidth=2
                     \| :command! -buffer -range=% ReBullet silent! %s/^\(  \(    \)*\)\* /\1- / <bar> silent! %s/^\(\(    \)*\)\- /\1* /
     augroup END
+
+    augroup myspacevim_haskell
+        autocmd!
+        autocmd! FileType haskell
+                    \  :set shiftwidth=2
+    augroup END
     " }}}
 endfunction " }}}
 

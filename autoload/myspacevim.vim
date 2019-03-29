@@ -152,7 +152,7 @@ function! myspacevim#before() abort " {{{
     "" }}}
 
     "" plugin/NERD_commenter.vim {{{
-    call SpaceVim#custom#SPC('nmap', ['c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
+    call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
     "" }}}
 
     " }}}

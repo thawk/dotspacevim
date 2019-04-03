@@ -1,0 +1,148 @@
+#-------------------------------------------------------------------------------
+# UltiSnips snippets for Hspec - http://hspec.github.io/
+#
+# Many triggers modeled on RSpec triggers.
+#-------------------------------------------------------------------------------
+
+priority -50
+
+extends haskell
+
+# See: http://hspec.github.io/hspec-discover.html
+snippet hdisc "Hspec: discovery magic preproc comment" b
+{-# OPTIONS_GHC -F -pgmF hspec-discover${1: -optF --module-name=${2:Spec}} #-}
+endsnippet
+
+
+# This can be used as a standalone main suite, or a single file when using
+# discovery. The main method then allows it to be individually tested from GHCi.
+snippet spec "Hspec: new suite" b
+module ${1:Module.Subject}Spec (main, spec) where
+
+import Test.Hspec
+import $1
+
+main :: IO ()
+main = hspec spec
+
+spec :: Spec
+spec = do
+	describe "${2:$1}" $ do
+		$0
+endsnippet
+
+
+snippet hspec "Hspec: begin suite"
+hspec $ do
+	des$0
+endsnippet
+
+
+snippet bef "Hspec: suite with before hook"
+hspec $ before ${1:ioAction} $ do
+	des$0
+endsnippet
+
+
+snippet aft "Hspec: suite with after hook"
+hspec $ after ${1:ioAction} $ do
+	des$0
+endsnippet
+
+
+snippet around "Hspec: suite with around hook"
+hspec $ around ${1:ioWrapper} $ do
+	des$0
+endsnippet
+
+
+snippet pw "Hspec: pendingWith" b
+pendingWith "${1:explanation}"
+endsnippet
+
+
+snippet des "Hspec: describe block" b
+describe "${1:subject}" $ do
+	$0
+endsnippet
+
+
+snippet con "Hspec: context block" b
+context "${1:context}" $ do
+	$0
+endsnippet
+
+
+snippet it "Hspec: it block" b
+it "${1:does something}" $ do
+	$0
+endsnippet
+
+
+# Prefer active voice, but for some this is an ingrained habit.
+snippet its "Hspec: it should" b
+it "should ${1:do something}" $ do
+	$0
+endsnippet
+
+
+snippet itr "Hspec: it with resource loaner pattern" b
+it "${1:does something}" $ ${2:withResource} $ \\${3:rs} -> do
+	$0
+endsnippet
+
+#-------------------------------------------------------------------------------
+# Expectations
+#
+# TODO: has this behavior broken in UltiSnips? Doesn't seem to work for me anymore
+#   http://fueledbylemons.com/blog/2011/07/27/why-ultisnips/#different-beginning-of-line-snippet
+#-------------------------------------------------------------------------------
+
+snippet shb "Hspec: shouldBe"
+\`shouldBe\` ${1:result}
+endsnippet
+
+
+snippet shb "Hspec: shouldBe" !b
+${1:subject} \`shouldBe\` ${2:result}
+endsnippet
+
+
+snippet shret "Hspec: shouldReturn"
+\`shouldReturn\` ${1:result}
+endsnippet
+
+
+snippet shret "Hspec: shouldReturn" !b
+${1:subject} \`shouldReturn\` ${2:result}
+endsnippet
+
+
+snippet shs "Hspec: shouldSatisfy"
+\`shouldSatisfy\` ${1:(${2:not . null})}
+endsnippet
+
+
+snippet shs "Hspec: shouldSatisfy" !b
+${1:subject} \`shouldSatisfy\` ${2:(${3:not . null})}
+endsnippet
+
+
+snippet sht "Hspec: shouldThrow"
+\`shouldThrow\` ${1:anyException}
+endsnippet
+
+
+snippet sht "Hspec: shouldThrow" !b
+${1:evaluate (${2:subject})} \`shouldThrow\` ${3:anyException}
+endsnippet
+
+#-------------------------------------------------------------------------------
+# Hspec with QuickCheck
+#-------------------------------------------------------------------------------
+
+snippet itp "Hspec: it with QuickCheck property" b
+it "${1:does something}" $ property $
+	\\${3:subj} -> $0
+endsnippet
+

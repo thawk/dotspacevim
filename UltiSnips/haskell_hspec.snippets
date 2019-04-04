@@ -4,7 +4,7 @@
 # Many triggers modeled on RSpec triggers.
 #-------------------------------------------------------------------------------
 
-priority -50
+priority 0
 
 extends haskell
 
@@ -103,9 +103,11 @@ snippet shb "Hspec: shouldBe"
 endsnippet
 
 
+priority 1
 snippet shb "Hspec: shouldBe" !b
 ${1:subject} \`shouldBe\` ${2:result}
 endsnippet
+priority 0
 
 
 snippet shret "Hspec: shouldReturn"
@@ -113,9 +115,11 @@ snippet shret "Hspec: shouldReturn"
 endsnippet
 
 
+priority 1
 snippet shret "Hspec: shouldReturn" !b
 ${1:subject} \`shouldReturn\` ${2:result}
 endsnippet
+priority 0
 
 
 snippet shs "Hspec: shouldSatisfy"
@@ -123,9 +127,11 @@ snippet shs "Hspec: shouldSatisfy"
 endsnippet
 
 
+priority 1
 snippet shs "Hspec: shouldSatisfy" !b
 ${1:subject} \`shouldSatisfy\` ${2:(${3:not . null})}
 endsnippet
+priority 0
 
 
 snippet sht "Hspec: shouldThrow"
@@ -133,9 +139,11 @@ snippet sht "Hspec: shouldThrow"
 endsnippet
 
 
+priority 1
 snippet sht "Hspec: shouldThrow" !b
 ${1:evaluate (${2:subject})} \`shouldThrow\` ${3:anyException}
 endsnippet
+priority 0
 
 #-------------------------------------------------------------------------------
 # Hspec with QuickCheck

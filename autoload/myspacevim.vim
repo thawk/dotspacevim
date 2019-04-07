@@ -4,6 +4,11 @@ function! myspacevim#before() abort " {{{
     call myspacevim#colorscheme#autoload()
     call s:setup_lsp()
 
+    " Global configurations {{{
+    " Add rooter for haskell
+    call add(g:spacevim_project_rooter_patterns, 'stack.yaml')
+    " }}}
+
     " Mapping {{{
     nnoremap zJ zjzx
     nnoremap zK zkzx

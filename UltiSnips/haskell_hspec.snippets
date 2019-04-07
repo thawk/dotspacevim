@@ -17,7 +17,7 @@ endsnippet
 # This can be used as a standalone main suite, or a single file when using
 # discovery. The main method then allows it to be individually tested from GHCi.
 snippet spec "Hspec: new suite" b
-module ${1:Module.Subject}Spec (main, spec) where
+module ${1:`!v substitute(substitute(expand('%:r'), '\C^\%(tests\?[/\\]\)\(.*\)Spec$\|.*', '\1', ''), '[/\\]', '.', 'g')`}Spec (main, spec) where
 
 import Test.Hspec
 import $1

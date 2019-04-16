@@ -87,3 +87,41 @@ def add_thousands_sep(num):
 
     return ".".join(parts)
 endsnippet
+
+snippet matplotlib_init "Init matplotlib" b
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+try:
+	import pandas.plotting
+	# Required by recent versions of Pandas, but not old versions
+	pandas.plotting.register_matplotlib_converters()
+except:
+	pass
+
+matplotlib.style.use('ggplot')
+
+plt.rcParams['agg.path.chunksize'] = 20000
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei'] + matplotlib.rcParams['font.sans-serif']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 属性
+fig_size = (12, 8)
+fig_dpi = 100
+
+try:
+	fig_colors = [p['color'] for p in list(plt.rcParams['axes.prop_cycle'])]
+except:
+	fig_colors = list(plt.rcParams['axes.color_cycle'])
+
+fig_marker_styles = list(".+^*xdsp")
+fig_line_styles = ['-', '--', ':', '-.']
+endsnippet
+
+snippet matplotlib_fig "Create new figure" b
+	fig, ax = plt.subplots(1, 1, width=width, height=height, dpi=dpi)
+endsnippet

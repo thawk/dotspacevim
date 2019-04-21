@@ -164,6 +164,10 @@ enable = true
 name = 'tmux'
 enable = true
 
+[[layers]]
+name = 'lang#lilypond'
+enable = true
+
 # end optional layers
 
 [[custom_plugins]]

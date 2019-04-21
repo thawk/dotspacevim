@@ -1,0 +1,50 @@
+snippet skel "Skeleton" b
+\version "${1:2.18.2}"
+
+\paper {
+	#(set-paper-size "${2:a4}")
+}
+
+${0:score}
+endsnippet
+
+snippet score "score" b
+\score {
+	\header {
+		piece = "${1:title}"
+	}
+	${0:relative}
+}
+endsnippet
+
+snippet relative "Relative notes" b
+\relative ${2:c'}
+{
+	\clef "treble"
+	\key ${3:c} ${4:\major}
+	\time ${5:4/4}
+	% \tempo 4. = 96
+
+	${0}
+}
+endsnippet	
+
+snippet absolute "Absolute notes" b
+\absolute
+{
+	\clef "treble"
+	\key ${2:c} ${3:\major}
+	\time ${4:4/4}
+	% \tempo 4. = 96
+
+	${0}
+}
+endsnippet	
+
+snippet bar "Bar"
+\bar "${1:|.}" ${0}
+endsnippet
+
+snippet tuplet "Tuplet连音"
+\tuplet ${1:3/2} { ${0} }
+endsnippet

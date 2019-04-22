@@ -1,11 +1,18 @@
 snippet skel "Skeleton" b
 \version "${1:2.18.2}"
 
+${0:paper}
+endsnippet
+
+snippet paper "Paper setting" b
 \paper {
 	#(set-paper-size "${2:a4}")
-}
+	two-sided = ##${3:t}
 
-${0:score}
+	binding-offset = ${4:10}\mm  % scaled to paper-size
+	indent = ${5:15}\mm         % scaled to paper-size
+}
+${0}
 endsnippet
 
 snippet score "score" b

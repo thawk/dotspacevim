@@ -11,16 +11,24 @@ snippet paper "Paper setting" b
 
 	binding-offset = ${4:10}\mm  % scaled to paper-size
 	indent = ${5:15}\mm         % scaled to paper-size
+
+	scoreTitleMarkup = \markup {
+		\fill-line {
+			\null
+			\fontsize #4 \bold \fromproperty #'header:piece
+			\fromproperty #'header:composer
+		}
+	}
 }
 ${0}
 endsnippet
 
 snippet score "score" b
 \score {
+	${0:relative}
 	\header {
 		piece = "${1:title}"
 	}
-	${0:relative}
 }
 endsnippet
 

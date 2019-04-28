@@ -28,6 +28,7 @@ snippet score "score" b
 	${0:relative}
 	\header {
 		piece = "${1:title}"
+		% composer = ""
 	}
 }
 endsnippet
@@ -38,7 +39,7 @@ snippet relative "Relative notes" b
 	\clef "treble"
 	\key ${3:c} ${4:\major}
 	\time ${5:4/4}
-	% \tempo 4. = 96
+	% \tempo 4 = 96
 
 	${0}
 }

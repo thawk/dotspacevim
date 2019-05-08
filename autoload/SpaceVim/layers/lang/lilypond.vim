@@ -16,6 +16,14 @@ function! SpaceVim#layers#lang#lilypond#config() abort
     autocmd FileType lilypond compiler lilypond
   augroup END
 
-  call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'make %', 'compile', 1)
+  call SpaceVim#mapping#space#regesit_lang_mappings('lilypond', function('s:mappings'))
+endfunction
+
+function! s:mappings() abort
+  if !exists('g:_spacevim_mappings_space')
+    let g:_spacevim_mappings_space = {}
+  endif
+  let g:_spacevim_mappings_space.l = {'name' : '+Language Specified'}
+  call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'make -o "%:r" "%"', 'compile', 1)
 endfunction
 

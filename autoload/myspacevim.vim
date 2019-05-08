@@ -156,8 +156,17 @@ function! myspacevim#before() abort " {{{
     let g:CodeReviewer_reviewFile="review.rev"
     "" }}}
 
-    "" plugin/NERD_commenter.vim {{{
+    "" NERD_commenter.vim {{{
     call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
+    "" }}}
+
+    
+    "" surround {{{
+    augroup myspacevim_surround_markdown
+        autocmd!
+
+        autocmd! FileType markdown :let b:surround_96 = "``\r``"
+    augroup END
     "" }}}
 
     " }}}

@@ -334,9 +334,11 @@ endfunction " }}}
 
 " command SyntaxId {{{
 function! s:syntax_id()
+    let s = []
     for id in synstack(line("."), col("."))
-        echo synIDattr(id, "name")
+        call add(s, synIDattr(id, "name"))
     endfor
+    echo join(s, ' -> ')
 endfunction
-command! SyntaxId echo s:syntax_id()
+command! SyntaxId call s:syntax_id()
 " }}}

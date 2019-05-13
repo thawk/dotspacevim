@@ -37,8 +37,8 @@ statusline_unicode_symbols = 1
 disabled_plugins=['vim-gutentags']
 
 default_indent = 4
-# 恢复q的正常用途
-windows_smartclose = ''
+# 恢复q的正常用途。<Leader>qr是宏录制的快捷键
+#windows_smartclose = ''
 
 # Wildignore
 wildignore = """\

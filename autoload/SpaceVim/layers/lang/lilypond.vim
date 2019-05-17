@@ -14,7 +14,10 @@ endfunction
 
 function! SpaceVim#layers#lang#lilypond#config() abort
   augroup spacevim_lang_lilypond
-    autocmd FileType lilypond compiler lilypond
+    autocmd FileType lilypond 
+                \ compiler lilypond |
+                \ setlocal errorformat+=%DChanging\ working\ directory\ to:\ `%f'
+                \ errorformat+=%XConverting\ to
   augroup END
 
   call SpaceVim#mapping#space#regesit_lang_mappings('lilypond', function('s:mappings'))

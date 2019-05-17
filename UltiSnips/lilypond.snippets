@@ -1,7 +1,5 @@
-snippet skel "Skeleton" b
+snippet ver "Skeleton" b
 \version "${1:2.18.2}"
-
-${0:paper}
 endsnippet
 
 snippet paper "Paper setting" b
@@ -66,7 +64,7 @@ snippet tuplet "Tuplet连音"
 endsnippet
 
 snippet barcheck "barNumberCheck"
-\barNumberCheck ${0:number}
+\barNumberCheck #${0:number}
 endsnippet
 
 snippet octavecheck "octaveCheck"
@@ -76,5 +74,44 @@ endsnippet
 snippet trans "transpose"
 \transpose ${1:c} ${2:f} {
 	${0}
+}
+endsnippet
+
+snippet toc "目录" b
+\markuplist \table-of-contents
+endsnippet
+
+snippet toci "tocItem" b
+\tocItem \markup \\"${1}"
+endsnippet
+
+snippet inote "include note"
+\include "../notes/${1:name}.ily"
+
+\tocItem \markup \\"$2Piece"
+\score {
+	\\"${2:$1}Notes"
+	\header {
+		piece    = \\"$2Piece"
+		composer = \\"$2Composer"
+	}
+}
+${0}
+endsnippet
+
+snippet note "Notes" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Composer" = ""
+
+"$1Notes" = \relative ${4:c'}
+{
+	\clef "treble"
+	\key ${5:c} ${6:\major}
+	\time ${7:4/4}
+	% \tempo 4 = 96
+
+	${0}
+
+	\bar "|."
 }
 endsnippet

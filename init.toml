@@ -14,8 +14,8 @@ background = "dark"
 # true colors
 enable_guicolors = true
 
-# use fontlink to map fonts into Consolas, so just use Consolas is OK
-guifont = 'Consolas:h13:cANSI:qDRAFT'
+# guifont = "SauceCodePro NF:h13"
+guifont = "DejaVuSansMono NF:h13"
 
 # Disable statusline separator, if you want to use other value, please
 # install nerd fonts

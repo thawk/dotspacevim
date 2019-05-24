@@ -160,7 +160,6 @@ function! myspacevim#before() abort " {{{
     call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
     "" }}}
 
-    
     "" surround {{{
     augroup myspacevim_surround_markdown
         autocmd!
@@ -204,7 +203,7 @@ function! myspacevim#before() abort " {{{
     augroup myspacevim_haskell
         autocmd!
         autocmd! FileType haskell
-                    \  :set shiftwidth=2
+                    \  :set shiftwidth=2 expandtab
     augroup END
     " }}}
 endfunction " }}}

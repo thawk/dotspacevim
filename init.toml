@@ -227,7 +227,7 @@ on_cmd = ['Mark', 'MarkClear', 'Marks', 'MarkLoad', 'MarkSave', 'MarkPalette']
 on_map = ['<Plug>Mark']
 
 [[custom_plugins]]
-name = 'crusoexia/vim-monokai'
+name = 'sickill/vim-monokai'
 
 # The following plugins is for my personal file formats
 [[custom_plugins]]

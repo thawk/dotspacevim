@@ -115,3 +115,18 @@ snippet note "Notes" b
 	\bar "|."
 }
 endsnippet
+
+snippet repeat "repeat" b
+\set Score.voltaSpannerDuration = #(ly:make-moment ${1:4/4})
+\repeat volta 2
+{
+	${0}
+}
+\alternative
+{
+	{
+	}
+	{
+	}
+}
+endsnippet

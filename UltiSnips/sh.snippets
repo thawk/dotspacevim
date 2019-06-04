@@ -8,14 +8,22 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 endsnippet
 
-snippet mktemp
+snippet tempdir
 ${1:tmpdir}=$(mktemp -d)
-trap "rm -rf '\$$1'" EXIT
+trap "rm -rf '\$$1'" 0               # EXIT
+trap "rm -rf '\$$1'; exit 1" 2       # INT
+trap "rm -rf '\$$1'; exit 1" 1 15    # HUP TERM
+$0
+endsnippet
+
+snippet #! "shebang"
+#!/usr/bin/env bash
+
 $0
 endsnippet
 
 snippet skel "Basic getopt skel"
-#!/bin/sh
+#!/usr/bin/env bash
 
 function EchoUsage()
 {
@@ -65,7 +73,7 @@ while true ; do
 	esac
 done
 
-# 参数最小为1
+# 参数个数最少为1
 if [ $# -lt 1 ]
 then
 	EchoUsage

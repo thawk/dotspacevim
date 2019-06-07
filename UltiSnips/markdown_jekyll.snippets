@@ -1,0 +1,31 @@
+# vim:ft=snippets:
+snippet post "Jekyll post header" b
+---
+title: ${1:title}
+layout: post
+guid: `!p
+import uuid
+if not snip.c:
+  try:
+    guid = uuid.uuid4().hex
+  except:
+    guid = uuid.uuid4().get_hex()
+snip.rv = guid
+`
+date: `!v strftime("%Y-%m-%d %H:%M:%S")`
+tags:
+  - ${4}
+---
+
+${0}
+endsnippet
+
+snippet /img "jekyll image path completion"
+/${1:images}/`!p
+parts = snip.fn.split('-')
+rv = ''
+if len(parts) >= 3:
+	rv = '/'.join(parts[:3])
+snip.rv=rv`/${2:file.png}
+endsnippet
+

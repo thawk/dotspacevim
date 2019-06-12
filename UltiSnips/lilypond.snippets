@@ -130,3 +130,17 @@ snippet repeat "repeat" b
 	}
 }
 endsnippet
+
+snippet partial
+\partial ${1:duration}
+endsnippet
+
+snippet func "define music functin" b
+${1:funcname} =
+#(define-music-function
+     (parser location ${2:note})
+     (${3:ly:music?})
+   #{
+     ${0}
+   #})
+endsnippet

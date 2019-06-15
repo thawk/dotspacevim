@@ -162,8 +162,7 @@ snippet transexec "十二大调转调练习" b
 
 \include "../notes/$2.ily"
 
-Notes = 
-{
+Notes = \transpose c c {
 	\"$2Pitches"
 }
 
@@ -179,7 +178,7 @@ Notes =
 
 \tocItem \markup "F"
 \score {
-	\transpose c f, {
+	\transpose c f${3:,} {
 		\"Notes"
 	}
 	\header {
@@ -201,7 +200,7 @@ Notes =
 
 \tocItem \markup "Eb"
 \score {
-	\transpose c es, {
+	\transpose c es {
 		\"Notes"
 	}
 	\header {
@@ -223,7 +222,7 @@ Notes =
 
 \tocItem \markup "Db"
 \score {
-	\transpose c des, {
+	\transpose c des {
 		\"Notes"
 	}
 	\header {
@@ -235,7 +234,7 @@ Notes =
 
 \tocItem \markup "Gb/F#"
 \score {
-	\transpose c ges, {
+	\transpose c ges$3 {
 		\"Notes"
 	}
 	\header {
@@ -257,7 +256,7 @@ Notes =
 
 \tocItem \markup "E"
 \score {
-	\transpose c e, {
+	\transpose c e {
 		\"Notes"
 	}
 	\header {
@@ -279,7 +278,7 @@ Notes =
 
 \tocItem \markup "D"
 \score {
-	\transpose c d, {
+	\transpose c d {
 		\"Notes"
 	}
 	\header {

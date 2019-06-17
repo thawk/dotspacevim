@@ -1,6 +1,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker foldlevel=0:
 
 function! myspacevim#before() abort " {{{
+    call s:setup_conemu()
     call myspacevim#colorscheme#autoload()
     call s:setup_lsp()
 
@@ -340,4 +341,19 @@ function! s:syntax_id()
     echo join(s, ' -> ')
 endfunction
 command! SyntaxId call s:syntax_id()
+" }}}
+
+" ConEmu color fix {{{
+function! s:setup_conemu()
+    if !empty($CONEMUBUILD)
+        echom "Running in conemu"
+        " Should ``chcp 65001`` in console
+        set termencoding=utf8
+        set term=xterm
+        set t_Co=256
+        let g:spacevim_enable_guicolors=0
+        let &t_AB="\e[48;5;%dm"
+        let &t_AF="\e[38;5;%dm"
+    endif
+endfunction
 " }}}

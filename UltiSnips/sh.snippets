@@ -1,9 +1,9 @@
 snippet currdir "Resolve current path and filename"
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+	DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
+	SOURCE="$(readlink "$SOURCE")"
+	[[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 endsnippet
@@ -88,4 +88,32 @@ then
 	echo "Version"
 	exit 0
 fi
+endsnippet
+
+snippet ostype "case OSTYPE" b
+case "$OSTYPE" in
+	"darwin"*)
+		: "MacOS"
+	;;
+
+	"linux"*)
+		: "Linux"
+	;;
+
+	*"bsd"* | "dragonfly" | "bitrig")
+		: "BSD"
+	;;
+
+	"cygwin" | "msys" | "win32")
+		: "Windows"
+	;;
+
+	*)
+		printf '%s\n' "Unknown OS detected, aborting..." >&2
+		exit 1
+	;;
+esac
+
+# Finally, set the variable.
+os="$_"
 endsnippet

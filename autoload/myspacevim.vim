@@ -1,22 +1,119 @@
 " vim: fileencoding=utf-8 foldmethod=marker foldlevel=0:
 
 function! myspacevim#before() abort " {{{
+    if filereadable($HOME . "/.spacevim.local")
+        exec "source " . $HOME . "/.spacevim.local"
+    endif
+
     call s:setup_conemu()
-    call myspacevim#colorscheme#autoload()
     call s:setup_lsp()
+    call myspacevim#colorscheme#autoload()
 
     " Global configurations {{{
     " Add rooter for haskell
     call add(g:spacevim_project_rooter_patterns, 'stack.yaml')
     " }}}
 
-    " Mapping {{{
+    call s:setup_mapping()
+    call s:setup_plugin()
+endfunction " }}}
+
+function! myspacevim#after() abort " {{{
+    set ignorecase
+    set smartcase
+    set wildmode=longest:full,full
+    set wildmenu
+    " Fix compatibility of CJK long lines.
+    set nolinebreak
+
+    call s:setup_plugin_after()
+    call s:setup_autocmd()
+endfunction " }}}
+
+function! myspacevim#IncludePathHook(config) " {{{
+    if has_key(a:config, 'c_include_path')
+        let p = a:config['c_include_path']
+        if type(p) == type("")
+            let raw_path = has('win32') ? tr(p, '\', '/') : p
+            let paths = split(escape(p]\)\@!')
+            let &l:path .= ',' . join(paths, ',')
+        endif
+    endif
+endfunction " }}}
+
+function! s:goyo_enter() " {{{
+    if executable('tmux')
+        silent !tmux set status off
+        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    endif
+endfunction " }}}
+
+function! s:goyo_leave() " {{{
+    if executable('tmux')
+        silent !tmux set status on
+        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    endif
+endfunction " }}}
+
+function! s:setup_lsp() " {{{
+    let lsp_servers = {
+                \ 'c' : 'clangd',
+                \ 'cpp' : 'clangd',
+                \ 'css' : 'css-languageserver',
+                \ 'dart' : 'dart_language_server',
+                \ 'dockerfile' : 'docker-langserver',
+                \ 'go' : 'go-langserver',
+                \ 'haskell' : 'hie-wrapper',
+                \ 'html' : 'html-languageserver',
+                \ 'javascript' : 'javascript-typescript-stdio',
+                \ 'julia' : 'julia',
+                \ 'objc' : 'clangd',
+                \ 'objcpp' : 'clangd',
+                \ 'php' : 'php',
+                \ 'purescript' : 'purescript-language-server',
+                \ 'python' : 'pyls',
+                \ 'rust' : 'rustup',
+                \ 'sh' : 'bash-language-server',
+                \ 'typescript' : 'typescript-language-server',
+                \ 'ruby' : 'solargraph.BAT',
+                \ 'vue' : 'vls',
+                \ }
+
+    let filetypes = []
+
+    for lang in keys(lsp_servers)
+        if executable(lsp_servers[lang])
+            call add(filetypes, lang)
+        endif
+    endfor
+
+    call SpaceVim#layers#lsp#set_variable({
+                \ 'filetypes' : filetypes,
+                \ })
+endfunction " }}}
+
+function! s:setup_conemu() " {{{
+    if &term=='win32' && !empty($ConEmuANSI)
+        " echom "Running in conemu"
+        " Should ``chcp 65001`` in console
+        set termencoding=utf8
+        set term=xterm
+        set t_Co=256
+        let &t_AB="\e[48;5;%dm"
+        let &t_AF="\e[38;5;%dm"
+        let g:spacevim_enable_guicolors=0
+        let g:spacevim_colorscheme_default = "onedark"
+    endif
+endfunction
+" }}}
+
+function! s:setup_mapping() " {{{
     nnoremap zJ zjzx
     nnoremap zK zkzx
-    " }}}
+endfunction
+" }}}
 
-    " Plugin settings {{{
-
+function! s:setup_plugin() " {{{
     "" deoplete.vim {{{
     let g:deoplete#auto_complete_delay = 150
     "" }}}
@@ -161,17 +258,10 @@ function! myspacevim#before() abort " {{{
     call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
     "" }}}
 
-    "" surround {{{
-    augroup myspacevim_surround_markdown
-        autocmd!
+endfunction
+" }}}
 
-        autocmd! FileType markdown :let b:surround_96 = "``\r``"
-    augroup END
-    "" }}}
-
-    " }}}
-
-    " autocmds {{{
+function! s:setup_autocmd() " {{{
     augroup myspacevim_jam
         autocmd!
         autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2,*.jam :set filetype=jam
@@ -206,24 +296,25 @@ function! myspacevim#before() abort " {{{
         autocmd! FileType haskell
                     \  :set shiftwidth=2 expandtab
     augroup END
-    " }}}
-endfunction " }}}
 
-function! myspacevim#after() abort " {{{
-    set ignorecase
-    set smartcase
-    set wildmode=longest:full,full
-    set wildmenu
-    " Fix compatibility of CJK long lines.
-    set nolinebreak
+    " surround
+    augroup myspacevim_surround_markdown
+        autocmd!
 
-    call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
-
+        autocmd! FileType markdown :let b:surround_96 = "``\r``"
+    augroup END
+    
     " Goyo, Distraction-free writing in Vim
     augroup myspacevim_goyo
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
     augroup END
+
+endfunction
+" }}}
+
+function! s:setup_plugin_after() " {{{
+    call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
 
     if exists('*unite#filters#matcher_default#use')
         call unite#filters#matcher_default#use(['matcher_context'])
@@ -268,69 +359,8 @@ function! myspacevim#after() abort " {{{
     highlight MarkWord5 ctermbg=DarkRed     ctermfg=Black guibg=#9999FF guifg=Black |
     highlight MarkWord6 ctermbg=DarkBlue    ctermfg=Black guibg=#A4E57E guifg=Black
     "" }}}
-endfunction " }}}
-
-function! myspacevim#IncludePathHook(config) " {{{
-    if has_key(a:config, 'c_include_path')
-        let p = a:config['c_include_path']
-        if type(p) == type("")
-            let raw_path = has('win32') ? tr(p, '\', '/') : p
-            let paths = split(escape(p]\)\@!')
-            let &l:path .= ',' . join(paths, ',')
-        endif
-    endif
-endfunction " }}}
-
-function! s:goyo_enter() " {{{
-    if executable('tmux')
-        silent !tmux set status off
-        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    endif
-endfunction " }}}
-
-function! s:goyo_leave() " {{{
-    if executable('tmux')
-        silent !tmux set status on
-        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    endif
-endfunction " }}}
-
-function! s:setup_lsp() " {{{
-    let lsp_servers = {
-                \ 'c' : 'clangd',
-                \ 'cpp' : 'clangd',
-                \ 'css' : 'css-languageserver',
-                \ 'dart' : 'dart_language_server',
-                \ 'dockerfile' : 'docker-langserver',
-                \ 'go' : 'go-langserver',
-                \ 'haskell' : 'hie-wrapper',
-                \ 'html' : 'html-languageserver',
-                \ 'javascript' : 'javascript-typescript-stdio',
-                \ 'julia' : 'julia',
-                \ 'objc' : 'clangd',
-                \ 'objcpp' : 'clangd',
-                \ 'php' : 'php',
-                \ 'purescript' : 'purescript-language-server',
-                \ 'python' : 'pyls',
-                \ 'rust' : 'rustup',
-                \ 'sh' : 'bash-language-server',
-                \ 'typescript' : 'typescript-language-server',
-                \ 'ruby' : 'solargraph.BAT',
-                \ 'vue' : 'vls',
-                \ }
-
-    let filetypes = []
-
-    for lang in keys(lsp_servers)
-        if executable(lsp_servers[lang])
-            call add(filetypes, lang)
-        endif
-    endfor
-
-    call SpaceVim#layers#lsp#set_variable({
-                \ 'filetypes' : filetypes,
-                \ })
-endfunction " }}}
+endfunction
+" }}}
 
 " command SyntaxId {{{
 function! s:syntax_id()
@@ -343,18 +373,3 @@ endfunction
 command! SyntaxId call s:syntax_id()
 " }}}
 
-" ConEmu color fix {{{
-function! s:setup_conemu()
-    if &term=='win32' && !empty($ConEmuANSI)
-        " echom "Running in conemu"
-        " Should ``chcp 65001`` in console
-        set termencoding=utf8
-        set term=xterm
-        set t_Co=256
-        let &t_AB="\e[48;5;%dm"
-        let &t_AF="\e[38;5;%dm"
-        let g:spacevim_enable_guicolors=0
-        let g:spacevim_colorscheme_default = "onedark"
-    endif
-endfunction
-" }}}

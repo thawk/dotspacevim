@@ -16,6 +16,7 @@ function! myspacevim#before() abort " {{{
 
     call s:setup_mapping()
     call s:setup_plugin()
+    call s:setup_autocmd()
 endfunction " }}}
 
 function! myspacevim#after() abort " {{{
@@ -27,7 +28,6 @@ function! myspacevim#after() abort " {{{
     set nolinebreak
 
     call s:setup_plugin_after()
-    call s:setup_autocmd()
 endfunction " }}}
 
 function! myspacevim#IncludePathHook(config) " {{{

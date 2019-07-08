@@ -26,6 +26,7 @@ snippet score "score" b
 	${0:relative}
 	\header {
 		piece = "${1:title}"
+		% opus = ""
 		% composer = ""
 	}
 }
@@ -93,6 +94,7 @@ snippet inote "include note"
 	\\"${2:$1}Notes"
 	\header {
 		piece    = \\"$2Piece"
+		opus     = \\"$2Opus"
 		composer = \\"$2Composer"
 	}
 }
@@ -101,6 +103,7 @@ endsnippet
 
 snippet note "Notes" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
 "$1Composer" = ""
 
 "$1Pitches" = \relative $4
@@ -112,13 +115,15 @@ snippet note "Notes" b
 	\bar "|."
 }
 
-"$1Notes" = \relative ${4:c'}
+"$1Notes" =
 {
 	\clef "treble"
 	\key ${5:c} ${6:\major}
 	% \tempo 4 = 96
 
-	\"$1Pitches"
+	\transpose c ${7:$5} {
+		\"$1Pitches"
+	}
 }
 endsnippet
 

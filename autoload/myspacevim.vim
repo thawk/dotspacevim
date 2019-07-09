@@ -151,6 +151,7 @@ function! s:setup_plugin() " {{{
     "" }}}
 
     "" ultisnips {{{
+    let g:UltiSnipsNoPythonWarning = 1
     let g:ultisnips_python_quoting_style = "single"
     let g:ultisnips_python_triple_quoting_style = "double"
     let g:ultisnips_python_style = "google"

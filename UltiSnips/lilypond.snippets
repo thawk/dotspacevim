@@ -106,7 +106,7 @@ snippet note "Notes" b
 "$1Opus" = ""
 "$1Composer" = ""
 
-"$1Pitches" = \relative $4
+"$1Pitches" = \relative ${4:c''}
 {
 	\time ${7:4/4}
 
@@ -128,7 +128,12 @@ snippet note "Notes" b
 endsnippet
 
 snippet repeat "repeat" b
+\repeat volta ${1:2} ${0}
+endsnippet
+
+snippet repeata "repeat with alternative" b
 \set Score.voltaSpannerDuration = #(ly:make-moment ${1:4/4})
+
 \repeat volta 2
 {
 	${0}

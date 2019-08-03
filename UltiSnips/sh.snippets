@@ -90,6 +90,51 @@ then
 fi
 endsnippet
 
+snippet getopts "bash builtin getopts" b
+__ScriptVersion="${1:version}"
+
+EchoUsage()
+{
+	echo "
+Usage: $(basename "\$0") [options] [--]
+
+	Options:
+		-h|help       Display this message
+		-V|version    Display script version
+		-v|verbose    Display more verbose log
+		-t|test <val> A testing argument
+" >&2
+}
+
+VERBOSE=
+while getopts ":hVvt:" opt; do
+	case $opt in
+		h|help)
+			EchoUsage
+			exit 0
+			;;
+		V|version)
+			echo "$${1:(basename $0)} -- Version $__ScriptVersion"
+			exit 0
+			;;
+		v|verbose)
+			VERBOSE="${VERBOSE}1"
+			;;
+		t|test)
+			echo "Testing argument: '$OPTARG' at position $OPTIND"
+			;;
+		* )
+			echo -e "\n  Option does not exist : '$OPTARG' at position $OPTIND\n"
+			EchoUsage
+			exit 1
+			;;
+	esac
+done
+shift $(($OPTIND-1))
+
+$0
+endsnippet
+
 snippet ostype "case OSTYPE" b
 case "$OSTYPE" in
 	"darwin"*)

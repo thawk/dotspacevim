@@ -221,9 +221,16 @@ lazy = 1
 on_cmd = ['Dein']
 
 [[custom_plugins]]
-name = 'vernonrj/Mark--Karkat'
+name = 'inkarkat/vim-ingo-library'
 lazy = 1
-on_cmd = ['Mark', 'MarkClear', 'Marks', 'MarkLoad', 'MarkSave', 'MarkPalette']
+
+[[custom_plugins]]
+name = 'inkarkat/vim-mark'
+depends = ['inkarkat/vim-ingo-library']
+lazy = 1
+on_cmd = [
+  'Mark', 'MarkClear', 'Marks', 'MarkLoad', 'MarkSave', 'MarkYankDefinitions',
+  'MarkYankDefinitionsOneLiner', 'MarkPalette', 'MarkName']
 on_map = ['<Plug>Mark']
 
 [[custom_plugins]]

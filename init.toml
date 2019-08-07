@@ -56,6 +56,7 @@ enable_os_fileformat_icon = 1
 
 # Disable delimitmate
 autocomplete_parens = 0
+# autocomplete_method = 'coc'
 
 snippet_engine = 'ultisnips'
 
@@ -71,6 +72,7 @@ project_rooter_automatically = 1
 name = 'autocomplete'
 auto-completion-return-key-behavior = "nil"
 auto-completion-tab-key-behavior = "smart"
+auto-completion-complete-with-key-sequence = "nil"
 
 [[layers]]
 name = 'leaderf'
@@ -114,7 +116,7 @@ enable = true
 
 [[layers]]
 name = 'lang#clojure'
-enable = true
+enable = false
 
 [[layers]]
 name = 'lang#go'

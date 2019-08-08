@@ -8,8 +8,9 @@ bootstrap_after = "myspacevim#after"
 # layer
 # Detect colorscheme used by dynamic-colors and fallback to NeoSolarized
 colorscheme = ""
-colorscheme_default = "NeoSolarized"
-background = "dark"
+colorscheme_bg = "dark"
+colorscheme_default = "gruvbox"
+
 # Disable guicolors in basic mode, many terminal do not support 24bit
 # true colors
 enable_guicolors = true

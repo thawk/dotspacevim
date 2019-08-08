@@ -102,7 +102,7 @@ function! s:setup_conemu() " {{{
         let &t_AB="\e[48;5;%dm"
         let &t_AF="\e[38;5;%dm"
         let g:spacevim_enable_guicolors=0
-        let g:spacevim_colorscheme_default = "onedark"
+        let g:spacevim_colorscheme_default = "gruvbox"
     endif
 endfunction
 " }}}

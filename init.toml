@@ -158,6 +158,9 @@ enable = true
 [[layers]]
 name = 'lsp'
 enable = true
+#   [layers.override_cmd]
+#     c = ['ccls', '--log-file=/tmp/ccls.log']
+#     cpp = ['ccls', '--log-file=/tmp/ccls.log']
 
 [[layers]]
 name = 'tags'

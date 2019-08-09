@@ -57,8 +57,8 @@ endfunction " }}}
 
 function! s:setup_lsp() " {{{
     let lsp_servers = {
-                \ 'c' : 'clangd',
-                \ 'cpp' : 'clangd',
+                \ 'c' : 'ccls',
+                \ 'cpp' : 'ccls',
                 \ 'css' : 'css-languageserver',
                 \ 'dart' : 'dart_language_server',
                 \ 'dockerfile' : 'docker-langserver',
@@ -67,8 +67,8 @@ function! s:setup_lsp() " {{{
                 \ 'html' : 'html-languageserver',
                 \ 'javascript' : 'javascript-typescript-stdio',
                 \ 'julia' : 'julia',
-                \ 'objc' : 'clangd',
-                \ 'objcpp' : 'clangd',
+                \ 'objc' : 'ccls',
+                \ 'objcpp' : 'ccls',
                 \ 'php' : 'php',
                 \ 'purescript' : 'purescript-language-server',
                 \ 'python' : 'pyls',

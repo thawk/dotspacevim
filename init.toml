@@ -57,7 +57,7 @@ enable_os_fileformat_icon = 1
 
 # Disable delimitmate
 autocomplete_parens = 0
-# autocomplete_method = 'coc'
+autocomplete_method = 'coc'
 
 snippet_engine = 'ultisnips'
 
@@ -98,7 +98,6 @@ name = 'denite'
 
 [[layers]]
 name = 'incsearch'
-enable = false
 
 [[layers]]
 name = 'tools'

@@ -5,7 +5,7 @@ function! myspacevim#before() abort " {{{
         exec "source " . $HOME . "/.spacevim.local"
     endif
 
-    if executable('node') && execuable('yarn')
+    if executable('node') && executable('yarn')
         " Use coc.vim only if we have node && yarn installed
         let g:spacevim_autocomplete_method = 'coc'
     endif

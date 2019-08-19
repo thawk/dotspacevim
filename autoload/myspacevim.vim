@@ -5,6 +5,11 @@ function! myspacevim#before() abort " {{{
         exec "source " . $HOME . "/.spacevim.local"
     endif
 
+    if executable('node') && execuable('yarn')
+        " Use coc.vim only if we have node && yarn installed
+        let g:spacevim_autocomplete_method = 'coc'
+    endif
+
     call s:setup_conemu()
     call s:setup_lsp()
     call myspacevim#colorscheme#autoload()

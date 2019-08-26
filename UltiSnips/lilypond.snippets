@@ -87,15 +87,15 @@ snippet toci "tocItem" b
 endsnippet
 
 snippet inote "include note"
-\include "../notes/${1:name}.ily"
+\include "../${1:notes}/${2:name}.ily"
 
-\tocItem \markup \\"$2Piece"
+\tocItem \markup \\"$3Piece"
 \score {
-	\\"${2:$1}Notes"
+	\\"${3:$2}Notes"
 	\header {
-		piece    = \\"$2Piece"
-		opus     = \\"$2Opus"
-		composer = \\"$2Composer"
+		piece    = \\"$3Piece"
+		opus     = \\"$3Opus"
+		composer = \\"$3Composer"
 	}
 }
 ${0}

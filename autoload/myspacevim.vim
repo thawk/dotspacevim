@@ -32,6 +32,8 @@ function! myspacevim#after() abort " {{{
     " Fix compatibility of CJK long lines.
     set nolinebreak
 
+    set wrap
+
     call s:setup_plugin_after()
 endfunction " }}}
 

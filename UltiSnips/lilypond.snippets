@@ -108,7 +108,7 @@ snippet note "Notes" b
 
 "$1Pitches" = \relative ${4:c''}
 {
-	\time ${7:4/4}
+	\time ${8:4/4}
 
 	${0}
 
@@ -154,11 +154,11 @@ endsnippet
 snippet func "define music functin" b
 ${1:funcname} =
 #(define-music-function
-     (parser location ${2:note})
-     (${3:ly:music?})
-   #{
-     ${0}
-   #})
+		(parser location ${2:note})
+		(${3:ly:music?})
+	#{
+		${0}
+	#})
 endsnippet
 
 snippet transexec "十二大调转调练习" b
@@ -310,3 +310,59 @@ Notes = \transpose c c {
 
 endsnippet
 
+snippet parallel "parallelMusic" b
+\parallelMusic #'(${1:primary} ${2:harmony}) {
+	% Bar 1
+	${0} |
+	|
+
+	% Bar 2
+	|
+	|
+}
+\new StaffGroup <<
+	\new Staff \\$1
+	\new Staff \\$2
+>>
+endsnippet
+
+snippet kalimba "Kalimba Notes" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+
+\parallelMusic #'(primary harmony) {
+
+	${0}
+
+	\bar "|."
+}
+
+"$1Pitches" =
+{
+	\time ${8:4/4}
+
+	\new StaffGroup <<
+		\new Staff {
+			\relative c''
+			{
+				%\tempo 4 = 108
+				\primary
+			}
+		}
+		\new Staff {
+			\relative c''
+			{
+				\harmony
+			}
+		}
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c ${7:c} {
+		\"$1Pitches"
+	}
+}
+endsnippet

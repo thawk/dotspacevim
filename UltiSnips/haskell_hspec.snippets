@@ -21,6 +21,7 @@ snippet spec "Hspec: new suite" b
 module ${1:`!v substitute(substitute(expand('%:r'), '\C^\%(tests\?[/\\]\)\(.*\)Spec$\|.*', '\1', ''), '[/\\]', '.', 'g')`}Spec (main, spec) where
 
 import Test.Hspec
+import Test.QuickCheck
 import $1
 
 main :: IO ()

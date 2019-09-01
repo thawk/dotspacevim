@@ -2,3 +2,7 @@ snippet datew "YYYY-MM-DD with weekday" w
 `!v strftime("%Y-%m-%d %A")`
 endsnippet
 
+snippet datey "YYYY-MM-DD and weekday for yesterday" w
+`!v strftime("%Y-%m-%d %A", localtime() - 24*3600)`
+endsnippet
+

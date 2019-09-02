@@ -340,18 +340,18 @@ snippet kalimba "Kalimba Notes" b
 
 "$1Pitches" =
 {
-	\time ${8:4/4}
+	\time ${3:4/4}
 
 	\new StaffGroup <<
 		\new Staff {
 			\relative c''
 			{
-				%\tempo 4 = 108
+				${4:\tempo 4 = ${5:108}}
 				\primary
 			}
 		}
 		\new Staff {
-			\relative c''
+			\relative c'
 			{
 				\harmony
 			}
@@ -361,7 +361,7 @@ snippet kalimba "Kalimba Notes" b
 
 "$1Notes" =
 {
-	\transpose c ${7:c} {
+	\transpose c c {
 		\"$1Pitches"
 	}
 }

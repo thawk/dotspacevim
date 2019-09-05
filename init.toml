@@ -17,6 +17,7 @@ enable_guicolors = true
 
 # guifont = "SauceCodePro NF:h13"
 guifont = "DejaVuSansMono NF:h13:cANSI:qDRAFT"
+guifont = "DejaVuSansMono_Nerd_Font:h13:cANSI:qDRAFT"
 
 # Disable statusline separator, if you want to use other value, please
 # install nerd fonts

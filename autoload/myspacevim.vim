@@ -35,6 +35,10 @@ function! myspacevim#after() abort " {{{
     set wrap
 
     call s:setup_plugin_after()
+
+    if !exists(':Make')
+      command! -nargs=* Make :call SpaceVim#plugins#runner#open("make " . <q-args>)
+    endif
 endfunction " }}}
 
 function! myspacevim#IncludePathHook(config) " {{{

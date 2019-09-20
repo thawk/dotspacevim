@@ -380,7 +380,8 @@ function! s:setup_plugin_after() " {{{
     endif
 
     if exists('*denite#custom#source')
-        call denite#custom#source('_'])
+        call denite#custom#source('_', 'matchers', ['matcher/regexp'])
+        call denite#custom#source('_', 'sorters', ['sorter/sublime'])
     endif
 
     if exists('*denite#custom#option')

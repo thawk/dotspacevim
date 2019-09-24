@@ -25,7 +25,7 @@ function! myspacevim#before() abort " {{{
 endfunction " }}}
 
 function! myspacevim#after() abort " {{{
-    set ignorecase
+    set noignorecase
     set smartcase
     set wildmode=longest:full,full
     set wildmenu
@@ -38,6 +38,12 @@ function! myspacevim#after() abort " {{{
 
     if !exists(':Make')
       command! -nargs=* Make :call SpaceVim#plugins#runner#open("make " . <q-args>)
+    endif
+
+    if filereadable('/usr/share/dict/words')
+        if &dictionary == ''
+            set dictionary+=/usr/share/dict/words
+        endif
     endif
 endfunction " }}}
 

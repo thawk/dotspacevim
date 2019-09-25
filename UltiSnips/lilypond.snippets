@@ -326,12 +326,14 @@ snippet parallel "parallelMusic" b
 >>
 endsnippet
 
-snippet kalimba "Kalimba Notes" b
+snippet note1 "Parallel Notes (one staff)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
 
 \parallelMusic #'(primary harmony) {
+
+	\time ${3:4/4}
 
 	${0}
 
@@ -340,21 +342,47 @@ snippet kalimba "Kalimba Notes" b
 
 "$1Pitches" =
 {
+	\new Staff <<
+		${4:\tempo 4 = ${5:108}}
+
+		\relative c'' \primary
+		\\\\
+		\relative c' \harmony
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c c {
+		\"$1Pitches"
+	}
+}
+endsnippet
+
+snippet note2 "Parallel Notes (two staffs)" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+
+\parallelMusic #'(primary harmony) {
+
 	\time ${3:4/4}
 
+	${0}
+
+	\bar "|."
+}
+
+"$1Pitches" =
+{
 	\new StaffGroup <<
 		\new Staff {
-			\relative c''
-			{
-				${4:\tempo 4 = ${5:108}}
-				\primary
-			}
+			${4:\tempo 4 = ${5:108}}
+
+			\relative c'' \primary
 		}
 		\new Staff {
-			\relative c'
-			{
-				\harmony
-			}
+			\relative c' \harmony 
 		}
 	>>
 }
@@ -365,4 +393,29 @@ snippet kalimba "Kalimba Notes" b
 		\"$1Pitches"
 	}
 }
+endsnippet
+
+snippet color "override colors"
+\override Accidental.color = #(x11-color '${1:gray50})
+\override Beam.color       = #(x11-color '$1)
+\override Dots.color       = #(x11-color '$1)
+\override NoteHead.color   = #(x11-color '$1)
+\override Rest.color       = #(x11-color '$1)
+\override Stem.color       = #(x11-color '$1)
+\override Tie.color        = #(x11-color '$1)
+${0}
+endsnippet
+
+snippet merge "Merge two Voice into one Staff"
+\new Staff <<
+	${1:\tempo 4 = ${2:108}}
+
+	\relative c'' {
+		${3:\primary}
+	}
+	\\\\
+	\relative c' {
+		${4:\harmony}
+	}
+>>
 endsnippet

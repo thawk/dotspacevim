@@ -22,6 +22,11 @@ function! myspacevim#before() abort " {{{
     call s:setup_mapping()
     call s:setup_plugin()
     call s:setup_autocmd()
+
+    if !exists(':Make')
+      command! -nargs=* Make :call s:async_make(<q-args>)
+    endif
+
 endfunction " }}}
 
 function! myspacevim#after() abort " {{{
@@ -35,10 +40,6 @@ function! myspacevim#after() abort " {{{
     set wrap
 
     call s:setup_plugin_after()
-
-    if !exists(':Make')
-      command! -nargs=* Make :call SpaceVim#plugins#runner#open("make " . <q-args>)
-    endif
 
     if filereadable('/usr/share/dict/words')
         if &dictionary == ''
@@ -399,6 +400,13 @@ function! s:setup_plugin_after() " {{{
                     \ 'direction' : 'botright',
                     \ })
     endif
+endfunction
+" }}}
+
+function! s:async_make(args) " {{{
+    let cmd1 = join(split(&makeprg, '\$\*', 1), a:args)
+    let cmd2 = join(map(split(cmd1, '\ze[<%# "'']'), 'expand(v:val)'), '')
+    call SpaceVim#plugins#runner#open(cmd2)
 endfunction
 " }}}
 

@@ -66,13 +66,18 @@ def space_if(p):
 	return " " if p else ""
 endglobal
 
-snippet mod "Module declaration" !b
-module ${1:`!v vim2hs#haskell#snippets#module_name()`}
-		( $2
-		)
-	where
+snippet module "Module declaration" !b
+module `!v substitute(substitute(expand('%:r'), '[/\\]','.','g'),'^\%(\l*\.\)\?','','')`
+( ${1}
+) where
 
-$0
+`!v expand('%') =~ 'Main' ? "\nmain :: IO ()\nmain = undefined" : ""`$0
+endsnippet
+
+snippet mod "Module declaration" !b
+module `!v substitute(substitute(expand('%:r'), '[/\\]','.','g'),'^\%(\l*\.\)\?','','')` where
+
+`!v expand('%') =~ 'Main' ? "\nmain :: IO ()\nmain = undefined" : ""`$0
 endsnippet
 
 snippet main "Main module" !b

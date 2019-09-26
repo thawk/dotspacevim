@@ -1,7 +1,7 @@
 "=============================================================================
 " lilypond.vim --- lilypond layer for SpaceVim
-" Copyright (c) 2019 thawk009
-" Author: thawk009
+" Copyright (c) 2019 thawk
+" Author: thawk
 " URL: https://spacevim.org
 " License: GPLv3
 "=============================================================================
@@ -17,7 +17,7 @@ function! SpaceVim#layers#lang#lilypond#config() abort
     autocmd FileType lilypond 
                 \ compiler lilypond |
                 \ setlocal errorformat+=%DChanging\ working\ directory\ to:\ `%f'
-                \ errorformat+=%XConverting\ to
+                \          errorformat+=%XConverting\ to
   augroup END
 
   call SpaceVim#mapping#space#regesit_lang_mappings('lilypond', function('s:mappings'))
@@ -28,11 +28,10 @@ function! s:mappings() abort
     let g:_spacevim_mappings_space = {}
   endif
   let g:_spacevim_mappings_space.l = {'name' : '+Language Specified'}
-  if exists(':Make')
-      " call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'Make -o "'.expand('%:r').'" "'.expand('%').'"', 'compile', 1)
-      call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'Make -o "%:r" "%"', 'compile', 1)
-  else
-      call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'make -o "%:r" "%"', 'compile', 1)
-  endif
+  " if exists(':Make')
+  "     call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'Make "%"', 'compile', 1)
+  " else
+      call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'make "%"', 'compile', 1)
+  " endif
 endfunction
 

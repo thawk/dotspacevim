@@ -60,7 +60,7 @@ snippet bar "Bar"
 \bar "${1:|.}" ${0}
 endsnippet
 
-snippet tuplet "Tuplet连音"
+snippet tuplet "Tuplet"
 \tuplet ${1:3/2} { ${0} }
 endsnippet
 
@@ -78,7 +78,7 @@ snippet trans "transpose"
 }
 endsnippet
 
-snippet toc "目录" b
+snippet toc "TOC" b
 \markuplist \table-of-contents
 endsnippet
 
@@ -159,155 +159,6 @@ ${1:funcname} =
 	#{
 		${0}
 	#})
-endsnippet
-
-snippet transexec "十二大调转调练习" b
-\version "2.18.2"
-
-\include "../global.ily"
-
-\header {
-	title = "转调练习-${2:`!v substitute(expand("%:t:r"), "转调练习-", "", "")`}"
-}
-
-\include "../notes/$2.ily"
-
-Notes = \transpose c c {
-	\"$2Pitches"
-}
-
-\tocItem \markup "C"
-\score {
-	\transpose c c {
-		\"Notes"
-	}
-	\header {
-		piece = "C"
-	}
-}
-
-\tocItem \markup "F"
-\score {
-	\transpose c f${3:,} {
-		\"Notes"
-	}
-	\header {
-		piece = "F"
-	}
-}
-
-\pageBreak
-
-\tocItem \markup "Bb"
-\score {
-	\transpose c bes, {
-		\"Notes"
-	}
-	\header {
-		piece = "Bb"
-	}
-}
-
-\tocItem \markup "Eb"
-\score {
-	\transpose c es {
-		\"Notes"
-	}
-	\header {
-		piece = "Eb"
-	}
-}
-
-\pageBreak
-
-\tocItem \markup "Ab"
-\score {
-	\transpose c aes, {
-		\"Notes"
-	}
-	\header {
-		piece = "Ab"
-	}
-}
-
-\tocItem \markup "Db"
-\score {
-	\transpose c des {
-		\"Notes"
-	}
-	\header {
-		piece = "Db"
-	}
-}
-
-\pageBreak
-
-\tocItem \markup "Gb/F#"
-\score {
-	\transpose c ges$3 {
-		\"Notes"
-	}
-	\header {
-		piece = "Gb/F#"
-	}
-}
-
-\tocItem \markup "B"
-\score {
-	\transpose c b, {
-		\"Notes"
-	}
-	\header {
-		piece = "B"
-	}
-}
-
-\pageBreak
-
-\tocItem \markup "E"
-\score {
-	\transpose c e {
-		\"Notes"
-	}
-	\header {
-		piece = "E"
-	}
-}
-
-\tocItem \markup "A"
-\score {
-	\transpose c a, {
-		\"Notes"
-	}
-	\header {
-		piece = "A"
-	}
-}
-
-\pageBreak
-
-\tocItem \markup "D"
-\score {
-	\transpose c d {
-		\"Notes"
-	}
-	\header {
-		piece = "D"
-	}
-}
-
-\tocItem \markup "G"
-\score {
-	\transpose c g, {
-		\"Notes"
-	}
-	\header {
-		piece = "G"
-	}
-}
-
-\pageBreak
-
 endsnippet
 
 snippet parallel "parallelMusic" b

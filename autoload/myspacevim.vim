@@ -328,8 +328,6 @@ endfunction
 function! s:setup_autocmd() " {{{
     augroup myspacevim_jam
         autocmd!
-        autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2,*.jam :set filetype=jam
-        autocmd! BufEnter Jamroot,Jamfile,Jamroot.v2,Jamfile.v2 :compiler b2
         autocmd! FileType jam
                     \  nnoremap <buffer> [SPC]lb :make<CR>
                     \| nnoremap <buffer> [SPC]lt :make unittest<CR>

@@ -12,12 +12,12 @@ BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-    `substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
-    Fixture()
-    : $1(${2})
-    {
-    }
+	Fixture()
+	: $1(${2})
+	{
+	}
 };
 
 ${0}
@@ -39,12 +39,12 @@ BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-    `substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
-    Fixture()
-    : $1(${2})
-    {
-    }
+	Fixture()
+	: $1(${2})
+	{
+	}
 };
 
 ${0}
@@ -66,12 +66,12 @@ BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-    `substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
-    Fixture()
-    : $1(${2})
-    {
-    }
+	Fixture()
+	: $1(${2})
+	{
+	}
 };
 
 ${0}
@@ -93,12 +93,12 @@ BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-    `substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
-    Fixture()
-    : $1(${2})
-    {
-    }
+	Fixture()
+	: $1(${2})
+	{
+	}
 };
 
 ${0}
@@ -116,7 +116,7 @@ snippet tc "unittest for any class" b
  */
 BOOST_FIXTURE_TEST_CASE(Test${4}, Fixture)
 {
-    ${0}
+	${0}
 }
 endsnippet
 
@@ -130,7 +130,7 @@ snippet stc1 "unittest for sscc::*" b
  */
 BOOST_FIXTURE_TEST_CASE(Test${4}, Fixture)
 {
-    ${0}
+	${0}
 }
 endsnippet
 
@@ -144,7 +144,7 @@ snippet stc2 "unittest for sscc::*::*" b
  */
 BOOST_FIXTURE_TEST_CASE(Test${4}, Fixture)
 {
-    ${0}
+	${0}
 }
 endsnippet
 
@@ -158,7 +158,7 @@ snippet stc3 "unittest for sscc::*::*::*" b
  */
 BOOST_FIXTURE_TEST_CASE(Test${4}, Fixture)
 {
-    ${0}
+	${0}
 }
 endsnippet
 

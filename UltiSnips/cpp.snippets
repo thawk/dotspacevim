@@ -1,18 +1,18 @@
 snippet try
 try
 {
-    ${1}
+	${1}
 }
 catch (${2:...})
 {
-    ${3}
+	${3}
 }
 endsnippet
 
 snippet fori
 for (${1:size_t} ${2:i}=${3:0}; $2 < ${4}; ++$2)
 {
-    ${0}
+	${0}
 }
 endsnippet
 
@@ -20,7 +20,7 @@ endsnippet
 snippet fore
 for (${1:auto} ${2:i} : ${3:container})
 {
-    ${4}
+	${4}
 }
 endsnippet
 
@@ -36,7 +36,7 @@ endsnippet
 snippet mfun
 ${4:void} ${1:`substitute(substitute(expand("%:t:r"), "^\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`}::${2:MemberFunction}(${3})
 {
-    ${0}
+	${0}
 }
 endsnippet
 
@@ -46,18 +46,18 @@ using namespace std;
 
 int main(int argc, char const* argv[])
 {
-    ${0:cout << "hello, world!" << endl;}
+	${0:cout << "hello, world!" << endl;}
 
-    return 0;
+	return 0;
 }
 endsnippet
 
 snippet log
 LOG_${1:INFO}(
-    ${2:kInfo},
-    format(translate(${3}))
-    % ${4},
-    ${5:""});
+	${2:kInfo},
+	format(translate(${3}))
+	% ${4},
+	${5:""});
 
 ${0}
 endsnippet

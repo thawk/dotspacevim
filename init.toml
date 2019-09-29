@@ -49,7 +49,7 @@ wildignore = """\
               bin*/**/gcc-*/**,*.gcov,*.o"""
 
 realtime_leader_guide = 1
-enable_vimfiler_welcome = 1
+enable_vimfiler_welcome = 0
 
 enable_tabline_filetype_icon = 1
 enable_statusline_display_mode = 0
@@ -245,4 +245,7 @@ name = 'sickill/vim-monokai'
 name = 'thawk/vim-pcet'
 lazy = 1
 on_path = 'pcet_.*\.xml'
+
+[[custom_plugins]]
+name = 'thawk/bbv2.vim'
 

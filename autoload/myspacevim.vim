@@ -255,16 +255,16 @@ function! s:setup_plugin() " {{{
     augroup myspacevim_fswitch
         autocmd!
 
-        autocmd! BufEnter *.h,*.hpp
+        autocmd! BufNewFile,BufEnter *.h,*.hpp
                     \  let b:fswitchdst='cpp,c,ipp,cxx'
                     \| let b:fswitchlocs='reg:/include/src/,reg:/include.*/src/,ifrel:|/include/|../src|,reg:!\<include/\w\+/!src/!,reg:!\<include/\(\w\+/\)\{2}!src/!,reg:!\<include/\(\w\+/\)\{3}!src/!,reg:!\<include/\(\w\+/\)\{4}!src/!,reg:!sscc\(/[^/]\+\|\)/.*!libs\1/**!'
-        autocmd! BufEnter *.c,*.cpp,cxx,*.ipp
+        autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
                     \  let b:fswitchdst='h,hpp'
                     \| let b:fswitchlocs='reg:/src/include/,reg:|/src|/include/**|,ifrel:|/src/|../include|,reg:|libs/.*|**|'
-        autocmd! BufEnter *.xml
+        autocmd! BufNewFile,BufEnter *.xml
                     \  let b:fswitchdst='rnc'
                     \| let b:fswitchlocs='./'
-        autocmd! BufEnter *.rnc
+        autocmd! BufNewFile,BufEnter *.rnc
                     \  let b:fswitchdst='xml'
                     \| let b:fswitchlocs='./'
 
@@ -362,16 +362,21 @@ function! s:setup_autocmd() " {{{
     " surround
     augroup myspacevim_surround_markdown
         autocmd!
-
         autocmd! FileType markdown :let b:surround_96 = "``\r``"
     augroup END
     
     " Goyo, Distraction-free writing in Vim
     augroup myspacevim_goyo
+        autocmd!
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
     augroup END
 
+    augroup myspacevim_private
+        autocmd!
+        autocmd! BufNewFile,BufEnter */private/*
+              \ :setlocal noswapfile noundofile nobackup writebackup backupdir=.
+    augroup END
 endfunction
 " }}}
 

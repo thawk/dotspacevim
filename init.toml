@@ -1,251 +1,262 @@
 # All SpaceVim option below [option] section
 [options]
-bootstrap_before = "myspacevim#before"
-bootstrap_after = "myspacevim#after"
+    bootstrap_before = "myspacevim#before"
+    bootstrap_after = "myspacevim#after"
 
-# set spacevim theme. by default colorscheme layer is not loaded,
-# if you want to use more colorscheme, please load the colorscheme
-# layer
-# Detect colorscheme used by dynamic-colors and fallback to NeoSolarized
-colorscheme = ""
-colorscheme_bg = "dark"
-colorscheme_default = "gruvbox"
+    # set spacevim theme. by default colorscheme layer is not loaded,
+    # if you want to use more colorscheme, please load the colorscheme
+    # layer
+    # Detect colorscheme used by dynamic-colors and fallback to NeoSolarized
+    colorscheme = ""
+    colorscheme_bg = "dark"
+    colorscheme_default = "gruvbox"
 
-# Disable guicolors in basic mode, many terminal do not support 24bit
-# true colors
-enable_guicolors = true
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = true
 
-# guifont = "SauceCodePro NF:h13"
-guifont = "DejaVuSansMono NF:h13:cANSI:qDRAFT,DejaVuSansMono_Nerd_Font:h13:cANSI:qDRAFT,Consolas:h13:cANSI:qDRAFT"
+    # guifont = "SauceCodePro NF:h13"
+    guifont = "DejaVuSansMono NF:h13:cANSI:qDRAFT,DejaVuSansMono_Nerd_Font:h13:cANSI:qDRAFT,Consolas:h13:cANSI:qDRAFT"
 
-# Disable statusline separator, if you want to use other value, please
-# install nerd fonts
-statusline_separator = "arrow"
-statusline_inactive_separator = "arrow"
-enable_tabline_filetype_icon = true
-enable_statusline_display_mode = false
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "arrow"
+    statusline_inactive_separator = "arrow"
+    enable_tabline_filetype_icon = true
+    enable_statusline_display_mode = false
 
-# 0: 1 ➛ ➊ 1: 1 ➛ ➀ 2: 1 ➛ ⓵ 3: 1 ➛ ¹ 4: 1 ➛ 1
-buffer_index_type = 4
+    # 0: 1 ➛ ➊ 1: 1 ➛ ➀ 2: 1 ➛ ⓵ 3: 1 ➛ ¹ 4: 1 ➛ 1
+    buffer_index_type = 4
 
-# 0: 1 ➛ ➊ 1: 1 ➛ ➀ 2: 1 ➛ ⓵ 3: 1 ➛ 1
-windows_index_type = 3
+    # 0: 1 ➛ ➊ 1: 1 ➛ ➀ 2: 1 ➛ ⓵ 3: 1 ➛ 1
+    windows_index_type = 3
 
-statusline_unicode_symbols = 1
+    statusline_unicode_symbols = 1
 
-# If there is a particular plugin you don't like, you can define this
-# variable to disable them entirely:
-disabled_plugins=['vim-gutentags']
+    # If there is a particular plugin you don't like, you can define this
+    # variable to disable them entirely:
+    disabled_plugins=['vim-gutentags']
 
-default_indent = 4
-# 恢复q的正常用途。<Leader>qr是宏录制的快捷键
-#windows_smartclose = ''
+    default_indent = 4
+    # 恢复q的正常用途。<Leader>qr是宏录制的快捷键
+    #windows_smartclose = ''
 
-# Wildignore
-wildignore = """\
-              */tmp/*,*.so,*.swp,*.zip,*.class,tags,\
-              *.jpg,*.ttf,*.TTF,*.png,*/target/*,\
-              .git,.svn,.hg,.DS_Store,*.svg,.*/,\
-              bin*/**/gcc-*/**,*.gcov,*.o"""
+    # Wildignore
+    wildignore = """\
+                  */tmp/*,*.so,*.swp,*.zip,*.class,tags,\
+                  *.jpg,*.ttf,*.TTF,*.png,*/target/*,\
+                  .git,.svn,.hg,.DS_Store,*.svg,.*/,\
+                  bin*/**/gcc-*/**,*.gcov,*.o"""
 
-realtime_leader_guide = 1
-enable_vimfiler_welcome = 0
+    realtime_leader_guide = 1
+    enable_vimfiler_welcome = 0
 
-enable_tabline_filetype_icon = 1
-enable_statusline_display_mode = 0
-enable_os_fileformat_icon = 1
+    enable_tabline_filetype_icon = 1
+    enable_statusline_display_mode = 0
+    enable_os_fileformat_icon = 1
 
-# Disable delimitmate
-autocomplete_parens = 0
+    # Disable delimitmate
+    autocomplete_parens = 0
 
-snippet_engine = 'ultisnips'
+    snippet_engine = 'ultisnips'
 
-src_root = '~/workspace/'
+    src_root = '~/workspace/'
 
-# 0: disable autochdir
-# 1: change to project root automatically
-# 2: change to directory of current file automatically
-project_rooter_automatically = 1
+    # 0: disable autochdir
+    # 1: change to project root automatically
+    # 2: change to directory of current file automatically
+    project_rooter_automatically = 1
 
 # default layers
 [[layers]]
-name = 'autocomplete'
-auto-completion-return-key-behavior = "nil"
-auto-completion-tab-key-behavior = "smart"
-auto-completion-complete-with-key-sequence = "nil"
+    name = 'autocomplete'
+    auto-completion-return-key-behavior = "nil"
+    auto-completion-tab-key-behavior = "smart"
+    auto-completion-complete-with-key-sequence = "nil"
 
 [[layers]]
-name = 'leaderf'
+    name = 'leaderf'
 
 [[layers]]
-name = 'shell'
-default_position = 'bottom'
-default_height = 30
+    name = 'shell'
+    default_position = 'bottom'
+    default_height = 30
 
 [[layers]]
-name = 'sudo'
+    name = 'sudo'
 
 # additional layers
 [[layers]]
-name = 'VersionControl'
+    name = 'VersionControl'
 
 [[layers]]
-name = 'colorscheme'
+    name = 'colorscheme'
 
 [[layers]]
-name = 'denite'
+    name = 'denite'
 
 [[layers]]
-name = 'incsearch'
+    name = 'incsearch'
 
 [[layers]]
-name = 'tools'
+    name = 'tools'
 
 [[layers]]
-name = 'unite'
+    name = 'unite'
 
 # begin optional layers
 [[layers]]
-name = 'lang#asciidoc'
-enable = true
+    name = 'lang#asciidoc'
+    enable = true
 
 [[layers]]
-name = 'lang#c'
-enable = true
+    name = 'lang#c'
+    enable = true
 
 [[layers]]
-name = 'lang#clojure'
-enable = false
+    name = 'lang#clojure'
+    enable = false
 
 [[layers]]
-name = 'lang#go'
-enable = true
+    name = 'lang#go'
+    enable = true
 
 [[layers]]
-name = 'lang#haskell'
-enable = true
+    name = 'lang#haskell'
+    enable = true
 
 [[layers]]
-name = 'lang#java'
-enable = true
+    name = 'lang#java'
+    enable = true
 
 [[layers]]
-name = 'lang#javascript'
-enable = true
+    name = 'lang#javascript'
+    enable = true
 
 [[layers]]
-name = 'lang#markdown'
-enable = true
+    name = 'lang#markdown'
+    enable = true
+    enableWcwidth = 1
+    listItemIndent = 1
+    listItemChar = '-'
 
 [[layers]]
-name = 'lang#python'
-enable = true
+    name = 'lang#python'
+    enable = true
 
 [[layers]]
-name = 'lang#toml'
-enable = true
+    name = 'lang#sh'
+    bash-file-head = [
+        '#!/usr/bin/env bash',
+        '# Time: `strftime("%Y-%m-%d %T")`',
+        ''
+    ]
 
 [[layers]]
-name = 'lang#vim'
-enable = true
+    name = 'lang#toml'
+    enable = true
 
 [[layers]]
-name = 'lang#xml'
-enable = true
+    name = 'lang#vim'
+    enable = true
 
 [[layers]]
-name = 'lsp'
-enable = true
-#   [layers.override_cmd]
-#     c = ['ccls', '--log-file=/tmp/ccls.log']
-#     cpp = ['ccls', '--log-file=/tmp/ccls.log']
+    name = 'lang#xml'
+    enable = true
 
 [[layers]]
-name = 'tags'
-enable = true
+    name = 'lsp'
+    enable = true
+    #   [layers.override_cmd]
+    #     c = ['ccls', '--log-file=/tmp/ccls.log']
+    #     cpp = ['ccls', '--log-file=/tmp/ccls.log']
 
 [[layers]]
-name = 'tmux'
-enable = true
+    name = 'tags'
+    enable = true
 
 [[layers]]
-name = 'lang#lilypond'
-enable = true
+    name = 'tmux'
+    enable = true
+
+[[layers]]
+    name = 'lang#lilypond'
+    enable = true
 
 # end optional layers
 
 [[custom_plugins]]
-# 彩色显示#RRGGBB
-name = 'lilydjwg/colorizer'
-merged = 0
+    # 彩色显示#RRGGBB
+    name = 'lilydjwg/colorizer'
+    merged = 0
 
 [[custom_plugins]]
-name ='thawk/vim-asciidoc-folding'
-lazy = 1
-on_ft = 'asciidoc'
+    name ='thawk/vim-asciidoc-folding'
+    lazy = 1
+    on_ft = 'asciidoc'
 
 [[custom_plugins]]
-name ='masukomi/vim-markdown-folding'
-lazy = 1
-on_ft = 'markdown'
+    name ='masukomi/vim-markdown-folding'
+    lazy = 1
+    on_ft = 'markdown'
 
-# [[custom_plugins]]
-# name ='hspec/hspec.vim'
-# lazy = 1
-# on_ft = 'haskell'
-
-[[custom_plugins]]
-name ='thawk/vim-b2'
-lazy = 0
+    # [[custom_plugins]]
+    # name ='hspec/hspec.vim'
+    # lazy = 1
+    # on_ft = 'haskell'
 
 [[custom_plugins]]
-name = 'ConradIrwin/vim-bracketed-paste'
+    name ='thawk/vim-b2'
+    lazy = 0
 
 [[custom_plugins]]
-name = 'derekwyatt/vim-fswitch'
-lazy = 1
-on_func = ['FSwitch']
-on_cmd = ['FSHere','FSRight','FSSplitRight','FSLeft','FSSplitLeft','FSAbove','FSSplitAbove','FSBelow','FSSplitBelow']
+    name = 'ConradIrwin/vim-bracketed-paste'
 
 [[custom_plugins]]
-name = 'junkblocker/patchreview-vim'
-lazy = 1
-on_cmd = ['PatchReview','PatchReviewPersist','ReversePatchReview','ReversePatchReviewPersist','DiffReview','DiffReviewPersist']
+    name = 'derekwyatt/vim-fswitch'
+    lazy = 1
+    on_func = ['FSwitch', 'FSReturnReadableCompanionFilename', 'FSReturnCompanionFilenameString']
+    on_cmd = ['FSHere','FSRight','FSSplitRight','FSLeft','FSSplitLeft','FSAbove','FSSplitAbove','FSBelow','FSSplitBelow','FSTab']
 
 [[custom_plugins]]
-name = 'vim-scripts/CodeReviewer.vim'
-lazy = 1
-on_cmd = ['CheckReview','SortReviewFile']
-  [custom_plugins.on_map]
-  n = '<Plug>AddComment'
+    name = 'junkblocker/patchreview-vim'
+    lazy = 1
+    on_cmd = ['PatchReview','PatchReviewPersist','ReversePatchReview','ReversePatchReviewPersist','DiffReview','DiffReviewPersist']
 
 [[custom_plugins]]
-name = 'haya14busa/dein-command.vim'
-lazy = 1
-on_cmd = ['Dein']
+    name = 'vim-scripts/CodeReviewer.vim'
+    lazy = 1
+    on_cmd = ['CheckReview','SortReviewFile']
+      [custom_plugins.on_map]
+      n = '<Plug>AddComment'
 
 [[custom_plugins]]
-name = 'inkarkat/vim-ingo-library'
-lazy = 1
+    name = 'haya14busa/dein-command.vim'
+    lazy = 1
+    on_cmd = ['Dein']
 
 [[custom_plugins]]
-name = 'inkarkat/vim-mark'
-depends = ['inkarkat/vim-ingo-library']
-lazy = 1
-on_cmd = [
-  'Mark', 'MarkClear', 'Marks', 'MarkLoad', 'MarkSave', 'MarkYankDefinitions',
-  'MarkYankDefinitionsOneLiner', 'MarkPalette', 'MarkName']
-on_map = ['<Plug>Mark']
+    name = 'inkarkat/vim-ingo-library'
+    lazy = 1
 
 [[custom_plugins]]
-name = 'sickill/vim-monokai'
+    name = 'inkarkat/vim-mark'
+    depends = ['inkarkat/vim-ingo-library']
+    lazy = 1
+    on_cmd = [
+      'Mark', 'MarkClear', 'Marks', 'MarkLoad', 'MarkSave', 'MarkYankDefinitions',
+      'MarkYankDefinitionsOneLiner', 'MarkPalette', 'MarkName']
+    on_map = ['<Plug>Mark']
+
+[[custom_plugins]]
+    name = 'sickill/vim-monokai'
 
 # The following plugins is for my personal file formats
 [[custom_plugins]]
-name = 'thawk/vim-pcet'
-lazy = 1
-on_path = 'pcet_.*\.xml'
+    name = 'thawk/vim-pcet'
+    lazy = 1
+    on_path = 'pcet_.*\.xml'
 
 [[custom_plugins]]
-name = 'thawk/bbv2.vim'
+    name = 'thawk/bbv2.vim'
 

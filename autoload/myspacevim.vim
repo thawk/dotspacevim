@@ -250,17 +250,19 @@ function! s:setup_plugin() " {{{
     "" }}}
 
     "" vim-fswitch {{{
-    let g:fsnonewfiles=1
     " 可以用:A在.h/.cpp间切换
     augroup myspacevim_fswitch
         autocmd!
 
         autocmd! BufNewFile,BufEnter *.h,*.hpp
                     \  let b:fswitchdst='cpp,c,ipp,cxx'
-                    \| let b:fswitchlocs='reg:/include/src/,reg:/include.*/src/,ifrel:|/include/|../src|,reg:!\<include/\w\+/!src/!,reg:!\<include/\(\w\+/\)\{2}!src/!,reg:!\<include/\(\w\+/\)\{3}!src/!,reg:!\<include/\(\w\+/\)\{4}!src/!,reg:!sscc\(/[^/]\+\|\)/.*!libs\1/**!'
+                    \| let b:fswitchlocs='reg:|/include/|/src/|,reg:|/include/.*|/src/|,ifrel:|/include/|../src|,reg:|/include/\w\+/|src/|,reg:|/include/\(\w\+/\)\{2}|src/|,reg:|/include/\(\w\+/\)\{3}|src/|,reg:|/include/\(\w\+/\)\{4}|src/|,reg:|/sscc\(/[^/]\+\|\)/.*|/libs\1/**|'
+                    \| let b:fsnonewfiles="on"
         autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
                     \  let b:fswitchdst='h,hpp'
-                    \| let b:fswitchlocs='reg:/src/include/,reg:|/src|/include/**|,ifrel:|/src/|../include|,reg:|libs/.*|**|'
+                    \| let b:fswitchlocs='reg:|/src/|/include/|,reg:|/src|/include/**|,ifrel:|/src/|../include/|,reg:|/libs/.*|/**|'
+                    \| let b:fsnonewfiles="on"
+
         autocmd! BufNewFile,BufEnter *.xml
                     \  let b:fswitchdst='rnc'
                     \| let b:fswitchlocs='./'
@@ -268,7 +270,16 @@ function! s:setup_plugin() " {{{
                     \  let b:fswitchdst='xml'
                     \| let b:fswitchlocs='./'
 
-        autocmd! FileType c,cpp,xml,rnc
+        autocmd! BufNewFile,BufEnter */src/*.hs
+                    \  let b:fswitchdst='hs'
+                    \| let b:fswitchlocs='reg:|/src/|/test/|'
+                    \| let b:fswitchfnames='/$/Spec/'
+        autocmd! BufNewFile,BufEnter */test/*Spec.hs
+                    \  let b:fswitchdst='hs'
+                    \| let b:fswitchlocs='reg:|/test/|/src/|'
+                    \| let b:fswitchfnames='/Spec$//'
+
+        autocmd! FileType c,cpp,xml,rnc,haskell
                     \  nnoremap <buffer> [SPC]lja :FSHere<CR>
                     \| nnoremap <buffer> [SPC]ljA :FSSplitRight<CR>
                     \| nnoremap <buffer> [SPC]ljl :FSRight<CR>
@@ -406,8 +417,18 @@ function! s:setup_plugin_after() " {{{
 endfunction
 " }}}
 
+function! s:build_make(program, args) abort
+  if a:program =~# '\$\*'
+    return substitute(a:program, '\$\*', a:args, 'g')
+  elseif empty(a:args)
+    return a:program
+  else
+    return a:program . ' ' . a:args
+  endif
+endfunction
+
 function! s:async_make(args) " {{{
-    let cmd1 = join(split(&makeprg, '\$\*', 1), a:args)
+    let cmd1 = s:build_make(&makeprg, a:args)
     let cmd2 = join(map(split(cmd1, '\ze[<%# "'']'), 'expand(v:val)'), '')
     call SpaceVim#plugins#runner#open(cmd2)
 endfunction

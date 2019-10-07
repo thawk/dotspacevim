@@ -15,4 +15,12 @@ for l in [ 'VersionControl', 'lang#c', 'lang#clojure',
 endfor
 ```
 
+## 安装依赖项
+
+* ``lang#markdown``依赖的``remark``
+
+  ```sh
+  npm install --global remark-cli remark-html remark-preset-lint-markdown-style-guide
+  ```
+
 [SpaceVim]: https://spacevim.org

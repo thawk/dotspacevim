@@ -414,6 +414,19 @@ function! s:setup_plugin_after() " {{{
                     \ 'direction' : 'botright',
                     \ })
     endif
+
+    "" vim-markdown {{{
+    if SpaceVim#layers#isLoaded("lang#latex")
+        augroup myspacevim_mkdtex
+            autocmd!
+            autocmd! FileType markdown
+                        \  syntax include @tex syntax/tex.vim
+                        \| syntax region mkdMath start="\\\@<!\$" end="\$" skip="\\\$" contains=@tex keepend
+                        \| syntax region mkdMath start="\\\@<!\$\$" end="\$\$" skip="\\\$" contains=@tex keepend
+                        \| echomsg "tex syntax loaded"
+        augroup END
+    endif
+    "" }}}
 endfunction
 " }}}
 

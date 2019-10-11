@@ -141,6 +141,10 @@
     listItemChar = '-'
 
 [[layers]]
+    name = 'lang#latex'
+    enable = true
+
+[[layers]]
     name = 'lang#python'
     enable = true
 

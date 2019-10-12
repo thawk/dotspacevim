@@ -30,7 +30,7 @@ function! myspacevim#before() abort " {{{
 endfunction " }}}
 
 function! myspacevim#after() abort " {{{
-    set noignorecase
+    set ignorecase
     set smartcase
     set wildmode=longest:full,full
     set wildmenu
@@ -128,6 +128,9 @@ endfunction
 function! s:setup_mapping() " {{{
     nnoremap zJ zjzx
     nnoremap zK zkzx
+
+    " use '%/' in cmdline to get current file path.  e.g. :e %/
+    cmap %/ <C-R>=escape(expand("%:p:h")."/", ' \')<CR>
 
     "" vim-mark {{{
     nmap <silent><unique> <Leader>mm <Plug>MarkSet

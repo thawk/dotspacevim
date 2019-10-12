@@ -48,10 +48,15 @@
                   .git,.svn,.hg,.DS_Store,*.svg,.*/,\
                   bin*/**/gcc-*/**,*.gcov,*.o"""
 
+    # The default file manager of SpaceVim. Default is 'vimfiler'.
+    # you can also use nerdtree or defx
+    filemanager = 'defx'
+
     realtime_leader_guide = 1
     enable_vimfiler_welcome = 0
 
     enable_tabline_filetype_icon = 1
+    # Enable/Disable display mode
     enable_statusline_display_mode = 0
     enable_os_fileformat_icon = 1
 
@@ -75,9 +80,6 @@
     auto-completion-complete-with-key-sequence = "nil"
 
 [[layers]]
-    name = 'leaderf'
-
-[[layers]]
     name = 'shell'
     default_position = 'bottom'
     default_height = 30
@@ -94,15 +96,25 @@
 
 [[layers]]
     name = 'denite'
+    enable = true
+
+[[layers]]
+    name = 'leaderf'
+    enable = false
+
+[[layers]]
+    name = 'unite'
+    enable = false
+
+[[layers]]
+    name = 'ctrlp'
+    enable = false
 
 [[layers]]
     name = 'incsearch'
 
 [[layers]]
     name = 'tools'
-
-[[layers]]
-    name = 'unite'
 
 # begin optional layers
 [[layers]]

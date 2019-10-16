@@ -132,7 +132,7 @@ function! s:setup_mapping() " {{{
     " use '%/' in cmdline to get current file path.  e.g. :e %/
     cmap %/ <C-R>=escape(expand("%:p:h")."/", ' \')<CR>
 
-    "" vim-mark {{{
+    "" vim-mark <Leader>m {{{
     nmap <silent><unique> <Leader>mm <Plug>MarkSet
     xmap <silent><unique> <Leader>mm <Plug>MarkSet
     nmap <silent><unique> <Leader>mr <Plug>MarkRegex
@@ -397,6 +397,7 @@ endfunction
 function! s:setup_plugin_after() " {{{
     call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
 
+    "" unite {{{
     if exists('*unite#filters#matcher_default#use')
         call unite#filters#matcher_default#use(['matcher_context'])
     endif
@@ -406,7 +407,9 @@ function! s:setup_plugin_after() " {{{
                     \   'direction': 'botright',
                     \ })
     endif
+    ""}}}
 
+    "" denite {{{
     if exists('*denite#custom#source')
         call denite#custom#source('_', 'matchers', ['matcher/regexp'])
         call denite#custom#source('_', 'sorters', ['sorter/sublime'])
@@ -417,6 +420,7 @@ function! s:setup_plugin_after() " {{{
                     \ 'direction' : 'botright',
                     \ })
     endif
+    ""}}}
 
     "" vim-markdown {{{
     if SpaceVim#layers#isLoaded("lang#latex")
@@ -428,6 +432,12 @@ function! s:setup_plugin_after() " {{{
                         \| syntax region mkdMath start="\\\@<!\$\$" end="\$\$" skip="\\\$" contains=@tex keepend
                         \| echomsg "tex syntax loaded"
         augroup END
+    endif
+    "" }}}
+
+    "" vim-startify {{{
+    if exists('g:startify_skiplist')
+        call add(g:startify_skiplist, '/private/')
     endif
     "" }}}
 endfunction

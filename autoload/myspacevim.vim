@@ -1,8 +1,8 @@
 " vim: fileencoding=utf-8 foldmethod=marker foldlevel=0:
 
 function! myspacevim#before() abort " {{{
-    if filereadable($HOME . "/.spacevim.local")
-        exec "source " . $HOME . "/.spacevim.local"
+    if filereadable($HOME . "/.myspacevim.local")
+        exec "source " . $HOME . "/.myspacevim.local"
     endif
 
     if executable('node') && executable('yarn')

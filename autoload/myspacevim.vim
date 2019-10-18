@@ -17,6 +17,11 @@ function! myspacevim#before() abort " {{{
     " Global configurations {{{
     " Add rooter for haskell
     call add(g:spacevim_project_rooter_patterns, 'stack.yaml')
+    " Add rooter for Boost.Build
+    call add(g:spacevim_project_rooter_patterns, 'Jamroot')
+    call add(g:spacevim_project_rooter_patterns, 'Jamroot.v2')
+    " Add rooter for gtags
+    call add(g:spacevim_project_rooter_patterns, 'GTAGS')
     " }}}
 
     call s:setup_mapping()
@@ -246,6 +251,12 @@ function! s:setup_plugin() " {{{
     "" vim-markdown-folding {{{
     let g:markdown_fold_style = 'nested'
     let g:markdown_fold_override_foldtext = 1
+    "" }}}
+
+    "" vim-markdown-toc {{{
+    let g:vmt_auto_update_on_save = 0
+    let g:vmt_dont_insert_fence = 0
+    let g:vmt_cycle_list_item_markers = 1
     "" }}}
 
     "" vim-bracketed-paste {{{

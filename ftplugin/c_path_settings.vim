@@ -1,8 +1,8 @@
 " Only do this when not done yet for this buffer
-if exists("b:did_ftplugin")
+if exists("b:did_c_path_settings")
     finish
 endif
-let b:did_ftplugin = 1
+let b:did_c_path_settings = 1
 
 let s:cpp_include_path_ready = 0
 let s:cpp_include_path = []
@@ -85,7 +85,7 @@ function! s:AddCppDefaultIncludePath()
     endfor
 endfunction
 
-function! SetupEnvironment()
+function! s:SetupEnvironment()
     " 使用当前目录
     "setlocal path=.
     let b:proj_processed_components = []
@@ -162,5 +162,5 @@ function! SetupEnvironment()
     call s:AddCppDefaultIncludePath()
 endfunction
 
-call SetupEnvironment()
+call s:SetupEnvironment()
 " vim: filetype=vim fileencoding=utf-8

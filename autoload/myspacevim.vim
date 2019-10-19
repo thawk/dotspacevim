@@ -20,8 +20,6 @@ function! myspacevim#before() abort " {{{
     " Add rooter for Boost.Build
     call add(g:spacevim_project_rooter_patterns, 'Jamroot')
     call add(g:spacevim_project_rooter_patterns, 'Jamroot.v2')
-    " Add rooter for gtags
-    call add(g:spacevim_project_rooter_patterns, 'GTAGS')
     " }}}
 
     call s:setup_mapping()
@@ -270,11 +268,11 @@ function! s:setup_plugin() " {{{
 
         autocmd! BufNewFile,BufEnter *.h,*.hpp
                     \  let b:fswitchdst='cpp,c,ipp,cxx'
-                    \| let b:fswitchlocs='reg:|/include/|/src/|,reg:|/include/.*|/src/|,ifrel:|/include/|../src|,reg:|/include/\w\+/|src/|,reg:|/include/\(\w\+/\)\{2}|src/|,reg:|/include/\(\w\+/\)\{3}|src/|,reg:|/include/\(\w\+/\)\{4}|src/|,reg:|/sscc\(/[^/]\+\|\)/.*|/libs\1/**|'
+                    \| let b:fswitchlocs='reg:!/include/!/src/!,reg:!/include/.*!/src/!,ifrel:!/include/!../src!,reg:!/include/\w\+/!src/!,reg:!/include/\(\w\+/\)\{2}!src/!,reg:!/include/\(\w\+/\)\{3}!src/!,reg:!/include/\(\w\+/\)\{4}!src/!,reg:!/sscc\(/[^/]\+\|\)/.*!/libs\1/**!'
                     \| let b:fsnonewfiles="on"
         autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
                     \  let b:fswitchdst='h,hpp'
-                    \| let b:fswitchlocs='reg:|/src/|/include/|,reg:|/src|/include/**|,ifrel:|/src/|../include/|,reg:|/libs/.*|/**|'
+                    \| let b:fswitchlocs='reg:!/src/!/include/!,reg:!/src!/include/**!,ifrel:!/src/!../include/!,reg:!/libs/.*!/**!'
                     \| let b:fsnonewfiles="on"
 
         autocmd! BufNewFile,BufEnter *.xml
@@ -286,11 +284,11 @@ function! s:setup_plugin() " {{{
 
         autocmd! BufNewFile,BufEnter */src/*.hs
                     \  let b:fswitchdst='hs'
-                    \| let b:fswitchlocs='reg:|/src/|/test/|'
+                    \| let b:fswitchlocs='reg:!/src/!/test/!'
                     \| let b:fswitchfnames='/$/Spec/'
         autocmd! BufNewFile,BufEnter */test/*Spec.hs
                     \  let b:fswitchdst='hs'
-                    \| let b:fswitchlocs='reg:|/test/|/src/|'
+                    \| let b:fswitchlocs='reg:!/test/!/src/!'
                     \| let b:fswitchfnames='/Spec$//'
 
         autocmd! FileType c,cpp,xml,rnc,haskell

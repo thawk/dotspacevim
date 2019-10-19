@@ -111,6 +111,10 @@
     enable = false
 
 [[layers]]
+    name = 'gtags'
+    enable = true
+
+[[layers]]
     name = 'incsearch'
 
 [[layers]]

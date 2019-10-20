@@ -280,7 +280,3 @@
 [[custom_plugins]]
     name = 'thawk/bbv2.vim'
 
-[[custom_plugins]]
-    name = 'thawk/Denite-sources'
-    merged = false
-

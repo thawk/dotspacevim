@@ -268,11 +268,24 @@ function! s:setup_plugin() " {{{
 
         autocmd! BufNewFile,BufEnter *.h,*.hpp
                     \  let b:fswitchdst='cpp,c,ipp,cxx'
-                    \| let b:fswitchlocs='reg:!/include/!/src/!,reg:!/include/.*!/src/!,ifrel:!/include/!../src!,reg:!/include/\w\+/!src/!,reg:!/include/\(\w\+/\)\{2}!src/!,reg:!/include/\(\w\+/\)\{3}!src/!,reg:!/include/\(\w\+/\)\{4}!src/!,reg:!/sscc\(/[^/]\+\|\)/.*!/libs\1/**!'
+                    \| let b:fswitchlocs=
+                    \      'reg:!/include/!/src/!,' .
+                    \      'reg:!/include/.*!/src/!,' .
+                    \      'ifrel:!/include/!../src!,' .
+                    \      'reg:!/include/\w\+/!src/!,' .
+                    \      'reg:!/include/\(\w\+/\)\{2}!src/!,' .
+                    \      'reg:!/include/\(\w\+/\)\{3}!src/!,' .
+                    \      'reg:!/include/\(\w\+/\)\{4}!src/!,' .
+                    \      'reg:!/include/.*!/src/**!,' .
+                    \      'reg:!/sscc\(/[^/]\+\|\)/.*!/libs\1/**!'
                     \| let b:fsnonewfiles="on"
         autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
                     \  let b:fswitchdst='h,hpp'
-                    \| let b:fswitchlocs='reg:!/src/!/include/!,reg:!/src!/include/**!,ifrel:!/src/!../include/!,reg:!/libs/.*!/**!'
+                    \| let b:fswitchlocs=
+                    \      'reg:!/src/!/include/!,' .
+                    \      'reg:!/src/.*!/include/**!,' .
+                    \      'ifrel:!/src/!../include/!,' .
+                    \      'reg:!/libs/.*!/**!'
                     \| let b:fsnonewfiles="on"
 
         autocmd! BufNewFile,BufEnter *.xml

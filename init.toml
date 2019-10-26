@@ -227,10 +227,6 @@
     # on_ft = 'haskell'
 
 [[custom_plugins]]
-    name ='thawk/vim-b2'
-    lazy = 0
-
-[[custom_plugins]]
     name = 'ConradIrwin/vim-bracketed-paste'
 
 [[custom_plugins]]

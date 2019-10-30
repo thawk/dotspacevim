@@ -226,13 +226,14 @@ snippet note2 "Parallel Notes (two staffs)" b
 
 "$1Pitches" =
 {
-	\new StaffGroup <<
-		\new Staff {
-			${4:\tempo 4 = ${5:108}}
+	\new Staff <<
+		${4:\tempo 4 = ${5:108}}
 
-			\relative c'' \primary
+		\relative c'' {
+			\primary
 		}
-		\new Staff {
+		\\\\
+		\relative c' {
 			\override Accidental.color = #(x11-color '${6:gray50})
 			\override Beam.color       = #(x11-color '$6)
 			\override Dots.color       = #(x11-color '$6)
@@ -241,7 +242,7 @@ snippet note2 "Parallel Notes (two staffs)" b
 			\override Stem.color       = #(x11-color '$6)
 			\override Tie.color        = #(x11-color '$6)
 
-			\relative c' \harmony 
+			\harmony
 		}
 	>>
 }

@@ -112,7 +112,7 @@
 
 [[layers]]
     name = 'gtags'
-    enable = true
+    enable = 'executable("global")'
 
 [[layers]]
     name = 'incsearch'

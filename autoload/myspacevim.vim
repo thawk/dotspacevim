@@ -277,7 +277,7 @@ function! s:setup_plugin() " {{{
                     \      'reg:!/include/\(\w\+/\)\{3}!src/!,' .
                     \      'reg:!/include/\(\w\+/\)\{4}!src/!,' .
                     \      'reg:!/include/.*!/src/**!,' .
-                    \      'reg:!/sscc\(/[^/]\+\|\)/.*!/libs\1/**!'
+                    \      'reg:!/^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!'
                     \| let b:fsnonewfiles="on"
         autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
                     \  let b:fswitchdst='h,hpp'

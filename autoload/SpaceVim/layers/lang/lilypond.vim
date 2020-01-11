@@ -29,9 +29,11 @@ function! s:mappings() abort
   endif
   let g:_spacevim_mappings_space.l = {'name' : '+Language Specified'}
   if exists(':Make')
-      call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'Make "%"', 'compile', 1)
+      call SpaceVim#mapping#space#langSPC('nmap', ['l','c'], 'Make "%"', 'compile curent file', 1)
+      call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'Make', 'build the project', 1)
   else
-      call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'make "%"', 'compile', 1)
+      call SpaceVim#mapping#space#langSPC('nmap', ['l','c'], 'make "%"', 'compile curent file', 1)
+      call SpaceVim#mapping#space#langSPC('nmap', ['l','b'], 'make', 'build the project', 1)
   endif
 endfunction
 

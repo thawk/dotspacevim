@@ -166,6 +166,10 @@
     enable = true
 
 [[layers]]
+    name = 'lang#scheme'
+    enable = true
+
+[[layers]]
     name = 'lang#sh'
     enable = true
     bash-file-head = [

@@ -49,6 +49,14 @@ function! myspacevim#after() abort " {{{
             set dictionary+=/usr/share/dict/words
         endif
     endif
+
+    if executable('chez')
+        call SpaceVim#plugins#runner#reg_runner('scheme', 'chez --script %s')
+        call SpaceVim#plugins#repl#reg('scheme', ['chez', '--quiet'])
+    else
+        call SpaceVim#plugins#runner#reg_runner('scheme', 'scheme --script %s')
+        call SpaceVim#plugins#repl#reg('scheme', ['scheme', '--quiet'])
+    endif
 endfunction " }}}
 
 function! myspacevim#IncludePathHook(config) " {{{
@@ -400,7 +408,7 @@ function! s:setup_autocmd() " {{{
         autocmd!
         autocmd! FileType markdown :let b:surround_96 = "``\r``"
     augroup END
-    
+
     " Goyo, Distraction-free writing in Vim
     augroup myspacevim_goyo
         autocmd!

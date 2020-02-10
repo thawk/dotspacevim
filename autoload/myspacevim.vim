@@ -50,13 +50,13 @@ function! myspacevim#after() abort " {{{
         endif
     endif
 
-    if executable('chez')
-        call SpaceVim#plugins#runner#reg_runner('scheme', 'chez --script %s')
-        call SpaceVim#plugins#repl#reg('scheme', ['chez', '--quiet'])
-    else
-        call SpaceVim#plugins#runner#reg_runner('scheme', 'scheme --script %s')
-        call SpaceVim#plugins#repl#reg('scheme', ['scheme', '--quiet'])
-    endif
+"    if executable('chez')
+"        call SpaceVim#plugins#runner#reg_runner('scheme', 'chez --script %s')
+"        call SpaceVim#plugins#repl#reg('scheme', ['chez', '--quiet'])
+"    else
+"        call SpaceVim#plugins#runner#reg_runner('scheme', 'scheme --script %s')
+"        call SpaceVim#plugins#repl#reg('scheme', ['scheme', '--quiet'])
+"    endif
 endfunction " }}}
 
 function! myspacevim#IncludePathHook(config) " {{{

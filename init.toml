@@ -168,7 +168,9 @@
 [[layers]]
     name = 'lang#scheme'
     enable = true
-    dialect = 'chez'
+    scheme_dialect = 'guile'
+    scheme_interpreter = 'guile'
+    # dialect = 'chez'
 
 [[layers]]
     name = 'lang#sh'

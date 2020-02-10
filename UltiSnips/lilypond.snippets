@@ -56,6 +56,10 @@ snippet absolute "Absolute notes" b
 }
 endsnippet	
 
+snippet key "Key" b
+\key ${1:c} ${2:\major}
+endsnippet
+
 snippet bar "Bar"
 \bar "${1:|.}" ${0}
 endsnippet
@@ -127,6 +131,61 @@ snippet note "Notes" b
 }
 endsnippet
 
+snippet notely "Notes with lyric" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+
+prelude = \relative $6
+{
+	\time $3
+
+	${0}
+
+}
+
+melody = \relative ${6:c''}
+{
+	\time ${3:4/4}
+
+
+	\bar "|."
+}
+
+verse = \lyricmode {
+}
+
+"$1Pitches" =
+{
+	<<
+		\new Voice = "melody" {
+			${4:\tempo 4 = ${5:60}}
+
+			<<
+				\new Voice {
+					\voiceTwo
+					\prelude
+				}
+				{
+					\voiceOne
+					\melody
+				}
+			>>
+		}
+		\new Lyrics \lyricsto "melody" {
+			\verse
+		}
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c c {
+		\"$1Pitches"
+	}
+}
+endsnippet
+
 snippet repeat "repeat" b
 \repeat volta ${1:2}
 {
@@ -135,8 +194,6 @@ snippet repeat "repeat" b
 endsnippet
 
 snippet repeata "repeat with alternative" b
-\set Score.voltaSpannerDuration = #(ly:make-moment ${1:4/4})
-
 \repeat volta 2
 {
 	${0}
@@ -165,7 +222,7 @@ ${1:funcname} =
 endsnippet
 
 snippet parallel "parallelMusic" b
-\parallelMusic #'(${1:primary} ${2:harmony}) {
+\parallelMusic #'(${1:melody} ${2:harmony}) {
 	% Bar 1
 	${0} |
 	|
@@ -185,7 +242,7 @@ snippet note1 "Parallel Notes (one staff)" b
 "$1Opus" = ""
 "$1Composer" = ""
 
-\parallelMusic #'(primary harmony) {
+\parallelMusic #'(melody harmony) {
 
 	\time ${3:4/4}
 
@@ -199,7 +256,7 @@ snippet note1 "Parallel Notes (one staff)" b
 	\new Staff <<
 		${4:\tempo 4 = ${5:108}}
 
-		\relative c'' \primary
+		\relative c'' \melody
 		\\\\
 		\relative c' \harmony
 	>>
@@ -213,12 +270,122 @@ snippet note1 "Parallel Notes (one staff)" b
 }
 endsnippet
 
+snippet note1ly "Parallel Notes (1 staffs with lyric)" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+
+\parallelMusic #'(preludeM preludeH) {
+
+	\time $3
+
+	${0}
+
+}
+
+\parallelMusic #'(melody harmony) {
+
+	\time ${3:4/4}
+
+
+	\bar "|."
+}
+
+grayVoice = {
+	\override Accidental.color = #(x11-color 'gray50)
+	\override Beam.color       = #(x11-color 'gray50)
+	\override Dots.color       = #(x11-color 'gray50)
+	\override NoteHead.color   = #(x11-color 'gray50)
+	\override Rest.color       = #(x11-color 'gray50)
+	\override Stem.color       = #(x11-color 'gray50)
+	\override Tie.color        = #(x11-color 'gray50)
+}
+
+"$1Pitches" =
+{
+	<<
+		\new Voice = "melody" {
+			${4:\tempo 4 = ${5:60}}
+
+			<<
+				\new Voice {
+					\voiceThree
+					\relative c'' {
+						\preludeM
+					}
+				}
+				\new Voice {
+					\voiceFour
+					\grayVoice
+					\relative c' {
+						\preludeH
+					}
+				}
+				{
+					\voiceOne
+					\relative c'' {
+						\melody
+					}
+				}
+				\new Voice {
+					\voiceTwo
+					\grayVoice
+					\relative c' {
+						\harmony
+					}
+				}
+			>>
+		}
+
+		\new Lyrics="firstVerse" \lyricsto "melody" {
+		}
+		\new Lyrics="secondVerse" \lyricsto "melody" {
+			\repeat unfold 4 { \skip 1 }
+		}
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c c {
+		\"$1Pitches"
+	}
+}
+
+"$1Melody" =
+{
+	<<
+		\new Voice = "melody" {
+			$4
+
+			<<
+				\new Voice {
+					\voiceThree
+					\relative c'' {
+						\preludeM
+					}
+				}
+				{
+					\voiceOne
+					\relative c'' {
+						\melody
+					}
+				}
+			>>
+		}
+		\new Lyrics \lyricsto "melody" {
+			\verse
+		}
+	>>
+}
+endsnippet
+
 snippet note2 "Parallel Notes (two staffs)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
 
-\parallelMusic #'(primary harmony) {
+\parallelMusic #'(melody harmony) {
 
 	\time ${3:4/4}
 
@@ -233,7 +400,7 @@ snippet note2 "Parallel Notes (two staffs)" b
 		${4:\tempo 4 = ${5:108}}
 
 		\relative c'' {
-			\primary
+			\melody
 		}
 		\\\\
 		\relative c' {
@@ -263,7 +430,7 @@ snippet note2' "Parallel Notes (two staffs separated)" b
 "$1Opus" = ""
 "$1Composer" = ""
 
-\parallelMusic #'(primary harmony) {
+\parallelMusic #'(melody harmony) {
 
 	\time ${3:4/4}
 
@@ -278,7 +445,7 @@ snippet note2' "Parallel Notes (two staffs separated)" b
 		\new Staff {
 			${4:\tempo 4 = ${5:108}}
 
-			\relative c'' \primary
+			\relative c'' \melody
 		}
 		\new Staff {
 			\relative c' \harmony 
@@ -310,7 +477,7 @@ snippet merge "Merge two Voice into one Staff"
 	${1:\tempo 4 = ${2:108}}
 
 	\relative c'' {
-		${3:\primary}
+		${3:\melody}
 	}
 	\\\\
 	\relative c' {

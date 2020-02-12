@@ -77,6 +77,7 @@ snippet octavecheck "octaveCheck"
 endsnippet
 
 snippet trans "transpose"
+\key `!p snip.rv = re.sub("[,']+", "", t[2])` ${3:\major}
 \transpose ${1:c} ${2:f} {
 	${0}
 }
@@ -122,10 +123,10 @@ snippet note "Notes" b
 "$1Notes" =
 {
 	\clef "treble"
-	\key ${5:c} ${6:\major}
+	\key `!p snip.rv = re.sub("[,']+", "", t[5])` ${6:\major}
 	% \tempo 4 = 96
 
-	\transpose c ${7:$5} {
+	\transpose c ${5:c} {
 		\"$1Pitches"
 	}
 }
@@ -136,7 +137,7 @@ snippet notely "Notes with lyric" b
 "$1Opus" = ""
 "$1Composer" = ""
 
-prelude = \relative $6
+harmony = \relative $8
 {
 	\time $3
 
@@ -144,7 +145,7 @@ prelude = \relative $6
 
 }
 
-melody = \relative ${6:c''}
+melody = \relative ${8:c''}
 {
 	\time ${3:4/4}
 
@@ -164,7 +165,7 @@ verse = \lyricmode {
 			<<
 				\new Voice {
 					\voiceTwo
-					\prelude
+					\harmony
 				}
 				{
 					\voiceOne
@@ -180,7 +181,8 @@ verse = \lyricmode {
 
 "$1Notes" =
 {
-	\transpose c c {
+	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
+	\transpose c ${6:c} {
 		\"$1Pitches"
 	}
 }
@@ -264,7 +266,8 @@ snippet note1 "Parallel Notes (one staff)" b
 
 "$1Notes" =
 {
-	\transpose c c {
+	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
+	\transpose c ${6:c} {
 		\"$1Pitches"
 	}
 }
@@ -347,7 +350,8 @@ grayVoice = {
 
 "$1Notes" =
 {
-	\transpose c c {
+	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
+	\transpose c ${6:c} {
 		\"$1Pitches"
 	}
 }
@@ -404,13 +408,13 @@ snippet note2 "Parallel Notes (two staffs)" b
 		}
 		\\\\
 		\relative c' {
-			\override Accidental.color = #(x11-color '${6:gray50})
-			\override Beam.color       = #(x11-color '$6)
-			\override Dots.color       = #(x11-color '$6)
-			\override NoteHead.color   = #(x11-color '$6)
-			\override Rest.color       = #(x11-color '$6)
-			\override Stem.color       = #(x11-color '$6)
-			\override Tie.color        = #(x11-color '$6)
+			\override Accidental.color = #(x11-color '${8:gray50})
+			\override Beam.color       = #(x11-color '$8)
+			\override Dots.color       = #(x11-color '$8)
+			\override NoteHead.color   = #(x11-color '$8)
+			\override Rest.color       = #(x11-color '$8)
+			\override Stem.color       = #(x11-color '$8)
+			\override Tie.color        = #(x11-color '$8)
 
 			\harmony
 		}
@@ -419,7 +423,8 @@ snippet note2 "Parallel Notes (two staffs)" b
 
 "$1Notes" =
 {
-	\transpose c c {
+	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
+	\transpose c ${6:c} {
 		\"$1Pitches"
 	}
 }
@@ -455,7 +460,8 @@ snippet note2' "Parallel Notes (two staffs separated)" b
 
 "$1Notes" =
 {
-	\transpose c c {
+	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
+	\transpose c ${6:c} {
 		\"$1Pitches"
 	}
 }

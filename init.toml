@@ -99,6 +99,10 @@
     enable = 'has("python3")'
 
 [[layers]]
+    name = 'git'
+    enable = 'executable("git")'
+
+[[layers]]
     name = 'leaderf'
     enable = false
 

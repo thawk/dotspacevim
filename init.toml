@@ -289,3 +289,6 @@
 [[custom_plugins]]
     name = 'thawk/bbv2.vim'
 
+[[custom_plugins]]
+    name = 'skilstak/vim-abnf-utf8'
+    on_path = '.*\.abnf'

@@ -86,6 +86,7 @@
 
 [[layers]]
     name = 'sudo'
+    enable = true
 
 # additional layers
 [[layers]]
@@ -108,16 +109,11 @@
 
 [[layers]]
     name = 'unite'
-    enable = false
     enable = '!has("python3")'
 
 [[layers]]
     name = 'ctrlp'
     enable = false
-
-[[layers]]
-    name = 'gtags'
-    enable = 'executable("global")'
 
 [[layers]]
     name = 'incsearch'
@@ -126,6 +122,10 @@
     name = 'tools'
 
 # begin optional layers
+[[layers]]
+    name = 'gtags'
+    enable = 'executable("global")'
+
 [[layers]]
     name = 'lang#asciidoc'
     enable = true
@@ -216,8 +216,6 @@
     name = 'lang#lilypond'
     enable = true
 
-# end optional layers
-
 [[custom_plugins]]
     # Display colors like: #RRGGBB
     name = 'lilydjwg/colorizer'
@@ -237,6 +235,26 @@
     # name ='hspec/hspec.vim'
     # lazy = 1
     # on_ft = 'haskell'
+
+[[custom_plugins]]
+    name = 'haya14busa/dein-command.vim'
+    lazy = 1
+    on_cmd = ['Dein']
+
+# The following plugins is for my personal file formats
+[[custom_plugins]]
+    name = 'thawk/vim-pcet'
+    lazy = 1
+    on_path = 'pcet_.*\.xml'
+
+[[custom_plugins]]
+    name = 'thawk/bbv2.vim'
+
+[[custom_plugins]]
+    name = 'skilstak/vim-abnf-utf8'
+    on_path = '.*\.abnf'
+
+# end optional layers
 
 [[custom_plugins]]
     name = 'ConradIrwin/vim-bracketed-paste'
@@ -260,11 +278,6 @@
       n = '<Plug>AddComment'
 
 [[custom_plugins]]
-    name = 'haya14busa/dein-command.vim'
-    lazy = 1
-    on_cmd = ['Dein']
-
-[[custom_plugins]]
     name = 'inkarkat/vim-ingo-library'
     lazy = 1
 
@@ -279,16 +292,3 @@
 
 [[custom_plugins]]
     name = 'sickill/vim-monokai'
-
-# The following plugins is for my personal file formats
-[[custom_plugins]]
-    name = 'thawk/vim-pcet'
-    lazy = 1
-    on_path = 'pcet_.*\.xml'
-
-[[custom_plugins]]
-    name = 'thawk/bbv2.vim'
-
-[[custom_plugins]]
-    name = 'skilstak/vim-abnf-utf8'
-    on_path = '.*\.abnf'

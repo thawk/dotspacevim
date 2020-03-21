@@ -5,7 +5,7 @@ function! myspacevim#before() abort " {{{
         exec "source " . $HOME . "/.myspacevim.local"
     endif
 
-    if executable('node') && executable('yarn')
+    if executable('node') && executable('yarn') && ! get(g:, 'spacevim_autocomplete_method', '')
         " Use coc.vim only if we have node && yarn installed
         let g:spacevim_autocomplete_method = 'coc'
     endif
@@ -86,8 +86,8 @@ endfunction " }}}
 
 function! s:setup_lsp() " {{{
     let lsp_servers = {
-                \ 'c' : 'ccls',
-                \ 'cpp' : 'ccls',
+                \ 'c' : 'clangd',
+                \ 'cpp' : 'clangd',
                 \ 'css' : 'css-languageserver',
                 \ 'dart' : 'dart_language_server',
                 \ 'dockerfile' : 'docker-langserver',

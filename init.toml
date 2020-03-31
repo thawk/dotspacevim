@@ -22,8 +22,9 @@
     # install nerd fonts
     statusline_separator = "arrow"
     statusline_inactive_separator = "arrow"
-    enable_tabline_filetype_icon = true
+    enable_tabline_ft_icon = true
     enable_statusline_display_mode = false
+    enable_os_fileformat_icon = true
 
     # 0: 1 ➛ ➊ 1: 1 ➛ ➀ 2: 1 ➛ ⓵ 3: 1 ➛ ¹ 4: 1 ➛ 1
     buffer_index_type = 4
@@ -54,11 +55,6 @@
 
     realtime_leader_guide = 1
     enable_vimfiler_welcome = 0
-
-    enable_tabline_filetype_icon = 1
-    # Enable/Disable display mode
-    enable_statusline_display_mode = 0
-    enable_os_fileformat_icon = 1
 
     # Disable delimitmate
     autocomplete_parens = 0

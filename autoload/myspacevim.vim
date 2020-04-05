@@ -170,6 +170,14 @@ endfunction
 " }}}
 
 function! s:setup_plugin() " {{{
+    "" xml syntax {{{
+    let g:xml_syntax_folding = 1
+    augroup myspacevim_xml
+        autocmd! BufNewFile,BufEnter *.xml
+                    \  setlocal foldmethod=syntax
+    augroup END
+    "" }}}
+
     "" deoplete.vim {{{
     let g:deoplete#auto_complete_delay = 150
     "" }}}

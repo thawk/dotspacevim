@@ -1,5 +1,7 @@
 # All SpaceVim option below [option] section
 [options]
+    checkinstall = 1
+
     bootstrap_before = "myspacevim#before"
     bootstrap_after = "myspacevim#after"
 

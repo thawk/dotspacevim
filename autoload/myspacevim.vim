@@ -5,10 +5,10 @@ function! myspacevim#before() abort " {{{
         exec "source " . $HOME . "/.myspacevim.local"
     endif
 
-    if executable('node') && executable('yarn') && ! get(g:, 'spacevim_autocomplete_method', '')
-        " Use coc.vim only if we have node && yarn installed
-        let g:spacevim_autocomplete_method = 'coc'
-    endif
+    "if executable('node') && executable('yarn') && ! get(g:, 'spacevim_autocomplete_method', '')
+    "    " Use coc.vim only if we have node && yarn installed
+    "    let g:spacevim_autocomplete_method = 'coc'
+    "endif
 
     call s:setup_conemu()
     call s:setup_lsp()

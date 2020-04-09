@@ -6,6 +6,47 @@ let b:did_c_path_settings = 1
 
 let s:cpp_include_path_ready = 0
 let s:cpp_include_path = []
+let s:proj_includes = {}
+let s:path_to_proj_root = {}
+
+let s:proj_root_stopper = ["Jamroot", "Jamroot.v2", "Jamroot.jam", ".git", ".svn"]
+function! s:FindProjectRoot(path)
+    let l:last = fnamemodify(a:path, ':p')
+    if has_key(s:path_to_proj_root, l:last)
+        return s:path_to_proj_root[l:last]
+    endif
+
+    let l:root = l:last
+
+    let l:curr = fnamemodify(l:last, ':h')
+    while l:curr != l:last && l:curr != $HOME
+        for l:name in s:proj_root_stopper
+            let l:p = l:curr . "/" . l:name
+            if filereadable(l:p) || isdirectory(l:p)
+                let l:root = l:curr
+                break
+            endif
+        endfor
+
+        let l:last = l:curr
+        let l:curr = fnamemodify(l:last, ':h')
+    endwhile
+
+    return l:root
+endfunction
+
+function! s:GetProjectIncludes(path)
+    let l:root = s:FindProjectRoot(a:path)
+
+    if ! has_key(s:proj_includes, l:root)
+        let s:proj_includes[l:root] = []
+        for l:p in finddir("include", s:FindProjectRoot(l:root) . '/**', -1)
+            call add(s:proj_includes[l:root], l:p)
+        endfor
+    endif
+
+    return s:proj_includes[l:root]
+endfunction
 
 function! s:AddComponentsToPath(path)
     let l:path = fnamemodify(a:path, ':p')
@@ -127,8 +168,7 @@ function! s:SetupEnvironment()
         endfor
     endfor
 
-    " 加入路径上所有include目录及有include子目录的目录
-    for l:p in finddir("include", l:path . '/**1;', -1)
+    for l:p in s:GetProjectIncludes(l:path)
         call s:AddPath(l:p)
     endfor
 

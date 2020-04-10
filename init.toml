@@ -126,7 +126,7 @@
 
 [[layers]]
     name = 'debug'
-    enable = false
+    enable = 'executable("gdb")'
 
 [[layers]]
     name = 'lang#asciidoc'
@@ -134,7 +134,7 @@
 
 [[layers]]
     name = 'lang#c'
-    enable = false
+    enable = true
 
 [[layers]]
     name = 'lang#clojure'
@@ -143,6 +143,10 @@
 [[layers]]
     name = 'lang#go'
     enable = false
+
+[[layers]]
+    name = 'lang#html'
+    enable = true
 
 [[layers]]
     name = 'lang#haskell'

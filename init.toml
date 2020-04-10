@@ -125,6 +125,10 @@
     enable = 'executable("global")'
 
 [[layers]]
+    name = 'debug'
+    enable = false
+
+[[layers]]
     name = 'lang#asciidoc'
     enable = true
 

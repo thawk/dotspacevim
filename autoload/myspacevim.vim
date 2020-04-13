@@ -289,10 +289,10 @@ function! s:setup_plugin() " {{{
                     \      'reg:!/include\>!/src!,' .
                     \      'reg:!/include/.*!/src!,' .
                     \      'ifrel:!/include\>!../src!,' .
-                    \      'reg:!/include/\w\+\>!src/!,' .
-                    \      'reg:!/include\(/\w\+\)\{2}\>src/!,' .
-                    \      'reg:!/include\(/\w\+\)\{3}\>src/!,' .
-                    \      'reg:!/include\(/\w\+\)\{4}\>src/!,' .
+                    \      'reg:!/include/\w\+\>!/src!,' .
+                    \      'reg:!/include\(/\w\+\)\{2}\>!/src!,' .
+                    \      'reg:!/include\(/\w\+\)\{3}\>!/src!,' .
+                    \      'reg:!/include\(/\w\+\)\{4}\>!/src!,' .
                     \      'reg:!/include/.*!/src/**!,' .
                     \      'reg:!^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!'
                     \| let b:fsnonewfiles="on"

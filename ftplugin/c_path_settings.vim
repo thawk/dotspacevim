@@ -97,15 +97,23 @@ function! s:AddPath(path)
     endif
 endfunction
 
+function! s:GetCompilerDefaultIncludePath(compiler)
+    let l:output = system("echo '' | " . a:compiler . " -E -x c++ - -v |& sed -e '1,/#include <.*search starts here/d' -e '/End of search list/,$d'")
+    return map(split(l:output), 'fnamemodify(v:val, ":p")')
+endfunction
+
 function! s:AddCppDefaultIncludePath()
     if !s:cpp_include_path_ready
         let s:cpp_include_path_ready = 1
 
-        if executable("g++") && executable("sed")
-            let l:output = system("echo '' | g++ -E -x c++ - -v |& sed -e '1,/#include <.*search starts here/d' -e '/End of search list/,$d'")
-            for l:p in split(l:output)
-                call add(s:cpp_include_path, fnamemodify(l:p, ":p"))
-            endfor
+        if executable("sed")
+            if executable("clang++")
+                let s:cpp_include_path = extend(s:cpp_include_path, s:GetCompilerDefaultIncludePath("clang++"))
+                return
+            elseif executable("g++")
+                let s:cpp_include_path = extend(s:cpp_include_path, s:GetCompilerDefaultIncludePath("g++"))
+                return
+            endif
         endif
 
         " 未能从编译器取得include列表，自行查找

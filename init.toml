@@ -135,6 +135,7 @@
 [[layers]]
     name = 'lang#c'
     enable = true
+    enable_clang_syntax_highlight = true
 
 [[layers]]
     name = 'lang#clojure'

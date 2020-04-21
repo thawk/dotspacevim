@@ -15,9 +15,15 @@ for l in [ 'VersionControl', 'lang#c', 'lang#clojure',
 endfor
 ```
 
-## 安装依赖项
+## Offline usage
 
-* ``lang#markdown``依赖的``remark``
+You can use ``offline.sh`` to disable ``checkupdate`` to be used at an offline environment.
+
+You can use ``nogui.sh`` to be used in an terminal without nerd-font.
+
+## Dependencies
+
+* ``lang#markdown`` depends on ``remark``
 
   ```sh
   npm install --global remark-cli remark-html remark-preset-lint-markdown-style-guide

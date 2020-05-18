@@ -392,6 +392,7 @@ function! s:setup_autocmd() " {{{
         autocmd! FileType c,cpp
                     \  nnoremap <buffer> [SPC]lb :make<CR>
                     \| nnoremap <buffer> [SPC]lt :make unittest<CR>
+                    \| setlocal foldmethod=syntax
     augroup END
 
     augroup myspacevim_asciidoc

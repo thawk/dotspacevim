@@ -6,7 +6,7 @@ function! myspacevim#colorscheme#autoload()
     if g:spacevim_colorscheme == '' && g:spacevim_colorscheme_bg != ''
         " SpaceVim will not set background with
         " g:spacevim_colorscheme_default, so we do it ourself.
-        execute 'set backgroud=' . g:spacevim_colorscheme_bg
+        let &background=g:spacevim_colorscheme_bg
     endif
 endfunction
 

@@ -95,7 +95,7 @@ endsnippet
 snippet inote "include note"
 \include "../${1:notes}/${2:name}.ily"
 
-\tocItem \markup \\"$3Piece"
+\tocItem \markup \concat { \\"$3Piece" "" }
 \score {
 	\\"${3:$2}Notes"
 	\header {

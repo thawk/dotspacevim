@@ -93,12 +93,15 @@ snippet toci "tocItem" b
 endsnippet
 
 snippet inote "include note"
-\include "../${1:notes}/${2:name}.ily"
+\\include "../${1:notes}/${2:name}.ily"
 
-\tocItem \markup \concat { \\"$3Piece" "" }
-\score {
-	\\"${3:$2}Notes"
-	\header {
+\\tocItem \markup \concat { \\"$3Piece" "" }
+\\score {
+	\\transpose ${4:c} c {
+		\\transposition $4
+		\\"${3:$2}Notes"
+	}
+	\\header {
 		piece    = \\"$3Piece"
 		opus     = \\"$3Opus"
 		composer = \\"$3Composer"

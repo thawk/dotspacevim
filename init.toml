@@ -68,7 +68,9 @@
     # 0: disable autochdir
     # 1: change to project root automatically
     # 2: change to directory of current file automatically
-    project_rooter_automatically = 0
+    project_rooter_automatically = 1
+
+    project_rooter_outermost = true
 
 # default layers
 [[layers]]

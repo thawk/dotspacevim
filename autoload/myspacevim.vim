@@ -431,6 +431,13 @@ function! s:setup_autocmd() " {{{
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
     augroup END
 
+    augroup myspacevim_yaml
+        autocmd!
+        autocmd! BufNewFile,BufEnter *.ksy
+              \ :setlocal filetype=yaml
+        autocmd! FileType yaml :setlocal shiftwidth=2 expandtab
+    augroup END
+
     augroup myspacevim_private
         autocmd!
         autocmd! BufNewFile,BufEnter */private/*

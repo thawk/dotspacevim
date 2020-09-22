@@ -1,0 +1,15 @@
+snippet	ksy "Kaitai format file" b
+meta:
+	id: ${1:`!v expand("%:t:r")`}
+	file-extension:
+		- ${2:$1}
+	license: CC0-1.0
+	endian: be
+
+doc: |
+	${3:Document}
+
+seq:
+	- ${0}
+endsnippet
+

@@ -1,7 +1,7 @@
 snippet try
 try
 {
-	${1}
+	${VISUAL}${1}
 }
 catch (${2:...})
 {
@@ -12,7 +12,7 @@ endsnippet
 snippet fori
 for (${1:size_t} ${2:i}=${3:0}; $2 < ${4}; ++$2)
 {
-	${0}
+	${VISUAL}${0}
 }
 endsnippet
 
@@ -20,7 +20,7 @@ endsnippet
 snippet fore
 for (${1:auto} ${2:i} : ${3:container})
 {
-	${4}
+	${VISUAL}${4}
 }
 endsnippet
 
@@ -28,7 +28,7 @@ snippet namespace
 namespace ${1:#:name}
 {
 
-${0}
+${VISUAL}${0}
 
 }   // namespace $1
 endsnippet
@@ -36,11 +36,11 @@ endsnippet
 snippet mfun
 ${4:void} ${1:`substitute(substitute(expand("%:t:r"), "^\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`}::${2:MemberFunction}(${3})
 {
-	${0}
+	${VISUAL}${0}
 }
 endsnippet
 
-snippet helloworld
+snippet skel
 #include <iostream>
 using namespace std;
 

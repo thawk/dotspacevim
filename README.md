@@ -23,10 +23,63 @@ You can use ``nogui.sh`` to be used in an terminal without nerd-font.
 
 ## Dependencies
 
+```sh
+pip install pynvim neovim
+```
+
 * ``lang#markdown`` depends on ``remark``
 
   ```sh
   npm install --global remark-cli remark-html remark-preset-lint-markdown-style-guide
   ```
+
+* ``lang#c`` depends on
+
+  ```sh
+  pip install clang
+  ```
+
+## Work with pyenv for neovim
+
+* Create the neovim virtualenvs
+
+  * <https://github.com/deoplete-plugins/deoplete-jedi/wiki/Setting-up-Python-for-Neovim>
+
+  * python2
+
+    ```sh
+    pyenv install 2.7.15
+    pyenv virtualenv 2.7.15 neovim2
+    pyenv activate neovim2
+    pip install pynvim neovim
+    pyenv which python  # Note the path
+    ```
+
+  * python3
+
+    ```py
+    pyenv install 3.7.3
+    pyenv virtualenv 3.7.3 neovim3
+    pyenv activate neovim3
+    pip install pynvim neovim
+    pyenv which python  # Note the path
+    ```
+
+* Set environment
+
+  * using vim script
+
+    ```py
+    let g:python_host_prog = '/full/path/to/neovim2/bin/python'
+    let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
+    ```py
+
+  * using shell
+
+    ```sh
+    export PYTHON_HOST_PROG='/full/path/to/neovim2/bin/python'
+    export PYTHON3_HOST_PROG='/full/path/to/neovim3/bin/python'
+F
+    ```
 
 [SpaceVim]: https://spacevim.org

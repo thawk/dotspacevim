@@ -197,6 +197,12 @@
     ]
 
 [[layers]]
+    name = 'lang#sml'
+    enable = 'executable("sml")'
+    auto_create_def_use = 'always'
+    enable_conceal = 0
+
+[[layers]]
     name = 'lang#toml'
     enable = true
 

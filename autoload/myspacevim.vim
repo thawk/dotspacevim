@@ -380,6 +380,10 @@ function! s:setup_plugin() " {{{
     "" colorizer {{{
     let g:colorizer_maxlines = 1000     " Disable plugin on large file
     "" }}}
+
+    "" indentLine {{{
+    let g:indentLine_setColors = 0
+    "" }}}
 endfunction
 " }}}
 

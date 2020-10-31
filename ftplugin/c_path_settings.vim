@@ -109,23 +109,23 @@ function! s:AddCppDefaultIncludePath()
         if executable("sed")
             if executable("clang++")
                 let s:cpp_include_path = extend(s:cpp_include_path, s:GetCompilerDefaultIncludePath("clang++"))
-                return
             elseif executable("g++")
                 let s:cpp_include_path = extend(s:cpp_include_path, s:GetCompilerDefaultIncludePath("g++"))
-                return
             endif
         endif
 
-        " 未能从编译器取得include列表，自行查找
-        let l:cpp_include_path = substitute(substitute(glob("/usr/include/c++/*/"), "^.*\n", "", ""), "/$", "", "")
-        if isdirectory(l:cpp_include_path)
-            call add(s:cpp_include_path, l:cpp_include_path)
+        if empty(s:cpp_include_path)
+            " 未能从编译器取得include列表，自行查找
+            let l:cpp_include_path = substitute(substitute(glob("/usr/include/c++/*/"), "^.*\n", "", ""), "/$", "", "")
+            if isdirectory(l:cpp_include_path)
+                call add(s:cpp_include_path, l:cpp_include_path)
 
-            " 在/usr/include/c++/4.4.6/x86_64-redhat-linux/bits有需要的文件，因此
-            " 把/usr/include/c++/4.4.6/x86_64-redhat-linux加入路径中
-            for l:p in finddir("bits", l:cpp_include_path . '/**2', -1)
-                call add(s:cpp_include_path, fnamemodify(l:p, ":p:h:h"))
-            endfor
+                " 在/usr/include/c++/4.4.6/x86_64-redhat-linux/bits有需要的文件，因此
+                " 把/usr/include/c++/4.4.6/x86_64-redhat-linux加入路径中
+                for l:p in finddir("bits", l:cpp_include_path . '/**2', -1)
+                    call add(s:cpp_include_path, fnamemodify(l:p, ":p:h:h"))
+                endfor
+            endif
         endif
     endif
 

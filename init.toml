@@ -143,7 +143,7 @@
 
 [[layers]]
     name = 'lang#clojure'
-    enable = false
+    enable = 'executable("clojure")'
 
 [[layers]]
     name = 'lang#go'

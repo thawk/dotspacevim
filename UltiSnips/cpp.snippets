@@ -1,3 +1,29 @@
+###########################################################################
+#                           Global functions                              #
+###########################################################################
+
+global !p
+
+def write_docstring_args(arglist, snip):
+	args = str(arglist).split(',')
+
+	if len(args) > 1:
+		c = 0
+		for arg in args:
+			if c == 0:
+				snip.rv += arg
+				c = 1
+			else:
+				snip += '*       : %s' % arg.strip()
+	else:
+		snip.rv = args[0]
+
+
+endglobal
+
+###########################################################################
+#                               Snippets                                  #
+###########################################################################
 snippet try
 try
 {
@@ -62,3 +88,16 @@ LOG_${1:INFO}(
 ${0}
 endsnippet
 
+snippet fnc "Basic c++ doxygen function template" b
+/**
+ * @brief: ${4:brief}
+ *
+ * @param: `!p write_docstring_args(t[3],snip)`
+ *
+ * @return: `!p snip.rv = t[1]`
+ */
+${1:ReturnType} ${2:FunctionName}(${3:param})
+{
+	${0:FunctionBody}
+}
+endsnippet

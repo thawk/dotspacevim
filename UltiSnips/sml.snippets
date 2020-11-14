@@ -1,4 +1,136 @@
-snippet // "comment (* *)" 
+# vim: foldmethod=marker
+
+# Pragmas {{{
+
+# Statements {{{
+
+global !p
+def last_module(mod):
+	return mod.rstrip('.').rsplit('.', 1)[-1]
+
+def space_if(p):
+	return " " if p else ""
+endglobal
+
+snippet datatype "Algebraic data type" !b
+datatype ${1:Type} = ${2:Constructor} | ${0:Constructor}
+endsnippet
+
+snippet rec "Data record" !b
+type ${1:Type} =
+	{ ${3:field} : ${4:Type}
+	}$0
+endsnippet
+
+snippet new "Type Synonyms" !b
+type ${1:Type} = ${2:Oldtype}
+endsnippet
+
+# snippet cls "Type class definition" !b
+# class ${1:Name} where
+#     $0
+# endsnippet
+#
+# snippet in "Instance definition" !b
+# instance ${1:Class} ${2:Type} where
+#     $0
+# endsnippet
+
+# }}} Statements
+
+# Definitions {{{
+
+# snippet :: "Type signature" !b
+# ${1:name} :: ${2:Type}
+# endsnippet
+#
+# snippet => "Class constraint" !w
+# ${1:Class} ${2:variable} => $2
+# endsnippet
+
+snippet fun "Function definition" !b
+fun ${1:name} ${2:args} =
+	$0
+endsnippet
+
+snippet fun[] "Function definition for list patterns" !b
+fun ${1:name} ${2:[]} = ${3:[]}
+  | $1 ${4:(x::xs')} = $0
+endsnippet
+
+# snippet def "Value definition" !b
+# -- | ${4:Documentation for $1}
+# $1 :: ${2:Type}
+# ${1:name} = ${5:error "undefined: \`$1' in `!v expand('%')`"}
+# endsnippet
+#
+# snippet = "Function clause" !b
+# ${1:name} ${2:pattern} = ${3:undefined}
+# endsnippet
+#
+# snippet 2= "Function clause" !b
+# ${1:name} ${2:pattern} = ${3:undefined}
+# $1 ${4:pattern} = ${5:undefined}
+# endsnippet
+#
+# snippet 3= "Function clause" !b
+# ${1:name} ${2:pattern} = ${3:undefined}
+# $1 ${4:pattern} = ${5:undefined}
+# $1 ${6:pattern} = ${7:undefined}
+# endsnippet
+
+snippet | "Guard" !b
+| ${1:predicate} = ${2:undefined}
+endsnippet
+
+# }}} Definitions
+
+# Expressions {{{
+
+snippet \ "Lambda" !w
+\\ ${1:args} -> ${2:expression}
+endsnippet
+
+snippet if "Boolean conditional" !w
+if ${1:condition}
+	then ${2:expression}
+	else ${3:expression}
+endsnippet
+
+snippet case "Pattern match" !w
+case ${1:scrutinee} of
+    ${2:[]} => ${3:expression}
+  | ${4:x::xs'} => ${5:expression}
+endsnippet
+
+snippet aux "Aux function for tail cursion"
+let fun aux(${1:lst}, acc) =
+		case $1 of
+		    [] => acc
+		  | x::xs => aux(xs, x::acc)
+in
+	aux($1, [])
+end
+endsnippet
+
+# snippet qq "Quasi quote" !w
+# [${1:quoter}|${2:content}|]
+# endsnippet
+#
+# snippet [|] "List comprehension" !w
+# [${3:foo }$1 | ${1:x} <- ${2:xs} ]
+# endsnippet
+
+snippet let "let ... in ... end" !b
+let
+	${1:name} = ${2:expression}
+in
+	${3:expression}
+end
+endsnippet
+# }}} Expressions
+
+snippet // "comment (* *)"
 (* $1 *)$0
 endsnippet
 

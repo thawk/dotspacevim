@@ -383,6 +383,8 @@ function! s:setup_plugin() " {{{
 
     "" indentLine {{{
     let g:indentLine_setColors = 0
+    let g:indentLine_fileTypeExclude = get(g:, 'indentLine_fileTypeExclude', [])
+    call add(g:indentLine_fileTypeExclude, 'sml')
     "" }}}
 endfunction
 " }}}

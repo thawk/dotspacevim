@@ -99,15 +99,15 @@ endsnippet
 
 snippet case "Pattern match" !w
 case ${1:scrutinee} of
-    ${2:[]} => ${3:expression}
-  | ${4:x::xs'} => ${5:expression}
+     ${2:[]} => ${3:expression}
+   | ${4:x::xs'} => ${5:expression}
 endsnippet
 
 snippet aux "Aux function for tail cursion"
 let fun aux(${1:lst}, acc) =
 		case $1 of
-		    [] => acc
-		  | x::xs => aux(xs, x::acc)
+		     ${2:[]} => ${3:acc}
+		   | ${4:x::xs} => ${5:aux(xs, ${6:x::acc})}
 in
 	aux($1, [])
 end
@@ -123,14 +123,15 @@ endsnippet
 
 snippet let "let ... in ... end" !b
 let
-	${1:name} = ${2:expression}
+	${1:val} ${2:name} = ${3:expression}
 in
-	${3:expression}
+	${4:expression}
 end
 endsnippet
 # }}} Expressions
 
 snippet // "comment (* *)"
-(* $1 *)$0
+(* $1 *)
+$0
 endsnippet
 

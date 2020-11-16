@@ -200,7 +200,8 @@
     name = 'lang#sml'
     enable = 'executable("sml")'
     auto_create_def_use = 'always'
-    enable_conceal = 0
+    enable_conceal = 1
+    enable_conceal_show_tick = 1
 
 [[layers]]
     name = 'lang#toml'

@@ -181,8 +181,12 @@
     enable = true
 
 [[layers]]
+    name = 'lang#racket'
+    enable = 'executable("racket")'
+
+[[layers]]
     name = 'lang#scheme'
-    enable = true
+    enable = 'executable("guile") || executable("chez")'
     scheme_dialect = 'guile'
     scheme_interpreter = 'guile'
     # dialect = 'chez'

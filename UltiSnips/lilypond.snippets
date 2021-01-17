@@ -488,10 +488,23 @@ snippet segno "segno"
 \mark \markup { \fontsize #-2 \musicglyph "scripts.segno" }
 endsnippet
 
+snippet coda "coda"
+\mark \markup { \fontsize #-1 \musicglyph "scripts.coda" }
+endsnippet
+
+snippet ds "D.S. al Coda"
+\mark \markup \line { "D.S. al" \raise #1 \musicglyph #"scripts.coda" }
+endsnippet
+
 snippet ds "D.S."
 \mark \markup { \fontsize #-2 "D.S." }
 endsnippet
 
 snippet dcds "D.C. D.S."
 \mark \markup { \fontsize #-2 \column { "D.C." "D.S." } }
+endsnippet
+
+snippet rest "long Rests"
+\override MultiMeasureRest.expand-limit = #3
+\compressFullBarRests
 endsnippet

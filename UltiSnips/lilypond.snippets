@@ -483,3 +483,15 @@ snippet skip "skip some notes"
 \repeat unfold ${1:note_count} { \skip 1 }
 ${0}
 endsnippet
+
+snippet segno "segno"
+\mark \markup { \fontsize #-2 \musicglyph "scripts.segno" }
+endsnippet
+
+snippet ds "D.S."
+\mark \markup { \fontsize #-2 "D.S." }
+endsnippet
+
+snippet dcds "D.C. D.S."
+\mark \markup { \fontsize #-2 \column { "D.C." "D.S." } }
+endsnippet

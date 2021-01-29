@@ -203,6 +203,10 @@ function! s:setup_plugin() " {{{
     let g:clang2_placeholder_prev = ''
     "" }}}
 
+    "" incsearch {{{
+    let g:incsearch#auto_nohlsearch = 0
+    "" }}}
+
     "" Neomake {{{
     let g:neomake_open_list = 0     " 0: don't auto open
     let g:neomake_vim_enabled_makers = []

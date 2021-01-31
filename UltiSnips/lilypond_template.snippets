@@ -1,0 +1,150 @@
+snippet skel "非复调 普通钢琴作品通用模板" b
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 非复调 普通钢琴作品通用模板
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\version "2.18.2"
+
+showTN = { \override TupletNumber #'transparent = ##f }
+hideTN = { \override TupletNumber #'transparent = ##t }
+
+staffDown = { \change Staff = "down" } %staff down
+staffUp   = { \change Staff = "up"   } %staff up
+
+mbreak = \break
+
+%%%%%%%%%%%%%%
+%  右手部分  %
+%%%%%%%%%%%%%%
+RH = \relative c''
+{
+	\clef treble
+	\key c \major
+	\time 4/4
+	\override Score.MetronomeMark #'transparent = ##t
+	\tempo 4=132
+	%TODO: 下面开始写右手部分
+
+}
+
+
+
+%%%%%%%%%%%%%%
+%  左手部分  %
+%%%%%%%%%%%%%%
+LH = \relative c
+{
+	\clef bass
+	\key c \major
+	\time 4/4
+	%TODO: 下面开始写左手部分
+
+}
+
+
+\score
+{
+	\context PianoStaff
+	<<
+		%\set PianoStaff.connectArpeggios = ##t
+		%\set PianoStaff.instrumentName = \markup { \fontsize #+3 \bold "1." }
+		\new Staff = "up"   \RH
+		\new Staff = "down" \LH
+	>>
+
+	\layout { }
+
+	\midi
+	{
+		\context
+		{
+			\Voice
+			\remove Dynamic_performer
+		}
+	}
+}
+endsnippet
+
+snippet skel "复调钢琴作品模板" b
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 复调模板
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\version "2.18.2"
+
+showTN = { \override TupletNumber #'transparent = ##f }
+hideTN = { \override TupletNumber #'transparent = ##t }
+
+staffDown = { \change Staff = "down" } %staff down
+staffUp   = { \change Staff = "up"   } %staff up
+
+mbreak = \break
+
+%%%%%%%%%%%%%%
+%     up     %
+%%%%%%%%%%%%%%
+A = \relative c'
+{
+	\clef treble
+	\key c \major
+	\time 4/4
+	\override Score.MetronomeMark #'transparent = ##t
+	\tempo 4=132
+
+}
+
+B = \relative c'
+{
+
+
+
+}
+
+
+%%%%%%%%%%%%%%
+%    down    %
+%%%%%%%%%%%%%%
+C = \relative c
+{
+	\clef bass
+	\key c \major
+
+}
+
+D = \relative c
+{
+
+
+
+}
+
+
+\score
+{
+	\context PianoStaff
+	<<
+		%\set PianoStaff.connectArpeggios = ##t
+		%\set PianoStaff.instrumentName = \markup { \fontsize #+3 \bold "1." }
+		\new Staff = "up"
+		<<
+		\new Voice = "A" \A
+		\new Voice = "B" \B
+		>>
+		\new Staff = "down"
+		<<
+		\new Voice = "C" \C
+		\new Voice = "D" \D
+		>>
+	>>
+
+	\layout { }
+
+	\midi
+	{
+		\context
+		{
+			\Voice
+			\remove Dynamic_performer
+		}
+	}
+}
+endsnippet
+

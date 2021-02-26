@@ -126,10 +126,10 @@ snippet note "Notes" b
 "$1Notes" =
 {
 	\clef "treble"
-	\key `!p snip.rv = re.sub("[,']+", "", t[5])` ${6:\major}
 	% \tempo 4 = 96
 
 	\transpose c ${5:c} {
+		\key c ${6:\major}
 		\"$1Pitches"
 	}
 }

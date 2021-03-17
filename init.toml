@@ -126,6 +126,7 @@
 [[layers]]
     name = 'gtags'
     enable = 'executable("global")'
+    auto_update = 0
 
 [[layers]]
     name = 'debug'

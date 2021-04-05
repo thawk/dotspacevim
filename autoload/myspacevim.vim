@@ -178,10 +178,6 @@ function! s:setup_plugin() " {{{
     augroup END
     "" }}}
 
-    "" deoplete.vim {{{
-    let g:deoplete#auto_complete_delay = 150
-    "" }}}
-
     "" dein.vim {{{
     " Do a shallow clone
     let g:dein#types#git#clone_depth = 1
@@ -483,6 +479,12 @@ function! s:setup_plugin_after() " {{{
                     \ })
     endif
     ""}}}
+
+    "" deoplete.vim {{{
+    if exists('*deoplete#custom#option')
+        call deoplete#custom#option("auto_complete_delay", 150)
+    endif
+    "" }}}
 
     "" vim-markdown {{{
     if SpaceVim#layers#isLoaded("lang#latex")

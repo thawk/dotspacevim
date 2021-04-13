@@ -39,6 +39,12 @@ pip install pynvim neovim
   pip install clang
   ```
 
+* ``lang#python`` depends on
+
+  ```sh
+  pip install jedi
+  ```
+
 ## Work with pyenv for neovim
 
 * Create the neovim virtualenvs
@@ -61,7 +67,7 @@ pip install pynvim neovim
     pyenv install 3.7.3
     pyenv virtualenv 3.7.3 neovim3
     pyenv activate neovim3
-    pip install pynvim neovim
+    pip install clang jedi neovim pynvim
     pyenv which python  # Note the path
     ```
 

@@ -4,10 +4,12 @@ if exists("b:did_c_path_settings")
 endif
 let b:did_c_path_settings = 1
 
-let s:cpp_include_path_ready = 0
-let s:cpp_include_path = []
-let s:proj_includes = {}
-let s:path_to_proj_root = {}
+if !exists('s:cpp_include_path')
+    let s:cpp_include_path_ready = 0
+    let s:cpp_include_path = []
+    let s:proj_includes = {}
+    let s:path_to_proj_root = {}
+endif
 
 let s:proj_root_stopper = ["Jamroot", "Jamroot.v2", "Jamroot.jam", ".git", ".svn"]
 function! s:FindProjectRoot(path)

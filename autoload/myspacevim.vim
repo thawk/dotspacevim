@@ -504,6 +504,12 @@ function! s:setup_plugin_after() " {{{
         call add(g:startify_skiplist, '/private/')
     endif
     "" }}}
+
+    "" gtags.vim {{{
+    if exists(':Gtags')
+        let g:gtags_open_list = 1
+    endif
+    "" }}}
 endfunction
 " }}}
 

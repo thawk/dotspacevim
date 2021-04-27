@@ -178,9 +178,9 @@ function! s:SetupEnvironment()
         endfor
     endfor
 
-    for l:p in s:GetProjectIncludes(l:path)
-        call s:AddPath(l:p)
-    endfor
+    " for l:p in s:GetProjectIncludes(l:path)
+    "     call s:AddPath(l:p)
+    " endfor
 
     " Boost库
     if match(&path, "boost") < 0    " 路径中没有boost库才需要加入

@@ -1,4 +1,4 @@
-snippet	skel_cpp "C++ base Makefile" bt
+snippet	cpp "C++ base Makefile" bt
 TARGET = ${1:target}
 
 # Listing all sources
@@ -36,21 +36,94 @@ $(TARGET): $(SOURCES:.cpp=.o)
 -include $(SOURCES:.cpp=.d)
 endsnippet
 
-snippet	skel_python "Python base Makefile" bt
-init:
-	pip install pipenv
-	pipenv install --dev
+snippet	python "Python base Makefile" bt
+# If the first argument is "run"...
+ifeq (run,$(firstword $(MAKECMDGOALS)))
+	# use the rest as arguments for "run"
+	RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+endif
 
-test:
-	py.test tests
+all: lint test
 
+%:
+	@:
+
+.PHONY: run
 run:
-	pipenv run python ${1:main.py}
+	python -m log_analyzer $(RUN_ARGS)
 
-PHONY: init run test
+.PHONY: lint
+lint:
+	flake8
+
+.PHONY: test
+test:
+	pytest
+
+#.PHONY: release
+#release:
+#	python setup.py sdist bdist_wheel upload
+
+.PHONY: clean
+clean:
+	find . -type f -name *.pyc -delete
+	find . -type d -name __pycache__ -delete
 endsnippet
 
-snippet skel_go_pkg "Go package Makefile" bt
+snippet	python "Python venv based Makefile" bt
+# system python interpreter, used to create virtual environment
+PY = python3
+VENV = venv
+BIN = $(VENV)/bin
+
+# make it work on windows too
+ifeq ($(OS), Windows_NT)
+	BIN = $(VENV)/Scripts
+	PY = python
+endif
+
+# If the first argument is "run"...
+ifeq (run,$(firstword $(MAKECMDGOALS)))
+	# use the rest as arguments for "run"
+	RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+endif
+
+all: lint test
+
+%:
+	@:
+
+$(VENV): requirements.txt requirements-dev.txt
+	$(PY) -m venv $(VENV)
+	$(BIN)/pip install --upgrade -r requirements.txt
+	$(BIN)/pip install --upgrade -r requirements-dev.txt
+	#$(BIN)/pip install -e .
+	touch $(VENV)
+
+.PHONY: run
+run: $(VENV)
+	$(BIN)/python -m log_analyzer $(RUN_ARGS)
+
+.PHONY: lint
+lint: $(VENV)
+	$(BIN)/flake8 --exclude $(VENV)
+
+.PHONY: test
+test: $(VENV)
+	$(BIN)/pytest
+
+#.PHONY: release
+#release: $(VENV)
+#	$(BIN)/python setup.py sdist bdist_wheel upload
+
+.PHONY: clean
+clean:
+	rm -rf $(VENV)
+	find . -type f -name *.pyc -delete
+	find . -type d -name __pycache__ -delete
+endsnippet
+
+snippet go "Go package Makefile" bt
 include $(GOROOT)/src/Make.inc
 
 TARG=${1:package}
@@ -61,7 +134,7 @@ GOFILES=\
 include $(GOROOT)/src/Make.pkg
 endsnippet
 
-snippet skel_go_prg "Go program Makefile" bt
+snippet go "Go program Makefile" bt
 include $(GOROOT)/src/Make.inc
 TARG=${1:program}
 GOFILES=\

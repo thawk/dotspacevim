@@ -227,7 +227,7 @@
 
 [[layers]]
     name = 'lsp'
-    enable = true
+    enable = false
     #   [layers.override_cmd]
     #     c = ['ccls', '--log-file=/tmp/ccls.log']
     #     cpp = ['ccls', '--log-file=/tmp/ccls.log']
@@ -242,7 +242,9 @@
 
 [[layers]]
     name = 'lang#lilypond'
+    lazy = 1
     enable = true
+    on_path = '.*\.(ly|ily)'
 
 [[custom_plugins]]
     # Display colors like: #RRGGBB
@@ -280,6 +282,7 @@
 
 [[custom_plugins]]
     name = 'skilstak/vim-abnf-utf8'
+    lazy = 1
     on_path = '.*\.abnf'
 
 # end optional layers
@@ -288,7 +291,7 @@
     name = 'ConradIrwin/vim-bracketed-paste'
 
 [[custom_plugins]]
-    name = 'derekwyatt/vim-fswitch'
+    name = 'thawk/vim-fswitch'
     lazy = 1
     on_func = ['FSwitch', 'FSReturnReadableCompanionFilename', 'FSReturnCompanionFilenameString']
     on_cmd = ['FSHere','FSRight','FSSplitRight','FSLeft','FSSplitLeft','FSAbove','FSSplitAbove','FSBelow','FSSplitBelow','FSTab']
@@ -318,6 +321,12 @@
       'MarkYankDefinitionsOneLiner', 'MarkPalette', 'MarkName']
     on_map = ['<Plug>Mark']
 
-[[custom_plugins]]
-    name = 'sickill/vim-monokai'
+# [[custom_plugins]]
+#     name = 'sickill/vim-monokai'
 
+[[custom_plugins]]
+    name = 'mhinz/vim-rfc'
+    lazy = 1
+    on_path = 'rfc.*\.txt'
+    on_cmd = ['RFC']
+    on_ft = 'rfc'

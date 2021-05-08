@@ -75,7 +75,7 @@ snippet bar "Bar"
 endsnippet
 
 snippet tuplet "Tuplet连音"
-\tuplet ${1:3/2} { ${0} }
+\tuplet ${1:3/2} { ${2} } ${0}
 endsnippet
 
 snippet barcheck "barNumberCheck"
@@ -144,7 +144,7 @@ snippet note "Notes" b
 }
 endsnippet
 
-snippet notely "Notes with lyric" b
+snippet note "Notes with lyric" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
@@ -234,7 +234,7 @@ snippet parallel "parallelMusic" b
 >>
 endsnippet
 
-snippet note1 "Parallel Notes (one staff)" b
+snippet note "Parallel Notes (one staff)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
@@ -261,14 +261,14 @@ snippet note1 "Parallel Notes (one staff)" b
 
 "$1Notes" =
 {
-	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
 	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
 		\"$1Pitches"
 	}
 }
 endsnippet
 
-snippet note1ly "Parallel Notes (1 staffs with lyric)" b
+snippet note "Parallel Notes (1 staffs with lyric)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
@@ -345,8 +345,8 @@ grayVoice = {
 
 "$1Notes" =
 {
-	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
 	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
 		\"$1Pitches"
 	}
 }
@@ -379,7 +379,7 @@ grayVoice = {
 }
 endsnippet
 
-snippet note2 "Parallel Notes (two staffs)" b
+snippet note "Parallel Notes (two staffs)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
@@ -403,13 +403,7 @@ snippet note2 "Parallel Notes (two staffs)" b
 		}
 		\\\\
 		\relative c' {
-			\override Accidental.color = #(x11-color '${8:gray50})
-			\override Beam.color       = #(x11-color '$8)
-			\override Dots.color       = #(x11-color '$8)
-			\override NoteHead.color   = #(x11-color '$8)
-			\override Rest.color       = #(x11-color '$8)
-			\override Stem.color       = #(x11-color '$8)
-			\override Tie.color        = #(x11-color '$8)
+			\grayNotes
 
 			\harmony
 		}
@@ -418,14 +412,14 @@ snippet note2 "Parallel Notes (two staffs)" b
 
 "$1Notes" =
 {
-	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
 	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
 		\"$1Pitches"
 	}
 }
 endsnippet
 
-snippet note2' "Parallel Notes (two staffs separated)" b
+snippet note "Parallel Notes (two staffs separated)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
@@ -455,8 +449,8 @@ snippet note2' "Parallel Notes (two staffs separated)" b
 
 "$1Notes" =
 {
-	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
 	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
 		\"$1Pitches"
 	}
 }

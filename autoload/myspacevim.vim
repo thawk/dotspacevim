@@ -403,6 +403,7 @@ function! s:setup_autocmd() " {{{
                     \  nnoremap <buffer> [SPC]lb :make<CR>
                     \| nnoremap <buffer> [SPC]lt :make unittest<CR>
                     \| setlocal foldmethod=syntax
+                    \| setlocal foldlevel=99
     augroup END
 
     augroup myspacevim_asciidoc
@@ -513,7 +514,7 @@ function! s:setup_plugin_after() " {{{
 endfunction
 " }}}
 
-function! s:build_make(program, args) abort
+function! s:build_make(program, args) abort " {{{
   if a:program =~# '\$\*'
     return substitute(a:program, '\$\*', a:args, 'g')
   elseif empty(a:args)
@@ -522,6 +523,7 @@ function! s:build_make(program, args) abort
     return a:program . ' ' . a:args
   endif
 endfunction
+" }}}
 
 function! s:async_make(args) " {{{
     let cmd1 = s:build_make(&makeprg, a:args)

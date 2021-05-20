@@ -33,7 +33,6 @@ function! myspacevim#before() abort " {{{
 endfunction " }}}
 
 function! myspacevim#after() abort " {{{
-    set ignorecase
     set smartcase
     set wildmode=longest:full,full
     set wildmenu

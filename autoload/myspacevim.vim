@@ -33,7 +33,8 @@ function! myspacevim#before() abort " {{{
 endfunction " }}}
 
 function! myspacevim#after() abort " {{{
-    set smartcase
+    set ignorecase
+    set smartcase   " Depending on 'ignorecase', will override 'ignorecase' if the search pattern contains upper case characters
     set wildmode=longest:full,full
     set wildmenu
     " Fix compatibility of CJK long lines.

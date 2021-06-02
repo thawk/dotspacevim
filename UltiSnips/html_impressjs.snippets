@@ -1,0 +1,57 @@
+snippet	impressjs "impress.js template" b
+<!doctype html>
+<html lang="zh-cmn-Hans">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>${1:幻灯标题}</title>
+		<!-- <link href="css/typo.css" rel="stylesheet" /> -->
+		<link href="css/basscss.css" rel="stylesheet" />
+		<link href="impress.js/css/impress-common.css" rel="stylesheet" />
+		<link href="css/fonts.css" rel="stylesheet" />
+		<link href="css/classic-slides.css" rel="stylesheet" />
+	</head>
+<body class="impress-not-supported">
+<div class="fallback-message">
+	<p>您正在使用的浏览器<b>不支持</b>impress.js需要的功能，因此只能看到简化版本。</p>
+	<p>请使用最新版本的<b>Chrome</b>、<b>Safari</b>或<b>Firefox</b>浏览器以取得最佳效果。</p>
+</div>
+
+<div id="impress" class="typo nodebug" data-width="1920" data-height="1080" data-autoplay="0" data-max-scale="4">
+
+<!-- title页放到其他页上面，避免在overview页面上被遮挡 -->
+<div id="title" class="step slide title" data-x="0" data-y="0" data-z=1100>
+	<h1>${2:$1}</h1>
+</div>
+
+<div id="${3:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1080" data-rotate=0 data-z=1000>
+${0:输入需要的内容}
+</div>
+
+<div id="overview" class="step slide skip" data-x="200" data-y="200" data-scale=5 data-rotate=360>
+	<div id="signature" class="absolute right-0 bottom-0 center">
+		<p>Power by <em><a href="http://impress.js.org">impress.js<sup>*</sup></a></em></p>
+	</div>
+</div>
+
+</div> <!-- #impress -->
+
+<div id="impress-toolbar"></div>
+
+<div class="impress-progressbar"><div></div></div>
+<div class="impress-progress"></div>
+
+<div id="impress-help"></div>
+
+<!-- <script src="impress.js/extras/highlight/highlight.pack.js" charset="utf-8"></script> -->
+<!-- <script src="impress.js/extras/markdown/markdown.js" charset="utf-8"></script> -->
+<script src="impress.js/js/impress.js" charset="utf-8"></script>
+<script charset="utf-8">impress().init();</script>
+</body>
+</html>
+endsnippet
+
+snippet step "<div id=step>" b
+<div id="${1:step_id}" class="step ${2:slide${3}}">
+</div>
+endsnippet

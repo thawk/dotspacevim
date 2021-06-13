@@ -8,7 +8,7 @@
 function! SpaceVim#layers#lang#lilypond#plugins() abort
   let plugins = []
   " call add(plugins, ['gisraptor/vim-lilypond-integrator', {'merged' : 0}])
-  call add(plugins, ['wchargin/vim-lilypond', {'merged' : 0}])
+  call add(plugins, ['sersorrel/vim-lilypond', {'merged' : 0}])
   return plugins
 endfunction
 

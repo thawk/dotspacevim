@@ -143,6 +143,15 @@ function! s:setup_mapping() " {{{
     " use '%/' in cmdline to get current file path.  e.g. :e %/
     cmap %/ <C-R>=escape(expand("%:p:h")."/", ' \')<CR>
 
+    "" build/test mapping for c and cpp {{{
+    for l:lang in ['c', 'cpp', 'bbv2']
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['b'], 'make', 'build project', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['B'], 'Make', 'async build project', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['t'], 'make unittest', 'run unittest', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['T'], 'Make unittest', 'async run unittest', 1)
+    endfor
+    "" }}}
+
     "" vim-mark <Leader>m {{{
     nmap <silent><unique> <Leader>mm <Plug>MarkSet
     xmap <silent><unique> <Leader>mm <Plug>MarkSet
@@ -278,65 +287,6 @@ function! s:setup_plugin() " {{{
     let g:bracketed_paste_tmux_wrap = 0
     "" }}}
 
-    "" vim-fswitch {{{
-    " 可以用:A在.h/.cpp间切换
-    augroup myspacevim_fswitch
-        autocmd!
-
-        " reg:的匹配部分使用的是:p:h的结果，是没有最后/的目录
-        autocmd! BufNewFile,BufEnter *.h,*.hpp
-                    \  let b:fswitchdst='cpp,c,ipp,cxx'
-                    \| let b:fswitchlocs=
-                    \      'reg:!/include\>!/src!,' .
-                    \      'reg:!/include/.*!/src!,' .
-                    \      'ifrel:!/include\>!../src!,' .
-                    \      'reg:!/include/\w\+\>!/src!,' .
-                    \      'reg:!/include\(/\w\+\)\{2}\>!/src!,' .
-                    \      'reg:!/include\(/\w\+\)\{3}\>!/src!,' .
-                    \      'reg:!/include\(/\w\+\)\{4}\>!/src!,' .
-                    \      'reg:!/include/.*!/src/**!,' .
-                    \      'reg:!^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!'
-                    \| let b:fsnonewfiles="on"
-        autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
-                    \  let b:fswitchdst='h,hpp'
-                    \| let b:fswitchlocs=
-                    \      'reg:!/src\>!/include!,' .
-                    \      'reg:!/src\(/.*\|\)$!/include/**!,' .
-                    \      'ifrel:!/src\>!../include/!,' .
-                    \      'reg:!/libs/.*!/**!'
-                    \| let b:fsnonewfiles="on"
-
-        autocmd! BufNewFile,BufEnter *.xml
-                    \  let b:fswitchdst='rnc'
-                    \| let b:fswitchlocs='./'
-        autocmd! BufNewFile,BufEnter *.rnc
-                    \  let b:fswitchdst='xml'
-                    \| let b:fswitchlocs='./'
-
-        autocmd! BufNewFile,BufEnter */src/*.hs
-                    \  let b:fswitchdst='hs'
-                    \| let b:fswitchlocs='reg:!/src/!/test/!'
-                    \| let b:fswitchfnames='/$/Spec/'
-        autocmd! BufNewFile,BufEnter */test/*Spec.hs
-                    \  let b:fswitchdst='hs'
-                    \| let b:fswitchlocs='reg:!/test/!/src/!'
-                    \| let b:fswitchfnames='/Spec$//'
-
-        autocmd! FileType c,cpp,xml,rnc,haskell
-                    \  nnoremap <buffer> [SPC]lja :FSHere<CR>
-                    \| nnoremap <buffer> [SPC]ljA :FSSplitRight<CR>
-                    \| nnoremap <buffer> [SPC]ljl :FSRight<CR>
-                    \| nnoremap <buffer> [SPC]ljL :FSSplitRight<CR>
-                    \| nnoremap <buffer> [SPC]ljh :FSLeft<CR>
-                    \| nnoremap <buffer> [SPC]ljH :FSSplitLeft<CR>
-                    \| nnoremap <buffer> [SPC]ljk :FSAbove<CR>
-                    \| nnoremap <buffer> [SPC]ljK :FSSplitAbove<CR>
-                    \| nnoremap <buffer> [SPC]ljj :FSBelow<CR>
-                    \| nnoremap <buffer> [SPC]ljJ :FSSplitBelow<CR>
-                    \| command! -buffer A :call FSwitch('%', '')
-    augroup END
-    "" }}}
-
     "" CodeReviewer.vim {{{
     call SpaceVim#custom#SPC('nmap', ['i'], '<Plug>AddComment', 'Insert code review comment', 0)
 
@@ -400,9 +350,7 @@ function! s:setup_autocmd() " {{{
     augroup myspacevim_cpp
         autocmd!
         autocmd! FileType c,cpp
-                    \  nnoremap <buffer> [SPC]lb :make<CR>
-                    \| nnoremap <buffer> [SPC]lt :make unittest<CR>
-                    \| setlocal foldmethod=syntax
+                    \  setlocal foldmethod=syntax
                     \| setlocal foldlevel=99
     augroup END
 
@@ -511,6 +459,71 @@ function! s:setup_plugin_after() " {{{
         let g:gtags_open_list = 1
     endif
     "" }}}
+    
+    "" vim-fswitch {{{
+    " 可以用:A在.h/.cpp间切换
+   
+    for l:lang in ['c', 'cpp', 'xml', 'rnc', 'haskell']
+        call SpaceVim#custom#LangSPCGroupName(l:lang, ['j'], '+Jump/Switch')
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'a'], 'FSHere', 'switch and load it into current window', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'A'], 'FSSplitRight', 'switch and load it into a new window split on the right', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'l'], 'FSRight', 'switch and load it into the window on the right', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'L'], 'FSSplitRight', 'switch and load it into a new window split on the right', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'h'], 'FSLeft', 'switch and load it into the window on the left', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'H'], 'FSSplitLeft', 'switch and load it into a new window split on the left', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'k'], 'FSAbove', 'switch and load it into the window above', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'K'], 'FSSplitAbove', 'switch and load it into a new window split above', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'j'], 'FSBelow', 'switch and load it into the window above', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'J'], 'FSSplitBelow', 'switch and load it into a new window split above', 1)
+    endfor
+
+    augroup myspacevim_fswitch
+        autocmd!
+
+        " reg:的匹配部分使用的是:p:h的结果，是没有最后/的目录
+        autocmd! BufNewFile,BufEnter *.h,*.hpp
+                    \  let b:fswitchdst='cpp,c,ipp,cxx'
+                    \| let b:fswitchlocs=
+                    \      'reg:!/include\>!/src!,' .
+                    \      'reg:!/include/.*!/src!,' .
+                    \      'ifrel:!/include\>!../src!,' .
+                    \      'reg:!/include/\w\+\>!/src!,' .
+                    \      'reg:!/include\(/\w\+\)\{2}\>!/src!,' .
+                    \      'reg:!/include\(/\w\+\)\{3}\>!/src!,' .
+                    \      'reg:!/include\(/\w\+\)\{4}\>!/src!,' .
+                    \      'reg:!/include/.*!/src/**!,' .
+                    \      'reg:!^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!'
+                    \| let b:fsnonewfiles="on"
+        autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
+                    \  let b:fswitchdst='h,hpp'
+                    \| let b:fswitchlocs=
+                    \      'reg:!/src\>!/include!,' .
+                    \      'reg:!/src\(/.*\|\)$!/include/**!,' .
+                    \      'ifrel:!/src\>!../include/!,' .
+                    \      'reg:!/libs/.*!/**!'
+                    \| let b:fsnonewfiles="on"
+
+        autocmd! BufNewFile,BufEnter *.xml
+                    \  let b:fswitchdst='rnc'
+                    \| let b:fswitchlocs='./'
+        autocmd! BufNewFile,BufEnter *.rnc
+                    \  let b:fswitchdst='xml'
+                    \| let b:fswitchlocs='./'
+
+        autocmd! BufNewFile,BufEnter */src/*.hs
+                    \  let b:fswitchdst='hs'
+                    \| let b:fswitchlocs='reg:!/src/!/test/!'
+                    \| let b:fswitchfnames='/$/Spec/'
+        autocmd! BufNewFile,BufEnter */test/*Spec.hs
+                    \  let b:fswitchdst='hs'
+                    \| let b:fswitchlocs='reg:!/test/!/src/!'
+                    \| let b:fswitchfnames='/Spec$//'
+
+        autocmd! FileType c,cpp,xml,rnc,haskell
+                       command! -buffer A :call FSwitch('%', '')
+    augroup END
+    "" }}}
+
 endfunction
 " }}}
 

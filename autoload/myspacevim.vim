@@ -153,13 +153,14 @@ function! s:setup_mapping() " {{{
     "" }}}
 
     "" vim-mark <Leader>m {{{
-    nmap <silent><unique> <Leader>mm <Plug>MarkSet
-    xmap <silent><unique> <Leader>mm <Plug>MarkSet
-    nmap <silent><unique> <Leader>mr <Plug>MarkRegex
-    xmap <silent><unique> <Leader>mr <Plug>MarkRegex
-    nmap <silent><unique> <Leader>mc <Plug>MarkClear
-    nmap <silent><unique> <Leader>mM <Plug>MarkToggle
-    nmap <silent><unique> <Leader>mC <Plug>MarkAllClear
+    let g:_spacevim_mappings.m = {'name' : '+vim-mark'}
+    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mm', '<Plug>MarkSet', 'Mark current word', 'MarkSet')
+    call SpaceVim#mapping#def('xmap <silent>', '<Leader>mm', '<Plug>MarkSet', 'Mark selected word', 'MarkSet')
+    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mr', '<Plug>MarkRegex', 'Mark using regex', 'MarkRegex')
+    call SpaceVim#mapping#def('xmap <silent>', '<Leader>mr', '<Plug>MarkRegex', 'Mark selection as regex','MarkRegex')
+    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mc', '<Plug>MarkClear', 'Clear current mark','MarkClear')
+    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mM', '<Plug>MarkToggle', 'Toggle marks', 'MarkToggle')
+    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mC', '<Plug>MarkConfirmAllClear', 'Clear ALL marks','MarkAllClear')
 
     " nmap <silent><unique> <Leader>mn <Plug>MarkSearchCurrentNext
     " nmap <silent><unique> <Leader>mp <Plug>MarkSearchCurrentPrev
@@ -288,7 +289,7 @@ function! s:setup_plugin() " {{{
     "" }}}
 
     "" CodeReviewer.vim {{{
-    call SpaceVim#custom#SPC('nmap', ['i'], '<Plug>AddComment', 'Insert code review comment', 0)
+    call SpaceVim#mapping#def('nmap <silent>', '<Leader>i', '<Plug>AddComment', 'Insert code review comment', 'AddComment')
 
     if $USER != ""
         let g:CodeReviewer_reviewer = $USER

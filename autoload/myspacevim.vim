@@ -64,7 +64,7 @@ function! myspacevim#IncludePathHook(config) " {{{
         let include = a:config['c_include_path']
         if type(include) == type("")
             let raw_path = has('win32') ? tr(include, '\', '/') : include
-            let paths = split(raw_path, ',')
+            let paths = split(raw_path, ':')
             let root = SpaceVim#plugins#projectmanager#current_root()
             for p in paths
                 let &l:path .= ',' . root . p

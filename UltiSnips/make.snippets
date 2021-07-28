@@ -1,4 +1,4 @@
-snippet	cpp "C++ base Makefile" bt
+snippet	skel "C++ base Makefile" bt
 TARGET = ${1:target}
 
 # Listing all sources
@@ -36,7 +36,7 @@ $(TARGET): $(SOURCES:.cpp=.o)
 -include $(SOURCES:.cpp=.d)
 endsnippet
 
-snippet	python "Python base Makefile" bt
+snippet	skel "Python base Makefile" bt
 # If the first argument is "run"...
 ifeq (run,$(firstword $(MAKECMDGOALS)))
 	# use the rest as arguments for "run"
@@ -70,7 +70,7 @@ clean:
 	find . -type d -name __pycache__ -delete
 endsnippet
 
-snippet	python "Python venv based Makefile" bt
+snippet	skel "Python venv based Makefile" bt
 # system python interpreter, used to create virtual environment
 PY = python3
 VENV = venv
@@ -123,7 +123,7 @@ clean:
 	find . -type d -name __pycache__ -delete
 endsnippet
 
-snippet go "Go package Makefile" bt
+snippet skel "Go package Makefile" bt
 include $(GOROOT)/src/Make.inc
 
 TARG=${1:package}
@@ -134,7 +134,7 @@ GOFILES=\
 include $(GOROOT)/src/Make.pkg
 endsnippet
 
-snippet go "Go program Makefile" bt
+snippet skel "Go program Makefile" bt
 include $(GOROOT)/src/Make.inc
 TARG=${1:program}
 GOFILES=\

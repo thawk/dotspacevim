@@ -127,6 +127,10 @@
     name = 'gtags'
     enable = 'executable("global")'
     auto_update = 0
+    # 0: don't open quickfix
+    # 1: open quickfix
+    # 2: open quickfix and preserve cursor position
+    open_quickfix = 0
 
 [[layers]]
     name = 'debug'

@@ -371,6 +371,12 @@ function! s:setup_autocmd() " {{{
                     \| :command! -buffer -range=% ReBullet silent! %s/^\(  \(    \)*\)\* /\1- / <bar> silent! %s/^\(\(    \)*\)\- /\1* /
     augroup END
 
+    augroup myspacevim_scss
+        autocmd!
+        autocmd! FileType scss
+                    \  :set shiftwidth=2
+    augroup END
+
     augroup myspacevim_haskell
         autocmd!
         autocmd! FileType haskell
@@ -458,12 +464,6 @@ function! s:setup_plugin_after() " {{{
     endif
     "" }}}
 
-    "" gtags.vim {{{
-    if exists(':Gtags')
-        let g:gtags_open_list = 1
-    endif
-    "" }}}
-    
     "" vim-fswitch {{{
     " 可以用:A在.h/.cpp间切换
    

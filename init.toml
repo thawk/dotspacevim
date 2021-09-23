@@ -130,7 +130,7 @@
     # 0: don't open quickfix
     # 1: open quickfix
     # 2: open quickfix and preserve cursor position
-    open_quickfix = 0
+    open_quickfix = 2
 
 [[layers]]
     name = 'debug'

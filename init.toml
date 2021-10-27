@@ -245,6 +245,9 @@
     enable = 'executable("tmux")'
 
 [[layers]]
+    name = 'treesitter'
+
+[[layers]]
     name = 'lang#lilypond'
     lazy = 1
     enable = true

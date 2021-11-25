@@ -328,12 +328,20 @@
       'MarkYankDefinitionsOneLiner', 'MarkPalette', 'MarkName']
     on_map = ['<Plug>Mark']
 
-# [[custom_plugins]]
-#     name = 'sickill/vim-monokai'
-
 [[custom_plugins]]
     name = 'mhinz/vim-rfc'
     lazy = 1
     on_path = 'rfc.*\.txt'
     on_cmd = ['RFC']
     on_ft = 'rfc'
+
+# Color schemes
+[[custom_plugins]]
+    name = 'sickill/vim-monokai'
+
+[[custom_plugins]]
+    name = 'artanikin/vim-synthwave84'
+
+[[custom_plugins]]
+    name = 'chriskempson/base16-vim'
+

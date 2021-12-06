@@ -75,6 +75,10 @@
 
 # default layers
 [[layers]]
+    name = 'core'
+    enable_smooth_scrolling = false
+
+[[layers]]
     name = 'autocomplete'
     auto-completion-return-key-behavior = "nil"
     auto-completion-tab-key-behavior = "smart"

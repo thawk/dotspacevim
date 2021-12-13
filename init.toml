@@ -349,3 +349,6 @@
 [[custom_plugins]]
     name = 'chriskempson/base16-vim'
 
+[[custom_plugins]]
+    name = 'dracula/vim'
+

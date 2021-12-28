@@ -1,3 +1,40 @@
+snippet	skel "C base Makefile" bt
+TARGET = ${1:target}
+
+# Listing all sources
+SOURCES = $(wildcard *.c)
+
+# depended libraries
+LFLAGS = $0
+
+all: $(TARGET)
+
+.PHONY : clean distclean cscope run
+clean:
+	rm -f $(TARGET) $(SOURCES:.c=.o)
+
+distclean:
+	rm -f $(TARGET) $(SOURCES:.c=.o) $(SOURCES:.c=.d)
+
+run: $(TARGET)
+	@-./$(TARGET)
+
+# TARGET depends on ".o"s, where every .cpp metioned in SOURCES are substituted into a .o
+$(TARGET): $(SOURCES:.c=.o)
+	$(CC) -g -o $@ $^ $(LFLAGS)
+
+# Every .d contains the header files which the correspending .c depends on
+# In gnu make, as of a sub makefile, this rule will automatic checked on the next include command
+%.d: %.c
+	@set -e; rm -f $@; \
+	$(CC) -MM $< > $@.$$$$; \
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+	rm -f $@.$$$$
+
+# Include ".d"s for each .c
+-include $(SOURCES:.c=.d)
+endsnippet
+
 snippet	skel "C++ base Makefile" bt
 TARGET = ${1:target}
 

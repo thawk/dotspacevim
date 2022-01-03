@@ -162,6 +162,7 @@
 [[layers]]
     name = 'lang#html'
     enable = true
+    emmet_filetyps = ['html']
 
 [[layers]]
     name = 'lang#haskell'

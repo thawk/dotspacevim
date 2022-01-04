@@ -55,7 +55,14 @@ snippet modeline "vim modeline" b
 <!-- vim: set fenc=utf-8 ft=html.impressjs: -->
 endsnippet
 
-snippet step "<div id=step>" b
-<div id="${1:step_id}" class="step ${2:slide${3}}">
+snippet step "<div class=step>" b
+<div id="${1:step_id}" class="step${2: slide${3}}">
+$0
+</div>
+endsnippet
+
+snippet slide "<div class=step slide>" b
+<div id="${1:step_id}" class="step slide${3}">
+$0
 </div>
 endsnippet

@@ -1,0 +1,43 @@
+snippet class "Class Diagram" b
+\`\`\`mermaid
+classDiagram$0
+	Animal <|-- Duck
+	Animal : -int age
+	Animal : -String gender
+	Animal: +isMammal()
+	Animal: +mate()
+	class Duck\{
+		-String beakColor
+		+swim()
+		+quack()
+	}
+\`\`\`
+endsnippet
+	
+snippet seq "Sequence Diagram" b
+\`\`\`mermaid
+sequenceDiagram$0
+	actor Alice
+	participant Bob
+	Alice->>John: Hello John, how are you?
+	loop Healthcheck
+		John->>John: Fight against hypochondria
+	end
+	Note right of John: Rational thoughts<br/>prevail...
+	John-->>Alice: Great!
+	John->>Bob: How about you?
+	Bob-->>John: Jolly good!
+\`\`\`
+endsnippet
+	
+snippet flow "Flow Chart Diagram" b
+\`\`\`mermaid
+flowchart ${1:LR}$0
+	A((Start)) --> B\{Is it?};
+	B -- Yes --> C[OK];
+	C --> D[Rethink];
+	D --> B;
+	B -- No ----> E((End));
+\`\`\`
+endsnippet
+	

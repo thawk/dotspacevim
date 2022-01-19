@@ -251,6 +251,7 @@
 
 [[layers]]
     name = 'treesitter'
+    enable = false
 
 [[layers]]
     name = 'lang#lilypond'

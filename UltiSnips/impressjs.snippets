@@ -46,7 +46,15 @@ ${0:输入需要的内容}
 <!-- <script src="impress.js/extras/highlight/highlight.pack.js" charset="utf-8"></script> -->
 <!-- <script src="impress.js/extras/markdown/markdown.js" charset="utf-8"></script> -->
 <script src="impress.js/js/impress.js" charset="utf-8"></script>
-<script charset="utf-8">impress().init();</script>
+<script charset="utf-8">
+impress().init();
+
+// All slides with class .hide-step will be hidden from navigation-ui
+var hideSteps = document.querySelectorAll( '.hide-step' );
+for ( var i = 0; i < hideSteps.length; i++ ) {
+	impress().lib.util.triggerEvent( hideSteps[i], "impress:navigation-ui:hideStep" );
+}
+</script>
 </body>
 </html>
 endsnippet

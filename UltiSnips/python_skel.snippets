@@ -99,7 +99,7 @@ ${1:description}''')
 	main(**vars(args))
 endsnippet
 
-snippet skel "skel with argparse for python" b
+snippet skel "full skel with argparse for python2/3" b
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -331,32 +331,93 @@ def setup_logger(quiet=False, verbose=False):
 
 @click.command()
 @click.version_option(
-    version=VERSION
+	version=VERSION
 )
 @click.option(
-    '--quiet',
-    '-q',
-    is_flag=True,
-    default=False,
-    help="Quiet mode."
+	'--quiet',
+	'-q',
+	is_flag=True,
+	default=False,
+	help="Quiet mode."
 )
 @click.option(
-    '--verbose',
-    '-v',
-    is_flag=True,
-    default=False,
-    help="Verbose mode."
+	'--verbose',
+	'-v',
+	is_flag=True,
+	default=False,
+	help="Verbose mode."
 )
 @click.argument('argument')
 def cli(
-        argument,
-        help=False,
-        quiet=False,
-        verbose=False
+	argument,
+	help=False,
+	quiet=False,
+	verbose=False
 ):
-    setup_logger(quiet=quiet, verbose=verbose)
+	setup_logger(quiet=quiet, verbose=verbose)
 
 
 if __name__ == '__main__':
-    cli()
+	cli()
+endsnippet
+
+
+# Directory structure:
+#
+# yourscript.py
+# setup.py
+#
+snippet setup "setup.py using setuptools" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from setuptools import setup
+
+setup(
+	name='${1:yourscript}',
+	version='0.1.0',
+	py_modules=['${2:$1}'],
+	install_requires=[
+		'Click',
+	],
+	entry_points={
+		'console_scripts': [
+			'$1 = $2:cli',
+		],
+	},
+)
+endsnippet
+
+# Directory structure:
+#
+# project/
+#     yourpackage/
+#         __init__.py
+#         main.py
+#         utils.py
+#         scripts/
+#             __init__.py
+#             yourscript.py
+#     setup.py
+#
+snippet setup "setup.py with package using setuptools" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from setuptools import setup, find_packages
+
+setup(
+	name='${1:yourpackage}',
+	version='0.1.0',
+	packages=find_packages(),
+	include_package_data=True,
+	install_requires=[
+		'Click',
+	],
+	entry_points={
+		'console_scripts': [
+			'${2:$1} = $1.scripts.$2:cli',
+		],
+	},
+)
 endsnippet

@@ -177,6 +177,10 @@
     enable = true
 
 [[layers]]
+    name = 'lang#lua'
+    enable = true
+
+[[layers]]
     name = 'lang#markdown'
     enable = true
     enableWcwidth = 1

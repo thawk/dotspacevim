@@ -1,0 +1,227 @@
+snippet skel "Skel using click for command line parsing" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import logging
+import os
+import sys
+
+import click
+
+VERSION = u'`!v strftime("%Y%m%d")`'
+
+
+def setup_logger(quiet=False, verbose=False):
+	"""日志初始化
+	Args:
+		args (Dict[string, string]): 命令行参数
+	"""
+	log_format = u'%(asctime)s %(levelname)s %(message)s'
+
+	if quiet:
+		logging.basicConfig(level=logging.WARNING, format=log_format)
+	elif verbose:
+		logging.basicConfig(level=logging.DEBUG, format=log_format)
+	else:
+		logging.basicConfig(level=logging.INFO, format=log_format)
+
+
+@click.command()
+@click.version_option(
+	version=VERSION
+)
+@click.option(
+	'--quiet',
+	'-q',
+	is_flag=True,
+	default=False,
+	help="Quiet mode."
+)
+@click.option(
+	'--verbose',
+	'-v',
+	is_flag=True,
+	default=False,
+	help="Verbose mode."
+)
+@click.argument('argument')
+def cli(
+	argument,
+	help=False,
+	quiet=False,
+	verbose=False
+):
+	setup_logger(quiet=quiet, verbose=verbose)
+
+
+if __name__ == '__main__':
+	cli()
+endsnippet
+
+snippet skel "Skel using click with sub-commands" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import logging
+import os
+import sys
+
+import click
+
+VERSION = u'`!v strftime("%Y%m%d")`'
+
+def setup_logger(quiet=False, verbose=False):
+	"""日志初始化
+	Args:
+		args (Dict[string, string]): 命令行参数
+	"""
+	log_format = u'%(asctime)s %(levelname)s %(message)s'
+
+	if quiet:
+		logging.basicConfig(level=logging.WARNING, format=log_format)
+	elif verbose:
+		logging.basicConfig(level=logging.DEBUG, format=log_format)
+	else:
+		logging.basicConfig(level=logging.INFO, format=log_format)
+
+
+@click.command()
+@click.version_option(
+	version=VERSION
+)
+@click.option(
+	'--quiet',
+	'-q',
+	is_flag=True,
+	default=False,
+	help="Quiet mode."
+)
+@click.option(
+	'--verbose',
+	'-v',
+	is_flag=True,
+	default=False,
+	help="Verbose mode."
+)
+@click.argument('argument')
+@click.pass_context
+def cli(
+	ctx,
+	argument,
+	help=False,
+	quiet=False,
+	verbose=False
+):
+	ctx.ensure_object(dict)
+	ctx.obj['quiet'] = quiet
+	ctx.obj['verbose'] = verbose
+	
+	setup_logger(quiet=quiet, verbose=verbose)
+
+@cli.command
+@click.pass_context
+def command1(ctx):
+	pass
+
+if __name__ == '__main__':
+	cli()
+endsnippet
+
+
+# Directory structure:
+#
+# yourscript.py
+# setup.py
+#
+snippet setup "setup.py using setuptools" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from setuptools import setup
+
+setup(
+	name='${1:yourscript}',
+	version='0.1.0',
+	py_modules=['${2:$1}'],
+	install_requires=[
+		'Click',
+	],
+	entry_points={
+		'console_scripts': [
+			'$1 = $2:cli',
+		],
+	},
+)
+endsnippet
+
+# Directory structure:
+#
+# project/
+#     yourpackage/
+#         __init__.py
+#         main.py
+#         utils.py
+#         scripts/
+#             __init__.py
+#             yourscript.py
+#     setup.py
+#
+snippet setup "setup.py with package using setuptools" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from setuptools import setup, find_packages
+
+setup(
+	name='${1:yourpackage}',
+	version='0.1.0',
+	packages=find_packages(),
+	include_package_data=True,
+	install_requires=[
+		'Click',
+	],
+	entry_points={
+		'console_scripts': [
+			'${2:$1} = $1.scripts.$2:cli',
+		],
+	},
+)
+endsnippet
+
+snippet option "click option" b
+@click.option('--${1:long-name}', '-${2:short-name}'${3:, type=${4:int}})
+endsnippet
+
+snippet option "click option flag" b
+@click.option('--${1:verbose}', '-${2:v}', is_flag=True,
+	help="${3:help}")
+endsnippet
+
+snippet option "click option flag pair" b
+@click.option('--${1:flag}/--no-$1', '-${2:f}/-${3:F}', default=False,
+	help="${4:help}")
+endsnippet
+
+snippet option "click option count" b
+@click.option('--${1:verbose}', '-${2:v}', count=True,
+	help="${3:help}")
+endsnippet
+
+snippet option "click option optional value" b
+@click.option('--${1:verbose}', '-${2:v}', is_flag=False, flag_value=${3:2},
+	help="${4:help}")
+endsnippet
+
+snippet option "click feature switch" b
+@click.option('--${2:feature1}', '${1:feature_name}', flag_value='$2', default=True)
+@click.option('--${3:feature2}', '$1', flag_value='$3')
+endsnippet
+
+snippet option "click option choice" b
+@click.option('--${1:name}', '-${2:n}', case_sensitive=False, 
+	type=click.Choice([${3:'MD5', 'SHA1'}]))
+endsnippet
+
+snippet option "click option range" b
+@click.option('--${1:name}', '-${2:n}', type=click.IntRange(${3:0}, ${4:10}${5:, clamp=True}))
+endsnippet

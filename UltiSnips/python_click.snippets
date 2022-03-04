@@ -70,6 +70,14 @@ import click
 
 VERSION = u'`!v strftime("%Y%m%d")`'
 
+class Settings(object):
+	def __init__(self):
+		self.quiet = False
+		self.verbose = False
+
+pass_settings = click.make_pass_decorator(Settings, ensure=True)
+
+
 def setup_logger(quiet=False, verbose=False):
 	"""日志初始化
 	Args:
@@ -85,43 +93,29 @@ def setup_logger(quiet=False, verbose=False):
 		logging.basicConfig(level=logging.INFO, format=log_format)
 
 
-@click.command()
-@click.version_option(
-	version=VERSION
-)
-@click.option(
-	'--quiet',
-	'-q',
-	is_flag=True,
-	default=False,
-	help="Quiet mode."
-)
-@click.option(
-	'--verbose',
-	'-v',
-	is_flag=True,
-	default=False,
-	help="Verbose mode."
-)
-@click.argument('argument')
-@click.pass_context
+@click.group()
+@click.version_option(version=VERSION)
+@click.option('--quiet', '-q', is_flag=True, default=False, help="Quiet mode.")
+@click.option('--verbose', '-v', is_flag=True, default=False, help="Verbose mode.")
+@pass_settings
 def cli(
-	ctx,
-	argument,
+	settings,
 	help=False,
 	quiet=False,
 	verbose=False
 ):
-	ctx.ensure_object(dict)
-	ctx.obj['quiet'] = quiet
-	ctx.obj['verbose'] = verbose
+	settings.quiet = quiet
+	settings.verbose = verbose
 	
 	setup_logger(quiet=quiet, verbose=verbose)
 
-@cli.command
-@click.pass_context
-def command1(ctx):
+
+@cli.command()
+@click.argument('input', type=click.File('rb'))
+@pass_settings
+def command1(settings, input):
 	pass
+
 
 if __name__ == '__main__':
 	cli()

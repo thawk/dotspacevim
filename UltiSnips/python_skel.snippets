@@ -1,13 +1,15 @@
-snippet skel "minimal skel with argparse for python2" b
-#!/usr/bin/env python2
-# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+snippet skel "minimal skel with argparse for python2/3" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # Imports
 import argparse
-import codecs
-import locale
 import logging
 import sys
+
+if sys.version_info[0] < 3:
+	import codecs
+	import locale
 
 VERSION=u'`!v strftime("%Y%m%d")`'
 
@@ -15,10 +17,12 @@ def main(**args):
 	${0:pass}
 
 if __name__ == '__main__':
-	reload(sys)
-	sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
-	sys.stderr = codecs.getwriter(locale.getpreferredencoding())(sys.stderr)
-	sys.setdefaultencoding(locale.getpreferredencoding())
+	if sys.version_info[0] < 3:
+		# Python2需要初始化locale信息
+		reload(sys)
+		sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+		sys.stderr = codecs.getwriter(locale.getpreferredencoding())(sys.stderr)
+		sys.setdefaultencoding(locale.getpreferredencoding())
 
 	parser = argparse.ArgumentParser(
 		description=u'''\
@@ -31,15 +35,16 @@ ${1:description}''')
 
 	args = parser.parse_args()
 
-	# 对解释出来的参数进行编码转换
-	for k in vars(args):
-		v = getattr(args, k)
-		if isinstance(v, str):
-			setattr(args, k, unicode(v, locale.getpreferredencoding()).strip())
-		elif isinstance(v, list):
-			setattr(
-				args, k,
-				[unicode(s, locale.getpreferredencoding()).strip() if isinstance(s, str) else s for s in v])
+	if sys.version_info[0] < 3:
+		# Python2需要对解释出来的参数进行编码转换
+		for k in vars(args):
+			v = getattr(args, k)
+			if isinstance(v, str):
+				setattr(args, k, unicode(v, locale.getpreferredencoding()).strip())
+			elif isinstance(v, list):
+				setattr(
+					args, k,
+					[unicode(s, locale.getpreferredencoding()).strip() if isinstance(s, str) else s for s in v])
 
 	if not args.verbose:
 		args.verbose = 0
@@ -59,7 +64,7 @@ endsnippet
 
 snippet skel "minimal skel with argparse for python3" b
 #!/usr/bin/env python3
-# vim: set fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4 softtabstop=4:
+# -*- coding: utf-8 -*-
 
 # Imports
 import argparse
@@ -174,7 +179,7 @@ def export_result(pickle_file, result):
 	logging.info(u'Exporting to "%s"...', pickle_file)
 
 	if not os.path.exists(os.path.dirname(pickle_file)):
-        logging.info(u'  Creating "%s"...', os.path.dirname(pickle_file))
+		logging.info(u'  Creating "%s"...', os.path.dirname(pickle_file))
 		mkpath(os.path.dirname(pickle_file))
 
 	with open(pickle_file, 'w') as _:

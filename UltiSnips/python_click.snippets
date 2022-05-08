@@ -201,3 +201,7 @@ endsnippet
 snippet option "click option range" b
 @click.option('--${1:name}', '-${2:n}', type=click.IntRange(${3:0}, ${4:10}${5:, clamp=True}))
 endsnippet
+
+snippet argument "click.argument" b
+@click.argument('${1:argument}')
+endsnippet

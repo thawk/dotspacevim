@@ -60,3 +60,8 @@ endsnippet
 snippet currdir "dir of script"
 os.path.dirname(os.path.realpath(__file__))
 endsnippet
+
+snippet defi "def __init__" b
+def __init__(self, ${1:args}):
+	${2:super().__init__()}
+endsnippet

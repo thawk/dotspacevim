@@ -162,7 +162,7 @@ endglobal
 
 # Include-Guard，适用于目录层次中有include目录的头文件
 # 可以选中额外的namespace（如foo:bar）后再扩展
-snippet "header(\d*)" "header for include/*" br
+snippet "header(\d*)" "header for include/*, header2 for 2 level dirs" br
 /**
  * @file
  * @brief  `!p snip.rv = fqn_to_classname(header_fqn(path, depth=match.group(1)))`类的声明
@@ -180,24 +180,24 @@ class `!p snip.rv = fqn_to_classname(header_fqn(path, depth=match.group(1)))`
 public:
     ${0}
 };
-`!p snip.rv = '\n'.join('}  // namespace ' + n + ' {' for n in header_fqn(path, depth=match.group(1))[:-1])`
+`!p snip.rv = '\n'.join('}  // namespace ' + n + ' {' for n in reversed(header_fqn(path, depth=match.group(1))[:-1]))`
 #endif  // `!p snip.rv = fqn_to_guard(header_fqn(path, depth=match.group(1)))`
 endsnippet
 
 # C++源文件框架，适用于目录层次中有src目录，头文件放在src同层的include下的情况。会自动从include下找到与本文件同名的头文件，按其目录确定最终的名字空间
-snippet "src(\d*)" "src for src/*" br
+snippet "src(\d*)" "src for src/*, src2 for 2 level dirs" br
 /**
  * @file
  * @brief  `!p snip.rv = fqn_to_classname(source_fqn(path, depth=match.group(1)))`类的定义
  * @author `!v $USER`
  */
-#include `!p snip.rv = source_include(path)`
+#include `!p snip.rv = source_include(path, depth=match.group(1))`
 
 `!p snip.rv = '\n'.join('namespace ' + n + ' {' for n in source_fqn(path, depth=match.group(1))[:-1])`
 
 ${0}
 
-`!p snip.rv = '\n'.join('}  // namespace ' + n for n in source_fqn(path, depth=match.group(1))[:-1])`
+`!p snip.rv = '\n'.join('}  // namespace ' + n for n in reversed(source_fqn(path, depth=match.group(1))[:-1]))`
 endsnippet
 
 

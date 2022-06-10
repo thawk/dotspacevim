@@ -22,9 +22,11 @@ snippet	skel "impress.js template" b
 <!-- title页放到其他页上面，避免在overview页面上被遮挡 -->
 <div id="title" class="step slide title" data-x="0" data-y="0" data-z=1100>
 	<h1>${2:$1}</h1>
+    <p>${3:`!v $USER`}</p>
+    <p><small>${4:`!v strftime("%Y-%m-%d")`}</small></p>
 </div>
 
-<div id="${3:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1080" data-rotate=0 data-z=1000>
+<div id="${5:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1080" data-rotate=0 data-z=1000>
 ${0:输入需要的内容}
 </div>
 

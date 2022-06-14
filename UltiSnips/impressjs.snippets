@@ -5,11 +5,12 @@ snippet	skel "impress.js template" b
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>${1:幻灯标题}</title>
-		<link href="css/tachyons.min.css" rel="stylesheet" />
-		<link href="impress.js/css/impress-common.css" rel="stylesheet" />
-		<link href="css/fonts.css" rel="stylesheet" />
-		<link href="css/classic-slides.css" rel="stylesheet" />
-		<link href="css/themes/default.css" rel="stylesheet" />
+        <link href="../css/tachyons.min.css" rel="stylesheet" />
+        <link href="../css/fonts.css" rel="stylesheet" />
+        <link href="../css/classic-slides.css" rel="stylesheet" />
+        <link href="../css/themes/default.css" rel="stylesheet" />
+        <link href="../vendor/impress.js/css/impress-common.css" rel="stylesheet" />
+        <link href="../vendor/impress.js/extras/highlight/styles/github.css" rel="stylesheet" />
 	</head>
 <body class="impress-not-supported">
 <div class="fallback-message">
@@ -26,7 +27,7 @@ snippet	skel "impress.js template" b
     <p><small>${4:`!v strftime("%Y-%m-%d")`}</small></p>
 </div>
 
-<div id="${5:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1080" data-rotate=0 data-z=1000>
+<div id="${5:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1h" data-rotate=0 data-z=1000>
 ${0:输入需要的内容}
 </div>
 
@@ -45,18 +46,10 @@ ${0:输入需要的内容}
 
 <div id="impress-help"></div>
 
-<!-- <script src="impress.js/extras/highlight/highlight.pack.js" charset="utf-8"></script> -->
-<!-- <script src="impress.js/extras/markdown/markdown.js" charset="utf-8"></script> -->
-<script src="impress.js/js/impress.js" charset="utf-8"></script>
-<script charset="utf-8">
-impress().init();
-
-// All slides with class .hide-step will be hidden from navigation-ui
-var hideSteps = document.querySelectorAll( '.hide-step' );
-for ( var i = 0; i < hideSteps.length; i++ ) {
-	impress().lib.util.triggerEvent( hideSteps[i], "impress:navigation-ui:hideStep" );
-}
-</script>
+<script src="../vendor/impress.js/extras/highlight/highlight.pack.js" charset="utf-8"></script>
+<script src="../vendor/marked/marked.min.js" charset="utf-8"></script>
+<script src="../vendor/impress.js/js/impress.js" charset="utf-8"></script>
+<script src="../js/init.js" charset="utf-8"></script>
 </body>
 </html>
 endsnippet

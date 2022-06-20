@@ -150,6 +150,8 @@ snippet note "Notes" b
 		\"$1Pitches"
 	}
 }
+
+"$1Melody" = \"$1Notes"
 endsnippet
 
 snippet note "Notes with lyric" b
@@ -187,6 +189,15 @@ verse = \lyricmode {
 	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
 	\transpose c ${6:c} {
 		\"$1Pitches"
+	}
+}
+
+"$1Melody" =
+{
+	\key `!p snip.rv = re.sub("[,']+", "", t[6])` $7
+	\transpose c ${6:c} {
+		$4
+		\melody
 	}
 }
 endsnippet
@@ -274,6 +285,8 @@ snippet note "Parallel Notes (one staff)" b
 		\"$1Pitches"
 	}
 }
+
+"$1Melody" = \"$1Notes"
 endsnippet
 
 snippet note "Parallel Notes (1 staffs with lyric)" b
@@ -425,6 +438,8 @@ snippet note "Parallel Notes (two staffs)" b
 		\"$1Pitches"
 	}
 }
+
+"$1Melody" = \"$1Notes"
 endsnippet
 
 snippet note "Parallel Notes (two staffs separated)" b
@@ -462,6 +477,8 @@ snippet note "Parallel Notes (two staffs separated)" b
 		\"$1Pitches"
 	}
 }
+
+"$1Melody" = \"$1Notes"
 endsnippet
 
 snippet color "override colors"

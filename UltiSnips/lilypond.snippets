@@ -108,6 +108,17 @@ snippet toci "tocItem" b
 \tocItem \markup \\"${1}"
 endsnippet
 
+snippet melody "xxMelody" b
+"${1:`!v expand("%:t:r")`}Melody" =
+{
+	\key ${2:c} ${3:\major}
+	\transpose c ${2:c} {
+		${4:\tempo 4 = ${5:60}}
+		\melody
+	}
+}
+endsnippet
+
 snippet inote "include note"
 \\include "../${1:notes}/${2:name}.ily"
 

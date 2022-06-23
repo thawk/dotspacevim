@@ -111,8 +111,8 @@ endsnippet
 snippet melody "xxMelody" b
 "${1:`!v expand("%:t:r")`}Melody" =
 {
-	\key ${2:c} ${3:\major}
-	\transpose c ${2:c} {
+	\key ${2:\\"${1:`!v expand("%:t:r")`}Key"} ${3:\major}
+	\transpose c $2 {
 		${4:\tempo 4 = ${5:60}}
 		\melody
 	}
@@ -124,7 +124,7 @@ snippet inote "include note"
 
 \\tocItem \markup \concat { \\"$3Piece" "" }
 \\score {
-	\\transpose ${4:c} c {
+	\\transpose ${4:\\"$2Key"} c {
 		\\transposition $4
 		\\"${3:$2}Notes"
 	}
@@ -141,27 +141,35 @@ snippet note "Notes" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Key" = \\Key${3:C}
 
 "$1Pitches" = \relative ${4:c''}
 {
-	\time ${8:4/4}
+	\time ${5:4/4}
+	\key `!p snip.rv = re.sub("[,']+", "", t[8])` ${9:\major}
 
 	${0}
 
 	\bar "|."
 }
 
-"$1Notes" =
+"$1NotesC" =
 {
-	\clef "treble"
-	% \tempo 4 = 96
+	${6:\tempo 4 = ${7:60}}
 
-	\transpose c ${5:c} {
-		\key c ${6:\major}
+	\transpose ${8:c} c {
 		\"$1Pitches"
 	}
 }
 
+"$1Notes" =
+{
+	\transpose c \\"$1Key" {
+		\"$1NotesC"
+	}
+}
+
+"$1MelodyC" = \"$1NotesC"
 "$1Melody" = \"$1Notes"
 endsnippet
 
@@ -169,11 +177,14 @@ snippet note "Notes with lyric" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Key" = \\Key${3:C}
 
-melody = \relative ${8:c''}
+melody = \relative ${4:c''}
 {
-	\time ${3:4/4}
+	\time ${5:4/4}
+	\key `!p snip.rv = re.sub("[,']+", "", t[8])` ${9:\major}
 
+	${0}
 
 	\bar "|."
 }
@@ -185,7 +196,7 @@ verse = \lyricmode {
 {
 	<<
 		\new Voice = "melody" {
-			${4:\tempo 4 = ${5:60}}
+			${6:\tempo 4 = ${7:60}}
 
 			\melody
 		}
@@ -195,20 +206,32 @@ verse = \lyricmode {
 	>>
 }
 
+"$1NotesC" =
+{
+	\transpose ${8:c} c {
+		\"$1Pitches"
+	}
+}
+
 "$1Notes" =
 {
-	\key `!p snip.rv = re.sub("[,']+", "", t[6])` ${7:\major}
-	\transpose c ${6:c} {
-		\"$1Pitches"
+	\transpose c \\"$1Key" {
+		\"$1NotesC"
+	}
+}
+
+"$1MelodyC" =
+{
+	\transpose $8 c {
+		$6
+		\melody
 	}
 }
 
 "$1Melody" =
 {
-	\key `!p snip.rv = re.sub("[,']+", "", t[6])` $7
-	\transpose c ${6:c} {
-		$4
-		\melody
+	\transpose c \\"$1Key" {
+		\"$1MelodyC"
 	}
 }
 endsnippet

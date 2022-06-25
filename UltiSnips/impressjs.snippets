@@ -21,7 +21,7 @@ snippet	skel "impress.js template" b
 <div id="impress" class="nodebug" data-width="1920" data-height="1080" data-autoplay="0" data-max-scale="4">
 
 <!-- title页放到其他页上面，避免在overview页面上被遮挡 -->
-<div id="title" class="step slide title" data-position="relative" data-x="0" data-y="0" data-z=1100>
+<div id="title" class="step slide title" data-rel-position="relative" data-x="0" data-y="0" data-z=1100>
 	<h1>${2:$1}</h1>
     <p>${3:`!v $USER`}</p>
     <p><small>${4:`!v strftime("%Y-%m-%d")`}</small></p>
@@ -76,8 +76,11 @@ endsnippet
 
 snippet mslide "impress.js markdown slide" bs
 <div id="${1:step_id}" class="step markdown slide${2}">
-### $1
-$0
+	<script type="text/template">
+		### $1
+
+		$0
+	</script>
 </div>
 
 endsnippet

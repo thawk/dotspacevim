@@ -71,7 +71,7 @@
     # 2: change to directory of current file automatically
     project_rooter_automatically = 1
 
-    project_rooter_outermost = true
+    project_rooter_outermost = false
 
 # default layers
 [[layers]]

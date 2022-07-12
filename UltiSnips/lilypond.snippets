@@ -200,7 +200,7 @@ verse = \lyricmode {
 
 			\melody
 		}
-		\new Lyrics \lyricsto "melody" {
+		\new Lyrics = "verse" \lyricsto "melody" {
 			\verse
 		}
 	>>
@@ -550,7 +550,7 @@ snippet segno "segno"
 endsnippet
 
 snippet coda "coda"
-\mark \markup { \fontsize #-1 \musicglyph "scripts.coda" }
+\mark \markup { \fontsize #-2 \musicglyph "scripts.coda" }
 endsnippet
 
 snippet ds "D.S. al Coda"
@@ -561,11 +561,42 @@ snippet ds "D.S."
 \mark \markup { \fontsize #-2 "D.S." }
 endsnippet
 
-snippet dcds "D.C. D.S."
+snippet ds "D.C. D.S."
 \mark \markup { \fontsize #-2 \column { "D.C." "D.S." } }
+endsnippet
+
+snippet ds "上coda，下D.S."
+\once \override Score.RehearsalMark.extra-offset = #'(0 . -8.5)
+\once \override Score.RehearsalMark.baseline-skip = #9
+\mark \markup \center-column { \fontsize #-2 {\musicglyph "scripts.coda"} "D.S." }
 endsnippet
 
 snippet rest "long Rests"
 \override MultiMeasureRest.expand-limit = #3
 \compressFullBarRests
 endsnippet
+
+snippet grace "装饰音"
+\grace { $1 } $0
+endsnippet
+
+snippet grace "短倚音"
+\acciaccatura { $1 } $0
+endsnippet
+
+snippet acci "短倚音"
+\acciaccatura { $1 } $0
+endsnippet
+
+snippet grace "长倚音"
+\appoggiatura { $1 } $0
+endsnippet
+
+snippet appo "长倚音"
+\appoggiatura { $1 } $0
+endsnippet
+
+snippet grace "后装饰音"
+\afterGrace $1 { $2 } $0
+endsnippet
+

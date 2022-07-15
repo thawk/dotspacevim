@@ -119,14 +119,32 @@ snippet melody "xxMelody" b
 }
 endsnippet
 
-snippet inote "include note"
+snippet inote "include note C调"
+\\pageBreak
+
 \\include "../${1:notes}/${2:name}.ily"
 
 \\tocItem \markup \concat { \\"$3Piece" "" }
 \\score {
-	\\transpose ${4:\\"$2Key"} c {
-		\\transposition $4
-		\\"${3:$2}Notes"
+	\\"${3:$2}NotesC"
+	\\header {
+		piece    = \\"$3Piece"
+		opus     = \\"$3Opus"
+		composer = \\"$3Composer"
+	}
+}
+${0}
+endsnippet
+
+snippet inote "include note"
+\\pageBreak
+
+\\include "../${1:notes}/${2:name}.ily"
+
+\\tocItem \markup \concat { \\"$3Piece" "" }
+\\score {
+	\\transpose c ${4:\\"$2Key"} {
+		\\"${3:$2}NotesC"
 	}
 	\\header {
 		piece    = \\"$3Piece"

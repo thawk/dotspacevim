@@ -226,6 +226,12 @@ function! s:setup_plugin() " {{{
     if executable('vint')
         call add(g:neomake_vim_enabled_makers, 'vint')
     endif
+
+    let g:neomake_markdown_markdownlint_errorformat = 
+                \ '%f:%l:%c %m,' .
+                \ '%f: %l: %c: %m,' .
+                \ '%f:%l %m,' .
+                \ '%f: %l: %m'
     "" }}}
 
     "" ultisnips {{{

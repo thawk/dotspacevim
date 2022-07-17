@@ -71,7 +71,7 @@ snippet key "Key" b
 endsnippet
 
 snippet bar "Bar"
-\bar "${1:|.}" ${0}
+\bar "${1:||}" ${0}
 endsnippet
 
 snippet tuplet "Tuplet连音"
@@ -151,7 +151,7 @@ snippet note "Notes" b
 
 	${0}
 
-	\bar "|."
+	\fine
 }
 
 "$1NotesC" =
@@ -187,7 +187,7 @@ melody = \relative ${4:c''}
 
 	${0}
 
-	\bar "|."
+	\fine
 }
 
 verse = \lyricmode {
@@ -299,7 +299,7 @@ snippet note "Parallel Notes (one staff)" b
 
 	${0}
 
-	\bar "|."
+	\fine
 }
 
 "$1Pitches" =
@@ -342,7 +342,7 @@ snippet note "Parallel Notes (1 staffs with lyric)" b
 	\time ${3:4/4}
 
 
-	\bar "|."
+	\fine
 }
 
 grayVoice = {
@@ -446,7 +446,7 @@ snippet note "Parallel Notes (two staffs)" b
 
 	${0}
 
-	\bar "|."
+	\fine
 }
 
 "$1Pitches" =
@@ -488,7 +488,7 @@ snippet note "Parallel Notes (two staffs separated)" b
 
 	${0}
 
-	\bar "|."
+	\fine
 }
 
 "$1Pitches" =
@@ -574,7 +574,7 @@ endsnippet
 
 snippet rest "long Rests"
 \override MultiMeasureRest.expand-limit = #3
-\compressFullBarRests
+\compressEmptyMeasures
 endsnippet
 
 snippet grace "装饰音"

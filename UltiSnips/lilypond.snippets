@@ -142,6 +142,7 @@ snippet note "Notes" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Singer" = ""
 "$1Key" = \\Key${3:C}
 
 "$1Pitches" = \relative ${4:c''}
@@ -178,6 +179,7 @@ snippet note "Notes with lyric" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Singer" = ""
 "$1Key" = \\Key${3:C}
 
 melody = \relative ${4:c''}
@@ -292,6 +294,8 @@ snippet note "Parallel Notes (one staff)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
 
 \parallelMusic #'(melody harmony) {
 
@@ -328,6 +332,8 @@ snippet note "Parallel Notes (1 staffs with lyric)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
 
 \parallelMusic #'(preludeM preludeH) {
 
@@ -439,6 +445,8 @@ snippet note "Parallel Notes (two staffs)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
 
 \parallelMusic #'(melody harmony) {
 
@@ -481,6 +489,8 @@ snippet note "Parallel Notes (two staffs separated)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
 
 \parallelMusic #'(melody harmony) {
 

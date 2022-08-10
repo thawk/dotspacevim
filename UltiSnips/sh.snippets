@@ -9,7 +9,7 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 endsnippet
 
 snippet tempdir
-${1:tmpdir}=$(mktemp -d)
+${1:tempdir}=$(mktemp -d)
 trap "rm -rf '\$$1'" 0               # EXIT
 trap "rm -rf '\$$1'; exit 1" 2       # INT
 trap "rm -rf '\$$1'; exit 1" 1 15    # HUP TERM
@@ -161,4 +161,11 @@ esac
 
 # Finally, set the variable.
 os="$_"
+endsnippet
+
+snippet die "die function" b
+die() {
+    echo "\${1:-Exiting}" >&2
+    exit "\${2:--1}"
+}
 endsnippet

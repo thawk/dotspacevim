@@ -169,3 +169,41 @@ die() {
     exit "\${2:--1}"
 }
 endsnippet
+
+snippet read "read from command into array" b
+IFS=$'\n' read -r -d '' -a ${1:my_array} < <( ${2:command} && printf '\0' )
+$0
+endsnippet
+
+snippet read "readarray from command into array" b
+readarray -t ${1:my_array} < <( ${2:command} )
+$0
+endsnippet
+
+snippet read "read from string into array" b
+IFS=$'\n' read -r -d '' -a ${1:my_array} <<<${2:$string}
+$0
+endsnippet
+
+snippet read "readarray from string into array" b
+readarray -t ${1:my_array} <<<${2:$string}
+$0
+endsnippet
+
+snippet heredoc "heredoc from string"
+<< ${1:EOS}
+${2:lines}
+$1
+$0
+endsnippet
+
+snippet heredoc "heredoc from string, disable special char"
+<< '${1:EOS}'
+${2:lines}
+$1
+$0
+endsnippet
+
+snippet heredoc "herestring"
+<<< ${1:"string"}
+endsnippet

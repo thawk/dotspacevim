@@ -83,8 +83,8 @@ pip install pynvim neovim
   * using shell
 
     ```sh
-    export PYTHON_HOST_PROG='/full/path/to/neovim2/bin/python'
-    export PYTHON3_HOST_PROG='/full/path/to/neovim3/bin/python'
+    export PYTHON_HOST_PROG="$(pyenv root)/neovim2/bin/python"
+    export PYTHON3_HOST_PROG="$(pyenv root)/neovim3/bin/python"
 F
     ```
 

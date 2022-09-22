@@ -147,7 +147,7 @@
 [[layers]]
     name = 'lang#c'
     enable = true
-    enable_clang_syntax_highlight = true
+    enable_clang_syntax_highlight = false
     [layers.clang_std]
         cpp = 'c++11'
 

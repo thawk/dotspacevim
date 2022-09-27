@@ -121,6 +121,10 @@
     enable = false
 
 [[layers]]
+    name = "ctrlspace"
+    enable = true
+
+[[layers]]
     name = 'incsearch'
 
 [[layers]]
@@ -240,7 +244,7 @@
 
 [[layers]]
     name = 'lsp'
-    enable = false
+    enable = true
     #   [layers.override_cmd]
     #     c = ['ccls', '--log-file=/tmp/ccls.log']
     #     cpp = ['ccls', '--log-file=/tmp/ccls.log']

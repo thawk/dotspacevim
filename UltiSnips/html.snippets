@@ -1,6 +1,16 @@
-snippet scriptt "<script type=?>" b
+snippet script "<script type=?>" b
 <script type="${1:text/template}">
 	${VISUAL}$0
 </script>
+endsnippet
+
+snippet script "HTML inline <script>" w
+<script charset="utf-8">
+	${0:${VISUAL}}
+</script>
+endsnippet
+
+snippet script "HTML <script src...>" w
+<script src="$1" charset="${3:utf-8}"></script>
 endsnippet
 

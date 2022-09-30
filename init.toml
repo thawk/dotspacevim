@@ -250,10 +250,6 @@
     #     cpp = ['ccls', '--log-file=/tmp/ccls.log']
 
 [[layers]]
-    name = 'tags'
-    enable = true
-
-[[layers]]
     name = 'tmux'
     enable = 'executable("tmux")'
 

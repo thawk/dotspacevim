@@ -89,38 +89,48 @@ endfunction " }}}
 
 function! s:setup_lsp() " {{{
     let lsp_servers = {
+                \ 'ada' : 'ada_language_server',
                 \ 'c' : 'clangd',
                 \ 'cpp' : 'clangd',
+                \ 'crystal' : 'scry',
                 \ 'css' : 'css-languageserver',
                 \ 'dart' : 'dart_language_server',
                 \ 'dockerfile' : 'docker-langserver',
-                \ 'go' : 'go-langserver',
+                \ 'go' : 'gopls',
                 \ 'haskell' : 'hie-wrapper',
                 \ 'html' : 'html-languageserver',
-                \ 'javascript' : 'javascript-typescript-stdio',
+                \ 'javascript' : 'typescript-language-server',
+                \ 'javascriptreact' : 'typescript-language-server',
                 \ 'julia' : 'julia',
-                \ 'objc' : 'ccls',
-                \ 'objcpp' : 'ccls',
-                \ 'php' : 'php',
+                \ 'objc' : 'clangd',
+                \ 'objcpp' : 'clangd',
+                \ 'php' : 'disable php',
                 \ 'purescript' : 'purescript-language-server',
                 \ 'python' : 'pyls',
+                \ 'reason' : 'ocaml-language-server',
+                \ 'ruby' : 'solargraph',
                 \ 'rust' : 'rustup',
+                \ 'scala' : 'metals-vim',
                 \ 'sh' : 'bash-language-server',
                 \ 'typescript' : 'typescript-language-server',
-                \ 'ruby' : 'solargraph.BAT',
-                \ 'vue' : 'vls',
+                \ 'typescriptreact' : 'typescript-language-server',
+                \ 'vim' : 'vim-language-server',
+                \ 'vue' : 'vls'
                 \ }
 
     let filetypes = []
+    let enabled_clients = []
 
-    for lang in keys(lsp_servers)
-        if executable(lsp_servers[lang])
+    for [lang, server] in items(lsp_servers)
+        if executable(server)
             call add(filetypes, lang)
+            call add(enabled_clients, server)
         endif
     endfor
 
     call SpaceVim#layers#lsp#set_variable({
                 \ 'filetypes' : filetypes,
+                \ 'enabled_clients' : uniq(sort(enabled_clients)),
                 \ })
 endfunction " }}}
 

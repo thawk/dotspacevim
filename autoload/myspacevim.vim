@@ -89,48 +89,96 @@ endfunction " }}}
 
 function! s:setup_lsp() " {{{
     let lsp_servers = {
-                \ 'ada' : 'ada_language_server',
                 \ 'c' : 'clangd',
                 \ 'cpp' : 'clangd',
-                \ 'crystal' : 'scry',
                 \ 'css' : 'css-languageserver',
-                \ 'dart' : 'dart_language_server',
                 \ 'dockerfile' : 'docker-langserver',
                 \ 'go' : 'gopls',
-                \ 'haskell' : 'hie-wrapper',
+                \ 'haskell' : {'hie':'hie-wrapper'},
                 \ 'html' : 'html-languageserver',
                 \ 'javascript' : 'typescript-language-server',
                 \ 'javascriptreact' : 'typescript-language-server',
-                \ 'julia' : 'julia',
                 \ 'objc' : 'clangd',
                 \ 'objcpp' : 'clangd',
-                \ 'php' : 'disable php',
+                \ 'php' : {'':'php', 'phpactor':'phpactor'},
                 \ 'purescript' : 'purescript-language-server',
                 \ 'python' : 'pyls',
                 \ 'reason' : 'ocaml-language-server',
                 \ 'ruby' : 'solargraph',
                 \ 'rust' : 'rustup',
                 \ 'scala' : 'metals-vim',
-                \ 'sh' : 'bash-language-server',
+                \ 'sh' : {'bashls':'bash-language-server'},
                 \ 'typescript' : 'typescript-language-server',
                 \ 'typescriptreact' : 'typescript-language-server',
-                \ 'vim' : 'vim-language-server',
+                \ 'vim' : {'vimls':'vim-language-server'},
                 \ 'vue' : 'vls'
                 \ }
 
-    let filetypes = []
-    let enabled_clients = []
+    let filetypes = []       " for old version
+    let enabled_clients = [] " for neovim 0.50 and above
+    let executables = {}
 
-    for [lang, server] in items(lsp_servers)
-        if executable(server)
+    for [lang, lsp] in items(lsp_servers)
+        if type(lsp) == v:t_dict
+            " lspconfig client name -> executable. empty name means not such lspconfig
+            for [c, e] in items(lsp)
+                if (has_key(executables, e) && !executables[e])
+                    continue
+                endif
+
+                if ! executable(e)
+                    let executables[e] = 0
+                    continue
+                endif
+
+                let executables[e] = 1
+                call add(filetypes, lang)
+                if c != ""
+                    call add(enabled_clients, c)
+                endif
+            endfor
+        elseif type(lsp) == v:t_list
+            for e in lsp
+                if (has_key(executables, e) && !executables[e])
+                    continue
+                endif
+
+                if ! executable(e)
+                    let executables[e] = 0
+                    continue
+                endif
+
+                let executables[e] = 1
+
+                call add(filetypes, lang)
+                call add(enabled_clients, e)
+            endfor
+        else
+            if (has_key(executables, lsp) && !executables[lsp])
+                continue
+            endif
+
+            if ! executable(lsp)
+                let executables[lsp] = 0
+                continue
+            endif
+
+            let executables[lsp] = 1
+
             call add(filetypes, lang)
-            call add(enabled_clients, server)
+            call add(enabled_clients, lsp)
         endif
     endfor
 
+    let filetypes = uniq(sort(filetypes))
+    let enabled_clients = uniq(sort(enabled_clients))
+
+    call SpaceVim#logger#info('enabled lsp langs:   ' . string(filetypes))
+    call SpaceVim#logger#info('enabled lsp clients: ' . string(enabled_clients))
+
     call SpaceVim#layers#lsp#set_variable({
                 \ 'filetypes' : filetypes,
-                \ 'enabled_clients' : uniq(sort(enabled_clients)),
+                \ 'enabled_clients' : enabled_clients,
                 \ })
 endfunction " }}}
 

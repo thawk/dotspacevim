@@ -274,15 +274,15 @@
     lazy = 1
     on_ft = 'asciidoc'
 
-[[custom_plugins]]
-    name ='masukomi/vim-markdown-folding'
-    lazy = 1
-    on_ft = 'markdown'
-
-    # [[custom_plugins]]
-    # name ='hspec/hspec.vim'
-    # lazy = 1
-    # on_ft = 'haskell'
+# [[custom_plugins]]
+#     name ='masukomi/vim-markdown-folding'
+#     lazy = 1
+#     on_ft = 'markdown'
+#
+# [[custom_plugins]]
+# name ='hspec/hspec.vim'
+# lazy = 1
+# on_ft = 'haskell'
 
 [[custom_plugins]]
     name = 'haya14busa/dein-command.vim'

@@ -560,7 +560,15 @@ function! s:setup_plugin_after() " {{{
                     \      'reg:!/include\(/\w\+\)\{3}\>!/src!,' .
                     \      'reg:!/include\(/\w\+\)\{4}\>!/src!,' .
                     \      'reg:!/include/.*!/src/**!,' .
-                    \      'reg:!^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!'
+                    \      'reg:!^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!' . 
+                    \      'reg:!/impl_include\>!/src/impl!,' .
+                    \      'reg:!/impl_include/.*!/src/impl!,' .
+                    \      'ifrel:!/impl_include\>!../src/impl!,' .
+                    \      'reg:!/impl_include/\w\+\>!/src/impl!,' .
+                    \      'reg:!/impl_include\(/\w\+\)\{2}\>!/src/impl!,' .
+                    \      'reg:!/impl_include\(/\w\+\)\{3}\>!/src/impl!,' .
+                    \      'reg:!/impl_include\(/\w\+\)\{4}\>!/src/impl!,' .
+                    \      'reg:!/impl_include/.*!/src/impl/**!,'
                     \| let b:fsnonewfiles="on"
         autocmd! BufNewFile,BufEnter *.c,*.cpp,cxx,*.ipp
                     \  let b:fswitchdst='h,hpp'
@@ -568,7 +576,10 @@ function! s:setup_plugin_after() " {{{
                     \      'reg:!/src\>!/include!,' .
                     \      'reg:!/src\(/.*\|\)$!/include/**!,' .
                     \      'ifrel:!/src\>!../include/!,' .
-                    \      'reg:!/libs/.*!/**!'
+                    \      'reg:!/libs/.*!/**!' .
+                    \      'reg:!/src/impl\>!/impl_include!,' .
+                    \      'reg:!/src/impl\(/.*\|\)$!/impl_include/**!,' .
+                    \      'ifrel:!/src/impl\>!../impl_include/!,'
                     \| let b:fsnonewfiles="on"
 
         autocmd! BufNewFile,BufEnter *.xml

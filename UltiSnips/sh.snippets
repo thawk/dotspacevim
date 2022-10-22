@@ -22,7 +22,7 @@ snippet #! "shebang"
 $0
 endsnippet
 
-snippet skel "Basic getopt skel"
+snippet skel "Basic skel using getopt, not work in macOS"
 #!/usr/bin/env bash
 
 function EchoUsage()
@@ -90,8 +90,8 @@ then
 fi
 endsnippet
 
-snippet getopts "bash builtin getopts" b
-__ScriptVersion="${1:version}"
+snippet skel "Basic skel using bash getopts, work for macOS, not support long option" b
+#!/usr/bin/env bash
 
 EchoUsage()
 {
@@ -100,7 +100,6 @@ Usage: $(basename "\$0") [options] [--]
 
 	Options:
 		-h|help       Display this message
-		-V|version    Display script version
 		-v|verbose    Display more verbose log
 		-t|test <val> A testing argument
 " >&2
@@ -111,10 +110,6 @@ while getopts ":hVvt:" opt; do
 	case $opt in
 		h|help)
 			EchoUsage
-			exit 0
-			;;
-		V|version)
-			echo "$${1:(basename $0)} -- Version $__ScriptVersion"
 			exit 0
 			;;
 		v|verbose)
@@ -131,6 +126,13 @@ while getopts ":hVvt:" opt; do
 	esac
 done
 shift $(($OPTIND-1))
+
+# 参数个数最少为1
+if [ $# -lt 1 ]
+then
+	EchoUsage
+	exit 1
+fi
 
 $0
 endsnippet

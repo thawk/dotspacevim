@@ -14,7 +14,8 @@ VERSION = u'`!v strftime("%Y%m%d")`'
 def setup_logger(quiet=False, verbose=False):
 	"""日志初始化
 	Args:
-		args (Dict[string, string]): 命令行参数
+		quiet (bool): 静默模式 
+		verbose (bool): 打印调试日志
 	"""
 	log_format = u'%(asctime)s %(levelname)s %(message)s'
 
@@ -51,17 +52,52 @@ snippet skel "Skel using click with sub-commands" b
 import logging
 import os
 import sys
+import functools
 
 import click
 
 VERSION = u'`!v strftime("%Y%m%d")`'
 
-class Settings(object):
+class Context(object):
 	def __init__(self):
 		self.quiet = False
 		self.verbose = False
 
-pass_settings = click.make_pass_decorator(Settings, ensure=True)
+pass_context = click.make_pass_decorator(Context, ensure=True)
+
+
+def init_common_params(func):
+    """Used to inject common params to sub-command
+    """
+
+    @click.option('--quiet', '-q', is_flag=True, default=False, help="Quiet mode.")
+    @click.option('--verbose', '-v', is_flag=True, default=False, help="Verbose mode.")
+    @pass_context
+    @functools.wraps(func)
+    def wrapper(context, *args, **kwargs):
+        context.quiet = kwargs['quiet']
+        context.verbose = kwargs['verbose']
+
+        del kwargs['quiet']
+        del kwargs['verbose']
+
+        return func(context, *args, **kwargs)
+
+    return wrapper
+
+
+def common_params(func):
+	"""Merge common params and do some common initilize
+	"""
+
+    @init_common_params
+    @functools.wraps(func)
+    def wrapper(context, *args, **kwargs):
+        setup_logger(quiet=context.quiet, verbose=context.verbose)
+
+        return func(context, *args, **kwargs)
+
+    return wrapper
 
 
 def setup_logger(quiet=False, verbose=False):
@@ -81,25 +117,19 @@ def setup_logger(quiet=False, verbose=False):
 
 @click.group()
 @click.version_option(version=VERSION)
-@click.option('--quiet', '-q', is_flag=True, default=False, help='Quiet mode.')
-@click.option('--verbose', '-v', is_flag=True, default=False, help='Verbose mode.')
-@pass_settings
+@init_common_params
 def cli(
-	settings,
-	help=False,
-	quiet=False,
-	verbose=False
+	context,
 ):
-	settings.quiet = quiet
-	settings.verbose = verbose
-	
-	setup_logger(quiet=quiet, verbose=verbose)
+	pass
 
 
 @cli.command()
 @click.argument('input', type=click.File('rb'))
-@pass_settings
-def command1(settings, input):
+@common_params
+def command1(
+		context,
+		input):
 	pass
 
 
@@ -202,6 +232,26 @@ snippet option "click option range" b
 @click.option('--${1:name}', '-${2:n}', type=click.IntRange(${3:0}, ${4:10}${5:, clamp=True}))
 endsnippet
 
-snippet argument "click.argument" b
+snippet option "click password option" b
+@click.option('--${1:password}', '-${2:p}', prompt=True, hide_input=True, confirmation_prompt=True))
+endsnippet
+
+snippet argument "click 1 argument" b
 @click.argument('${1:argument}')
+endsnippet
+
+snippet argument "click * arguments" b
+@click.argument('${1:argument}', nargs=-1)
+endsnippet
+
+snippet argument "click infile arguments" b
+@click.argument('${1:input}', type=click.File('rb'))
+endsnippet
+
+snippet argument "click outfile arguments" b
+@click.argument('${1:output}', type=click.File('wb'))
+endsnippet
+
+snippet argument "click path arguments" b
+@click.argument('${1:filename}', type=click.Path(${2:exists=True}))
 endsnippet

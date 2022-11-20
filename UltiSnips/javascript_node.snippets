@@ -1,0 +1,77 @@
+snippet skel "file handle skel" b
+#!/usr/bin/env node
+
+const path = require('path');
+const glob = require('glob');
+const fs = require('fs');
+
+var files = glob.sync('*/index.html');
+var outPath = path.resolve('dist');
+
+if (!fs.existsSync(outPath)){
+	fs.mkdirSync(outPath);
+}
+
+for (var i in presentations) {
+	var name = path.basename(path.dirname(presentations[i]));
+
+	process.stdout.write(`  Processing ${i*1+1}/${count}: ${name}...`);
+	process.stdout.write(`done.\n`);
+}
+
+process.stdout.write(`  All done.\n`);
+endsnippet
+
+snippet arg "yargs" b
+const argv = require('yargs')
+    .option('times', {
+        alias: 't',
+        description: 'The argument',
+        type: 'number'
+    })
+	.default({
+		'times': 3
+	})
+    .help()
+    .strict()
+    .demandCommand(0)
+    .example('\$0 -a 15', 'help string')
+    .check((argv, options) => {
+        return true;
+    })
+    .parse();
+
+for (var i=0; i<argv.times; ++i) {
+	console.log('Hello %s', argv._)
+}
+endsnippet
+
+snippet server "node HTTP server" b
+const path = require("path");
+const express = require("express");
+const app = express();
+const port = 3000;
+
+// Serve our example pages as the root
+app.use(
+	"/",
+	express.static(path.join(__dirname, "./"), {
+		extensions: ["htm", "html"] // Allow use of links without extensions
+	})
+);
+
+// Serve Turbolinks source code
+app.use(
+	"/text",
+	express.static(path.join(__dirname, "./"), {
+    setHeaders: function(res, path, stat) {
+		res.set("Content-Type", "text/plain"); // Set headers to text plain for easier frontend
+    }
+	})
+);
+
+// Hey, Listen!
+app.listen(port, () =>
+	console.log(`GitGraph server listening on port ${port}!`)
+);
+endsnippet

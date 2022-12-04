@@ -42,7 +42,7 @@ def path_to_fqn(relpath, base='', depth=-1):
         if x not in ('src','')]
 
     start = len(paths) - depth - 1
-    if depth <= 0 or start < 0:
+    if depth < 0 or start < 0:
         start = 0
 
     ret += paths[start:]
@@ -170,8 +170,7 @@ snippet "header(\d*)" "header for include/*, header2 for 2 level dirs" br
  */
 #ifndef `!p snip.rv = fqn_to_guard(header_fqn(path, depth=match.group(1)))`
 #define `!p snip.rv = fqn_to_guard(header_fqn(path, depth=match.group(1)))`
-
-`!p snip.rv = '\n'.join('namespace ' + n + ' {' for n in header_fqn(path, depth=match.group(1))[:-1])`
+`!p snip.rv = '' if match.group(1)=='0' else '\n' + '\n'.join('namespace ' + n + ' {' for n in header_fqn(path, depth=match.group(1))[:-1]) + '\n'`
 /**
  * @brief ${1}
  */
@@ -192,12 +191,8 @@ snippet "src(\d*)" "src for src/*, src2 for 2 level dirs" br
  * @author `!v $USER`
  */
 #include `!p snip.rv = source_include(path, depth=match.group(1))`
-
-`!p snip.rv = '\n'.join('namespace ' + n + ' {' for n in source_fqn(path, depth=match.group(1))[:-1])`
+`!p snip.rv = '' if match.group(1)=='0' else '\n' + '\n'.join('namespace ' + n + ' {' for n in source_fqn(path, depth=match.group(1))[:-1])`
 
 ${0}
-
 `!p snip.rv = '\n'.join('}  // namespace ' + n for n in reversed(source_fqn(path, depth=match.group(1))[:-1]))`
 endsnippet
-
-

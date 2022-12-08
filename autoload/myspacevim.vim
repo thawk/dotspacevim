@@ -274,24 +274,6 @@ function! s:setup_plugin() " {{{
     let g:incsearch#auto_nohlsearch = 0
     "" }}}
 
-    "" Neomake {{{
-    let g:neomake_open_list = 0     " 0: don't auto open
-    let g:neomake_vim_enabled_makers = []
-
-    if executable('vimlint')
-        call add(g:neomake_vim_enabled_makers, 'vimlint')
-    endif
-    if executable('vint')
-        call add(g:neomake_vim_enabled_makers, 'vint')
-    endif
-
-    let g:neomake_markdown_markdownlint_errorformat = 
-                \ '%f:%l:%c %m,' .
-                \ '%f: %l: %c: %m,' .
-                \ '%f:%l %m,' .
-                \ '%f: %l: %m'
-    "" }}}
-
     "" ultisnips {{{
     let g:UltiSnipsNoPythonWarning = 1
     let g:ultisnips_python_quoting_style = "single"
@@ -601,6 +583,32 @@ function! s:setup_plugin_after() " {{{
         autocmd! FileType c,cpp,xml,rnc,haskell
                        command! -buffer A :call FSwitch('%', '')
     augroup END
+    "" }}}
+
+    "" Neomake {{{
+    let g:neomake_open_list = 0     " 0: don't auto open
+
+    if ! exists('g:neomake_vim_enabled_makers')
+        let g:neomake_vim_enabled_makers = []
+    endif
+    if executable('vimlint')
+        call add(g:neomake_vim_enabled_makers, 'vimlint')
+    endif
+    if executable('vint')
+        call add(g:neomake_vim_enabled_makers, 'vint')
+    endif
+
+    # 优先使用clang-tidy
+    if executable('clang-tidy')
+        let g:neomake_c_enabled_makers = 'clangtidy'
+        let g:neomake_cpp_enabled_makers = 'clangtidy'
+    endif
+
+    let g:neomake_markdown_markdownlint_errorformat = 
+                \ '%f:%l:%c %m,' .
+                \ '%f: %l: %c: %m,' .
+                \ '%f:%l %m,' .
+                \ '%f: %l: %m'
     "" }}}
 
 endfunction

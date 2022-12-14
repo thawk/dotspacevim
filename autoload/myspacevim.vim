@@ -598,7 +598,7 @@ function! s:setup_plugin_after() " {{{
         call add(g:neomake_vim_enabled_makers, 'vint')
     endif
 
-    # 优先使用clang-tidy
+    " 优先使用clang-tidy
     if executable('clang-tidy')
         let g:neomake_c_enabled_makers = 'clangtidy'
         let g:neomake_cpp_enabled_makers = 'clangtidy'

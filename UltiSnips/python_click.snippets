@@ -236,6 +236,18 @@ snippet option "click password option" b
 @click.option('--${1:password}', '-${2:p}', prompt=True, hide_input=True, confirmation_prompt=True))
 endsnippet
 
+snippet option "click infile option" b
+@click.option('${1:input}', type=click.File('rb'))
+endsnippet
+
+snippet option "click outfile option" b
+@click.option('${1:output}', type=click.File('wb'))
+endsnippet
+
+snippet option "click path option" b
+@click.option('${1:filename}', type=click.Path(${2:exists=True}))
+endsnippet
+
 snippet argument "click 1 argument" b
 @click.argument('${1:argument}')
 endsnippet
@@ -245,7 +257,7 @@ snippet argument "click * arguments" b
 endsnippet
 
 snippet argument "click infile arguments" b
-@click.argument('${1:input}', type=click.File('rb'))
+@click.argument('${1:input}', type=click.File('rb'), nargs=-1)
 endsnippet
 
 snippet argument "click outfile arguments" b

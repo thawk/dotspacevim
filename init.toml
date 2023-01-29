@@ -198,6 +198,7 @@
 [[layers]]
     name = 'lang#python'
     enable = true
+    enable_typeinfo = true
 
 [[layers]]
     name = 'lang#racket'

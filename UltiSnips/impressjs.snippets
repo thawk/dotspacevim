@@ -21,17 +21,17 @@ snippet	skel "impress.js template" b
 <div id="impress" class="nodebug" data-width="1920" data-height="1080" data-autoplay="0" data-max-scale="4">
 
 <!-- title页放到其他页上面，避免在overview页面上被遮挡 -->
-<div id="title" class="step slide title" data-rel-position="relative" data-x="0" data-y="0" data-z=1100>
+<div id="title" class="step slide title" data-rel-position="relative" data-x="0" data-y="0" title="标题页">
 	<h1>${2:$1}</h1>
     <p>${3:`!v $USER`}</p>
     <p><small>${4:`!v strftime("%Y-%m-%d")`}</small></p>
 </div>
 
-<div id="${5:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1h" data-rotate=0 data-z=1000>
+<div id="${5:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1h" data-rotate=0>
 ${0:输入需要的内容}
 </div>
 
-<div id="overview" class="step slide skip" data-x="200" data-y="200" data-scale=5 data-rotate=360>
+<div id="overview" class="step slide skip" data-x="0" data-y="1.5h" data-scale=5 data-rotate=360>
 	<div id="signature" class="absolute right-0 bottom-0 center">
 		<p>Powered by <a href="http://impress.js.org">impress.js<sup>*</sup></a></p>
 	</div>
@@ -48,7 +48,7 @@ ${0:输入需要的内容}
 
 <script src="../vendor/impress.js/extras/highlight/highlight.pack.js" charset="utf-8"></script>
 <script src="../vendor/marked/marked.min.js" charset="utf-8"></script>
-<script src="../vendor/impress.js/js/impress.js" charset="utf-8"></script>
+<script src="../vendor/impress.js/js/impress.min.js" charset="utf-8"></script>
 <script src="../js/init.js" charset="utf-8"></script>
 </body>
 </html>
@@ -59,7 +59,7 @@ snippet modeline "vim modeline" b
 endsnippet
 
 snippet step "impress.js step" b
-<div id="${1:step_id}" class="step${2: slide${3}}">
+<div id="${1:step-id}" class="step${2: slide${3}}">
 	<h3>$1</h3>
 	$0
 </div>
@@ -67,7 +67,7 @@ snippet step "impress.js step" b
 endsnippet
 
 snippet slide "impress.js slide" b
-<div id="${1:step_id}" class="step slide${3}">
+<div class="step slide${3}">
 	<h3>$1</h3>
 	$0
 </div>
@@ -75,9 +75,9 @@ snippet slide "impress.js slide" b
 endsnippet
 
 snippet mslide "impress.js markdown slide" bs
-<div id="${1:step_id}" class="step markdown slide${2}">
+<div class="step markdown slide${2}">
 	<script type="text/template">
-		### $1
+		### ${1:title}
 
 		$0
 	</script>
@@ -92,9 +92,30 @@ $0
 endsnippet
 
 snippet section "impress section slide" b
-<div id="${1:step_id}" class="step slide title box">
+<div id="${1:step-id}" class="step slide title box">
     <h2>$1</h2>
 </div>
 
 endsnippet
 
+snippet v2 "split into two part vertically" b
+<div class="flex items-center">
+	<div class="w-50">
+		$0
+	</div>
+	<div class="w-50">
+	</div>
+</div>
+
+endsnippet
+
+snippet h2 "split into two part horizontally" b
+<div class="flex flex-column items-center">
+	<div class="h-50">
+		$0
+	</div>
+	<div class="h-50">
+	</div>
+</div>
+
+endsnippet

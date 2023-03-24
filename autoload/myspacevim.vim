@@ -458,7 +458,9 @@ endfunction
 " }}}
 
 function! s:setup_plugin_after() " {{{
-    call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
+    if exists('*editorconfig#AddNewHook')
+        call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
+    endif
 
     "" unite {{{
     if exists('*unite#filters#matcher_default#use')

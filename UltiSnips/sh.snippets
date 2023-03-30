@@ -209,3 +209,25 @@ endsnippet
 snippet heredoc "herestring"
 <<< ${1:"string"}
 endsnippet
+
+snippet append "Append new_path to $PATH"
+${1:PATH}=\$$1\${$1:+:${2:new_path}}
+endsnippet
+
+snippet prepend "Prepend new_path to $PATH"
+${1:PATH}=\${$1:+${2:new_path}:}\$$1
+endsnippet
+
+snippet append "Append new_path to $PATH if not existed"
+case ":\${${1:PATH}:-}:" in
+    *:${2:new_path}:*) ;;
+    *) $1="\${$1:+\$$1:}$2" ;;
+esac
+endsnippet
+
+snippet prepend "Prepend new_path to $PATH if not existed"
+case ":\${${1:PATH}:-}:" in
+    *:${2:new_path}:*) ;;
+    *) $1="$2\${$1:+:\$$1}" ;;
+esac
+endsnippet

@@ -153,7 +153,7 @@
     enable = true
     enable_clang_syntax_highlight = false
     [layers.clang_std]
-        cpp = 'c++11'
+        cpp = 'c++14'
 
 [[layers]]
     name = 'lang#clojure'

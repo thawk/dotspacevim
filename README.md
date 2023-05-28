@@ -45,6 +45,12 @@ pip install pynvim neovim
   pip install jedi
   ```
 
+* `lang#javascript` depends on
+
+  ```sh
+  npm install -g typescript typescript-language-server
+  ```
+
 ## Work with pyenv for neovim
 
 * Create the neovim virtualenvs

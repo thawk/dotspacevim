@@ -96,8 +96,8 @@ function! s:setup_lsp() " {{{
                 \ 'go' : 'gopls',
                 \ 'haskell' : {'hie':'hie-wrapper'},
                 \ 'html' : 'html-languageserver',
-                \ 'javascript' : 'typescript-language-server',
-                \ 'javascriptreact' : 'typescript-language-server',
+                \ 'javascript' : {'tsserver': 'typescript-language-server'},
+                \ 'javascriptreact' : {'tsserver': 'typescript-language-server'},
                 \ 'objc' : 'clangd',
                 \ 'objcpp' : 'clangd',
                 \ 'php' : {'':'php', 'phpactor':'phpactor'},
@@ -108,8 +108,8 @@ function! s:setup_lsp() " {{{
                 \ 'rust' : 'rustup',
                 \ 'scala' : 'metals-vim',
                 \ 'sh' : {'bashls':'bash-language-server'},
-                \ 'typescript' : 'typescript-language-server',
-                \ 'typescriptreact' : 'typescript-language-server',
+                \ 'typescript' : {'tsserver': 'typescript-language-server'},
+                \ 'typescriptreact' : {'tsserver': 'typescript-language-server'},
                 \ 'vim' : {'vimls':'vim-language-server'},
                 \ 'vue' : 'vls'
                 \ }

@@ -125,3 +125,15 @@ snippet notes "insert notes" b
 	$0
 </div>
 endsnippet
+
+snippet goto "goto-key"
+data-goto-key-list="${1:ArrowRight}" data-goto-next-list="${2:SlideId}" 
+endsnippet
+
+snippet rel-to "data-rel-to"
+data-rel-to="${1:slideId}" data-rel-reset data-rel-x="1w" 
+endsnippet
+
+snippet reset "data-rel-reset"
+data-rel-reset data-rel-${1:x}="${2:1w}" 
+endsnippet

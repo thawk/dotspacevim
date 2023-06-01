@@ -65,3 +65,10 @@ snippet defi "def __init__" b
 def __init__(self, ${1:args}):
 	${2:super().__init__()}
 endsnippet
+
+snippet input "handle file input" b
+import fileinput
+
+for line in fileinput.input(encoding="utf-8"):
+    process(line)
+endsnippet

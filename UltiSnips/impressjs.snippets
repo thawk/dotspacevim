@@ -74,7 +74,7 @@ snippet slide "impress.js slide" b
 
 endsnippet
 
-snippet mslide "impress.js markdown slide" bs
+snippet markdown "impress.js markdown slide" bs
 <div class="step markdown slide${2}">
 	<script type="text/template">
 		### ${1:title}
@@ -87,7 +87,9 @@ endsnippet
 
 snippet markdown "impress.js markdown block" b
 <div class="markdown">
-$0
+	<script type="text/template">
+		$0
+	</script>
 </div>
 endsnippet
 

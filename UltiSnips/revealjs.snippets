@@ -7,12 +7,12 @@ snippet	skel "reveal.js template" b
 
 		<title>${1:幻灯标题}</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="vendor/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="vendor/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="vendor/reveal.js/dist/theme/black.css">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="vendor/reveal.js/plugin/highlight/monokai.css">
 	</head>
 	<body>
 		<div class="reveal">
@@ -26,10 +26,10 @@ snippet	skel "reveal.js template" b
 			</div>
 		</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
+		<script src="vendor/reveal.js/dist/reveal.js"></script>
+		<script src="vendor/reveal.js/plugin/notes/notes.js"></script>
+		<script src="vendor/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="vendor/reveal.js/plugin/highlight/highlight.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -43,4 +43,43 @@ snippet	skel "reveal.js template" b
 		</script>
 	</body>
 </html>
+endsnippet
+
+snippet markdown "reveal.js markdown section w/ script" b
+<section data-markdown>
+	<script type="text/template">
+		$0
+	</script>
+</section>
+endsnippet
+
+snippet markdown "reveal.js markdown section w/ textarea" b
+<section data-markdown>
+	<textarea data-template>
+		$0
+	</textarea>
+</section>
+endsnippet
+
+snippet markdown "reveal.js markdown w/ external file" b
+<section data-markdown="${1:content.md}">
+</section>
+endsnippet
+
+snippet .elem "reveal.js markdown element attributes"
+<!-- .element: ${1:class="fragment"} -->$0
+endsnippet
+
+snippet .slide "reveal.js markdown element attributes"
+<!-- .slide: ${1:data-background="#ff0000"} -->$0
+endsnippet
+
+snippet notes "reveal.js HTML notes" b
+<aside class="notes">
+	${1:speak notes}
+</aside>$0
+endsnippet
+
+snippet notes "reveal.js Markdown notes" b
+notes: ${1:speak notes}
 endsnippet

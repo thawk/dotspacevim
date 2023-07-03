@@ -21,21 +21,21 @@ snippet	skel "impress.js template" b
 <div id="impress" class="nodebug" data-width="1920" data-height="1080" data-autoplay="0" data-max-scale="4">
 
 <!-- title页放到其他页上面，避免在overview页面上被遮挡 -->
-<div id="title" class="step slide title" data-rel-position="relative" data-x="0" data-y="0" title="标题页">
+<section id="title" class="step slide title" data-rel-position="relative" data-x="0" data-y="0" title="标题页">
 	<h1>${2:$1}</h1>
     <p>${3:`!v $USER`}</p>
     <p><small>${4:`!v strftime("%Y-%m-%d")`}</small></p>
-</div>
+</section>
 
-<div id="${5:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1h" data-rotate=0>
+<section id="${5:本步骤的名称}" class="step slide" data-rel-x="0" data-rel-y="1h" data-rotate=0>
 ${0:输入需要的内容}
-</div>
+</section>
 
-<div id="overview" class="step slide skip" data-x="0" data-y="1.5h" data-scale=5 data-rotate=360>
+<section id="overview" class="step slide skip" data-x="0" data-y="1.5h" data-scale=5 data-rotate=360>
 	<div id="signature" class="absolute right-0 bottom-0 center">
 		<p>Powered by <a href="http://impress.js.org">impress.js<sup>*</sup></a></p>
 	</div>
-</div>
+</section>
 
 </div> <!-- #impress -->
 
@@ -59,29 +59,29 @@ snippet modeline "vim modeline" b
 endsnippet
 
 snippet step "impress.js step" b
-<div id="${1:step-id}" class="step${2: slide${3}}">
+<section id="${1:step-id}" class="step${2: slide${3}}">
 	<h3>$1</h3>
 	$0
-</div>
+</section>
 
 endsnippet
 
 snippet slide "impress.js slide" b
-<div class="step slide${3}">
+<section class="step slide${3}">
 	<h3>$1</h3>
 	$0
-</div>
+</section>
 
 endsnippet
 
 snippet markdown "impress.js markdown slide" bs
-<div class="step markdown slide${2}">
+<section class="step markdown slide${2}">
 	<script type="text/template">
 		### ${1:title}
 
 		$0
 	</script>
-</div>
+</section>
 
 endsnippet
 
@@ -94,9 +94,9 @@ snippet markdown "impress.js markdown block" b
 endsnippet
 
 snippet section "impress section slide" b
-<div id="${1:step-id}" class="step slide title box">
+<section id="${1:step-id}" class="step slide title box">
     <h2>$1</h2>
-</div>
+</section>
 
 endsnippet
 

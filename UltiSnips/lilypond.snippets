@@ -260,6 +260,20 @@ snippet repeat "repeat with alternative" b
 }
 endsnippet
 
+snippet repeat "repeat with volta alternative" b
+\repeat volta 3
+{
+	${0}
+}
+\alternative
+{
+	\volta 1,2 {
+	}
+	\volta 3 {
+	}
+}
+endsnippet
+
 snippet partial
 \partial ${1:duration}
 endsnippet
@@ -560,23 +574,35 @@ snippet segno "segno"
 \mark \markup { \fontsize #-2 \musicglyph "scripts.segno" }
 endsnippet
 
-snippet coda "coda"
+snippet coda "Coda sign"
 \mark \markup { \fontsize #-2 \musicglyph "scripts.coda" }
 endsnippet
 
+snippet coda "Coda"
+\mark \markup { \fontsize #-2 \line { \musicglyph "scripts.coda" "Coda" } }
+endsnippet
+
+snippet coda "To Coda"
+\mark \markup { \fontsize #-2 \line { "To Coda " \musicglyph "scripts.coda" } }
+endsnippet
+
 snippet ds "D.S. al Coda"
+\bar "||" 
 \mark \markup \line { "D.S. al" \raise #1 \musicglyph #"scripts.coda" }
 endsnippet
 
 snippet ds "D.S."
+\bar "||" 
 \mark \markup { \fontsize #-2 "D.S." }
 endsnippet
 
 snippet ds "D.C. D.S."
+\bar "||" 
 \mark \markup { \fontsize #-2 \column { "D.C." "D.S." } }
 endsnippet
 
 snippet ds "上coda，下D.S."
+\bar "||" 
 \once \override Score.RehearsalMark.extra-offset = #'(0 . -8.5)
 \once \override Score.RehearsalMark.baseline-skip = #9
 \mark \markup \center-column { \fontsize #-2 {\musicglyph "scripts.coda"} "D.S." }

@@ -351,6 +351,13 @@
     on_cmd = ['RFC']
     on_ft = 'rfc'
 
+[[custom_plugins]]
+    name = 'AndrewRadev/linediff.vim'
+    lazy = 1
+    on_cmd = [
+        'Linediff', 'LinediffAdd', 'LinediffLast', 'LinediffShow',
+        'LinediffReset', 'LinediffMerge', 'LinediffPick', ]
+
 # Color schemes
 [[custom_plugins]]
     name = 'sickill/vim-monokai'

@@ -152,8 +152,8 @@
     name = 'lang#c'
     enable = true
     enable_clang_syntax_highlight = false
-    [layers.clang_std]
-        cpp = 'c++14'
+    #[layers.clang_std]
+    #    cpp = 'c++14'
 
 [[layers]]
     name = 'lang#clojure'

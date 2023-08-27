@@ -201,6 +201,11 @@ function! s:SetupEnvironment()
         endfor
     endfor
 
+    " 加入路径上所有include目录
+    for l:p in finddir('include', l:search_path, -1)
+        call s:AddPath(l:p)
+    endfor
+
     " 如果在Boost目录，则加上boost目录的上一层目录
     let l:boost_include = finddir("boost", l:search_path)
     if len(l:boost_include) > 0

@@ -19,7 +19,7 @@
 
     # guifont = "SauceCodePro NF:h13"
     # guifont = "DejaVuSansMono_Nerd_Font:h13:cANSI:qDRAFT,DejaVuSansMono\ Nerd\ Font:h13:cANSI:qDRAFT,DejaVuSansMono\ NF:h13:cANSI:qDRAFT,Consolas:h13:cANSI:qDRAFT"
-    guifont = "DejaVuSansMono\ Nerd\ Font:h13:cANSI:qDRAFT"
+    guifont = "DejaVuSansMono\ Nerd\ Font:h13:cANSI:qDRAFT,DejaVuSansMono_Nerd_Font:h13:cANSI:qDRAFT"
 
     # Disable statusline separator, if you want to use other value, please
     # install nerd fonts
@@ -54,7 +54,7 @@
 
     # The default file manager of SpaceVim. Default is 'vimfiler'.
     # you can also use nerdtree or defx
-    filemanager = 'defx'
+#filemanager = 'defx'
 
     realtime_leader_guide = 1
     enable_vimfiler_welcome = 0

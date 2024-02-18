@@ -70,8 +70,16 @@ snippet .elem "reveal.js markdown element attributes"
 <!-- .element: ${1:class="${2:fragment}"} -->$0
 endsnippet
 
-snippet .slide "reveal.js markdown element attributes"
+snippet .elem "reveal.js markdown element class attributes (prepend elem)"
+&shy;<!-- .element: ${1:class="${2:fragment}"} -->$0
+endsnippet
+
+snippet .slide "reveal.js markdown slide attributes"
 <!-- .slide: ${1:data-background="${2:#ff0000}"} -->$0
+endsnippet
+
+snippet .slide "reveal.js markdown title slide"
+<!-- .slide: ${1:class="${2:title}"} -->$0
 endsnippet
 
 snippet notes "reveal.js HTML notes" b

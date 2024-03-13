@@ -8,8 +8,18 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 endsnippet
 
-snippet tempdir
-${1:tempdir}=$(mktemp -d)
+snippet temp "Tempfile" b
+${1:TMPFILE}="$(mktemp -t ${3:--suffix=${4:.SUFFIX}} ${2:`!p
+snip.rv = re.sub(r'[^a-zA-Z]', '_', snip.fn) or "untitled"
+`}.XXXXXX)"
+${5:${6/(.+)/trap "/}${6:rm -f '$${1/.*\s//}'}${6/(.+)/" 0               # EXIT\n/}${7/(.+)/trap "/}${7:rm -f '$${1/.*\s//}'; exit 1}${7/(.+)/" 2       # INT\n/}${8/(.+)/trap "/}${8:rm -f '$${1/.*\s//}'; exit 1}${8/(.+)/" 1 15    # HUP TERM\n/}}
+
+endsnippet
+
+snippet temp "TempDir"
+${1:TMPDIR}="$(mktemp -d ${2:`!p
+snip.rv = re.sub(r'[^a-zA-Z]', '_', snip.fn) or "untitled"
+`}.XXXXXX)"
 trap "rm -rf '\$$1'" 0               # EXIT
 trap "rm -rf '\$$1'; exit 1" 2       # INT
 trap "rm -rf '\$$1'; exit 1" 1 15    # HUP TERM

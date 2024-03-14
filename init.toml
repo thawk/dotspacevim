@@ -260,6 +260,10 @@
     enable = 'executable("tmux")'
 
 [[layers]]
+    name = 'telescope'
+    enable = true
+
+[[layers]]
     name = 'treesitter'
     enable = true
 

@@ -241,3 +241,22 @@ case ":\${${1:PATH}:-}:" in
     *) $1="$2\${$1:+:\$$1}" ;;
 esac
 endsnippet
+
+snippet if "if ... then (if)" b
+if ${2:[[ ${1:condition} ]]}; then
+	${0:${VISUAL}}
+fi
+endsnippet
+
+snippet if "if type ... then (if cmd exists)" b
+if ${2:type ${1:cmd} &> /dev/null}; then
+	${0:${VISUAL}}
+fi
+endsnippet
+
+snippet plugin "dotfiles plugin bootstrap.sh" b
+source "$(dirname "$(dirname "${BASH_SOURCE[0]}")")/util.sh"
+init_plugin "${1:`!p snip.rv = os.path.basename(os.path.dirname(os.path.abspath(path)))`}"
+${2:env}_file="$(create_plugin_file ${3:$2.sh})"
+$0
+endsnippet

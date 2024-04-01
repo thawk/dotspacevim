@@ -237,6 +237,10 @@ function! s:setup_mapping() " {{{
     " highlight MarkWord5 ctermbg=DarkRed     ctermfg=Black guibg=#9999FF guifg=Black |
     " highlight MarkWord6 ctermbg=DarkBlue    ctermfg=Black guibg=#A4E57E guifg=Black
     "" }}}
+
+    "" Telescope <Leader>f {{{
+    call SpaceVim#mapping#def('nmap <silent>', '<Leader>fs', ':<C-U>Telescope lsp_dynamic_workspace_symbols<CR>', 'Telescope dynamic symbols', 'Find symbols')
+    "" }}}
 endfunction
 " }}}
 

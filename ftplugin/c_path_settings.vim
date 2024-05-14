@@ -172,7 +172,7 @@ function! s:SetupEnvironment()
     let l:search_path = l:path . ';' . l:stop_dir
 
     " 加入路径上所有lib/3rd/util/framework目录下的库
-    for l:d in ["lib", "3rd", "framework"]
+    for l:d in ["lib", "3rd", "framework", "prod"]
         for l:p in finddir(l:d, l:search_path, -1)
             call s:AddComponentsToPath(l:p)
         endfor

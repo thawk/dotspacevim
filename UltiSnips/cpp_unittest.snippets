@@ -3,16 +3,16 @@ snippet ut "unittest skel" b
 #include <boost/test/unit_test.hpp>
 #include <boost/system/error_code.hpp>
 #include <turtle/mock.hpp>
-#include <`substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", "")`>
+#include <`!v substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", "")`>
 
-using namespace `substitute(substitute(fnamemodify(substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", ""), ":p:h"), "[.-]", "_", "g"), "/", "::", "g")`;
+using namespace `!v substitute(substitute(fnamemodify(substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", ""), ":p:h"), "[.-]", "_", "g"), "/", "::", "g")`;
 using boost::system::error_code;
 
-BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
+BOOST_AUTO_TEST_SUITE(test_`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
 	Fixture()
 	: $1(${2})
@@ -30,16 +30,16 @@ snippet sut1 "unittest for sscc::*" b
 #include <boost/test/unit_test.hpp>
 #include <boost/system/error_code.hpp>
 #include <turtle/mock.hpp>
-#include "../src/`substitute(expand("%:t:r"), "^test_\\?", "", "")`.h"
+#include "../src/`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`.h"
 
-using namespace sscc`substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*\\(\\(/[^/]\\+\\)\\{1}\\)$", "\\1", ""), "/", "::", "g")`;
+using namespace sscc`!v substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*\\(\\(/[^/]\\+\\)\\{1}\\)$", "\\1", ""), "/", "::", "g")`;
 using boost::system::error_code;
 
-BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
+BOOST_AUTO_TEST_SUITE(test_`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
 	Fixture()
 	: $1(${2})
@@ -57,16 +57,16 @@ snippet sut2 "sscc::*::*" b
 #include <boost/test/unit_test.hpp>
 #include <boost/system/error_code.hpp>
 #include <turtle/mock.hpp>
-#include "../src/`substitute(expand("%:t:r"), "^test_\\?", "", "")`.h"
+#include "../src/`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`.h"
 
-using namespace sscc`substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*\\(\\(/[^/]\\+\\)\\{2}\\)$", "\\1", ""), "/", "::", "g")`;
+using namespace sscc`!v substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*\\(\\(/[^/]\\+\\)\\{2}\\)$", "\\1", ""), "/", "::", "g")`;
 using boost::system::error_code;
 
-BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
+BOOST_AUTO_TEST_SUITE(test_`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
 	Fixture()
 	: $1(${2})
@@ -84,16 +84,16 @@ snippet sut3 "sscc::*::*::*" b
 #include <boost/test/unit_test.hpp>
 #include <boost/system/error_code.hpp>
 #include <turtle/mock.hpp>
-#include "../src/`substitute(expand("%:t:r"), "^test_\\?", "", "")`.h"
+#include "../src/`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`.h"
 
-using namespace sscc`substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*\\(\\(/[^/]\\+\\)\\{3}\\)$", "\\1", ""), "/", "::", "g")`;
+using namespace sscc`!v substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*\\(\\(/[^/]\\+\\)\\{3}\\)$", "\\1", ""), "/", "::", "g")`;
 using boost::system::error_code;
 
-BOOST_AUTO_TEST_SUITE(test_`substitute(expand("%:t:r"), "^test_\\?", "", "")`);
+BOOST_AUTO_TEST_SUITE(test_`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`);
 
 struct Fixture
 {
-	`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`substitute(expand("%:t:r"), "^test_\\?", "", "")`};
+	`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")` ${1:`!v substitute(expand("%:t:r"), "^test_\\?", "", "")`};
 
 	Fixture()
 	: $1(${2})
@@ -109,12 +109,38 @@ endsnippet
 # Comment for Test Case
 snippet tc "unittest for any class" b
 /**
- * @class `substitute(substitute(fnamemodify(substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", ""), ":p:h"), "[.-]", "_", "g"), "/", "::", "g")`::`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
+ * @class `!v substitute(substitute(fnamemodify(substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", ""), ":p:h"), "[.-]", "_", "g"), "/", "::", "g")`::`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
  * @test ${1}\n
  * <b>输入数据：</b> ${2}\n
  * <b>预期输出：</b> ${3}
  */
-BOOST_FIXTURE_TEST_CASE(Test${4}, Fixture)
+BOOST_FIXTURE_TEST_CASE(Test${4}, ${5:Fixture})
+{
+	${0}
+}
+endsnippet
+
+snippet tc "data-driven unittest" b
+/**
+ * @class `!v substitute(substitute(fnamemodify(substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", ""), ":p:h"), "[.-]", "_", "g"), "/", "::", "g")`::`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
+ * @test ${1}\n
+ * <b>输入数据：</b> ${2}\n
+ * <b>预期输出：</b> ${3}
+ */
+BOOST_DATA_TEST_CASE(Test${4}, ${5:dataset}, ${6:param})
+{
+	${0}
+}
+endsnippet
+
+snippet tc "data-driven unittest with fixture" b
+/**
+ * @class `!v substitute(substitute(fnamemodify(substitute(findfile(substitute(expand("%:t:r"), "^test_\\?", "", "") . ".h", substitute(expand("%:p"), "\\<unittest/.*", "include/**", ""), 1), ".*\\<include/", "", ""), ":p:h"), "[.-]", "_", "g"), "/", "::", "g")`::`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
+ * @test ${1}\n
+ * <b>输入数据：</b> ${2}\n
+ * <b>预期输出：</b> ${3}
+ */
+BOOST_DATA_TEST_CASE_F(${4:Fixture}, Test${5}, ${6:dataset}, ${7:param})
 {
 	${0}
 }
@@ -123,7 +149,7 @@ endsnippet
 # Comment for Sscc Test Case
 snippet stc1 "unittest for sscc::*" b
 /**
- * @class sscc::`substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*/\\([^/]\\+\\)$", "\\1", ""), "/", "::", "g")`::`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
+ * @class sscc::`!v substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*/\\([^/]\\+\\)$", "\\1", ""), "/", "::", "g")`::`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
  * @test ${1}\n
  * <b>输入数据：</b> ${2}\n
  * <b>预期输出：</b> ${3}
@@ -137,7 +163,7 @@ endsnippet
 # Comment for Sscc Test Case
 snippet stc2 "unittest for sscc::*::*" b
 /**
- * @class sscc::`substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*/\\([^/]\\+/[^/]\\+\\)$", "\\1", ""), "/", "::", "g")`::`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
+ * @class sscc::`!v substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*/\\([^/]\\+/[^/]\\+\\)$", "\\1", ""), "/", "::", "g")`::`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
  * @test ${1}\n
  * <b>输入数据：</b> ${2}\n
  * <b>预期输出：</b> ${3}
@@ -151,7 +177,7 @@ endsnippet
 # Comment for Sscc Test Case
 snippet stc3 "unittest for sscc::*::*::*" b
 /**
- * @class sscc::`substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*/\\([^/]\\+/[^/]\\+/[^/]\\+\\)$", "\\1", ""), "/", "::", "g")`::`substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
+ * @class sscc::`!v substitute(substitute(substitute(substitute(expand("%:p:h"), "/unittest\\>", "", ""), "[.-]", "_", "g"), "^.*/\\([^/]\\+/[^/]\\+/[^/]\\+\\)$", "\\1", ""), "/", "::", "g")`::`!v substitute(substitute(expand("%:t:r"), "^test_\\(.\\)", "\\u\\1", ""),"_\\(.\\)","\\u\\1","g")`
  * @test ${1}\n
  * <b>输入数据：</b> ${2}\n
  * <b>预期输出：</b> ${3}

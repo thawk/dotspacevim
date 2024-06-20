@@ -13,6 +13,8 @@ if sys.version_info[0] < 3:
 
 VERSION=u'`!v strftime("%Y%m%d")`'
 
+logger = logging.getLogger()
+
 def main(**args):
 	${0:pass}
 
@@ -73,6 +75,8 @@ import logging
 
 VERSION=u'`!v strftime("%Y%m%d")`'
 
+logger = logging.getLogger()
+
 def main(**args):
 	${0:pass}
 
@@ -131,6 +135,8 @@ SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 # 存放结果的目录
 DEFAULT_OUTPUT_DIR = 'result'
 
+logger = logging.getLogger()
+
 
 def parse(args):
 	"""解释输入文件
@@ -161,12 +167,12 @@ def load_result(pickle_file):
 
 	Returns (Dict[string, pd.DataFrame]): 解释结果
 	"""
-	logging.info(u'Loading Pickle file "%s"...', pickle_file)
+	logger.info(u'Loading Pickle file "%s"...', pickle_file)
 
 	with open(pickle_file, 'r') as _:
 		return pickle.load(_)
 
-	logging.info(u'  Done.')
+	logger.info(u'  Done.')
 
 
 def export_result(pickle_file, result):
@@ -176,16 +182,16 @@ def export_result(pickle_file, result):
 		pickle_file (string): pickle文件路径
 		result (Dict[string, pd.DataFrame]): 解释结果
 	"""
-	logging.info(u'Exporting to "%s"...', pickle_file)
+	logger.info(u'Exporting to "%s"...', pickle_file)
 
 	if not os.path.exists(os.path.dirname(pickle_file)):
-		logging.info(u'  Creating "%s"...', os.path.dirname(pickle_file))
+		logger.info(u'  Creating "%s"...', os.path.dirname(pickle_file))
 		mkpath(os.path.dirname(pickle_file))
 
 	with open(pickle_file, 'w') as _:
 		pickle.dump(result, _, pickle.HIGHEST_PROTOCOL)
 
-	logging.info(u'  Done.')
+	logger.info(u'  Done.')
 
 
 def init_locale():

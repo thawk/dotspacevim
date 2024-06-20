@@ -10,6 +10,7 @@ import click
 
 VERSION = u'`!v strftime("%Y%m%d")`'
 
+logger = logging.getLogger()
 
 def setup_logger(quiet=False, verbose=False):
 	"""日志初始化
@@ -57,6 +58,8 @@ import functools
 import click
 
 VERSION = u'`!v strftime("%Y%m%d")`'
+
+logger = logging.getLogger()
 
 class Context(object):
 	def __init__(self):

@@ -29,7 +29,6 @@ function! myspacevim#before() abort " {{{
     if !exists(':Make')
       command! -nargs=* Make :call s:async_make(<q-args>)
     endif
-
 endfunction " }}}
 
 function! myspacevim#after() abort " {{{
@@ -204,15 +203,6 @@ function! s:setup_mapping() " {{{
     " use '%/' in cmdline to get current file path.  e.g. :e %/
     cmap %/ <C-R>=escape(expand("%:p:h")."/", ' \')<CR>
 
-    "" build/test mapping for c and cpp {{{
-    for l:lang in ['c', 'cpp', 'bbv2']
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['b'], 'make', 'build project', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['B'], 'Make', 'async build project', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['t'], 'make unittest', 'run unittest', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['T'], 'Make unittest', 'async run unittest', 1)
-    endfor
-    "" }}}
-
     "" vim-mark <Leader>m {{{
     let g:_spacevim_mappings.m = {'name' : '+vim-mark'}
     call SpaceVim#mapping#def('nmap <silent>', '<Leader>mm', '<Plug>MarkSet', 'Mark current word', 'MarkSet')
@@ -236,10 +226,6 @@ function! s:setup_mapping() " {{{
     " highlight MarkWord4 ctermbg=DarkGreen   ctermfg=Black guibg=#FFB3FF guifg=Black |
     " highlight MarkWord5 ctermbg=DarkRed     ctermfg=Black guibg=#9999FF guifg=Black |
     " highlight MarkWord6 ctermbg=DarkBlue    ctermfg=Black guibg=#A4E57E guifg=Black
-    "" }}}
-
-    "" Telescope <Leader>f {{{
-    call SpaceVim#mapping#def('nmap <silent>', '<Leader>fs', ':<C-U>Telescope lsp_dynamic_workspace_symbols<CR>', 'Telescope dynamic symbols', 'Find symbols')
     "" }}}
 endfunction
 " }}}
@@ -518,7 +504,7 @@ function! s:setup_plugin_after() " {{{
 
     "" vim-fswitch {{{
     " 可以用:A在.h/.cpp间切换
-   
+
     for l:lang in ['c', 'cpp', 'xml', 'rnc', 'haskell']
         call SpaceVim#custom#LangSPCGroupName(l:lang, ['j'], '+Jump/Switch')
         call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'a'], 'FSHere', 'switch and load it into current window', 1)
@@ -548,7 +534,7 @@ function! s:setup_plugin_after() " {{{
                     \      'reg:!/include\(/\w\+\)\{3}\>!/src!,' .
                     \      'reg:!/include\(/\w\+\)\{4}\>!/src!,' .
                     \      'reg:!/include/.*!/src/**!,' .
-                    \      'reg:!^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!' . 
+                    \      'reg:!^\(.*/\|\)sscc\(/[^/]\+\|\)!\1libs\2/src/**!' .
                     \      'reg:!/impl_include\>!/src/impl!,' .
                     \      'reg:!/impl_include/.*!/src/impl!,' .
                     \      'ifrel:!/impl_include\>!../src/impl!,' .
@@ -610,11 +596,32 @@ function! s:setup_plugin_after() " {{{
         let g:neomake_cpp_enabled_makers = 'clangtidy'
     endif
 
-    let g:neomake_markdown_markdownlint_errorformat = 
+    let g:neomake_markdown_markdownlint_errorformat =
                 \ '%f:%l:%c %m,' .
                 \ '%f: %l: %c: %m,' .
                 \ '%f:%l %m,' .
                 \ '%f: %l: %m'
+    "" }}}
+
+    "" Telescope {{{
+    if SpaceVim#layers#isLoaded("telescope")
+        call SpaceVim#mapping#def('nmap <silent>', '<Leader>fs', ':<C-U>Telescope lsp_dynamic_workspace_symbols<CR>', 'Telescope dynamic symbols', 'Find symbols')
+
+        for l:lang in ['c', 'cpp']
+            call SpaceVim#mapping#gd#add(l:lang, function('s:gotodef'))
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['x'], ':Telescope lsp_references', 'show-reference', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['i'], ':Telescope lsp_implementations', 'implementation', 1)
+        endfor
+    endif
+    "" }}}
+
+    "" build/test mapping for c and cpp {{{
+    for l:lang in ['c', 'cpp', 'bbv2']
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['b'], 'make', 'build project', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['B'], 'Make', 'async build project', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['t'], 'make unittest', 'run unittest', 1)
+        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['T'], 'Make unittest', 'async run unittest', 1)
+    endfor
     "" }}}
 
 endfunction

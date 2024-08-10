@@ -27,7 +27,7 @@ function! myspacevim#before() abort " {{{
     call s:setup_autocmd()
 
     if !exists(':Make')
-      command! -nargs=* Make :call s:async_make(<q-args>)
+        command! -nargs=* Make :call s:async_make(<q-args>)
     endif
 endfunction " }}}
 
@@ -49,13 +49,13 @@ function! myspacevim#after() abort " {{{
         endif
     endif
 
-"    if executable('chez')
-"        call SpaceVim#plugins#runner#reg_runner('scheme', 'chez --script %s')
-"        call SpaceVim#plugins#repl#reg('scheme', ['chez', '--quiet'])
-"    else
-"        call SpaceVim#plugins#runner#reg_runner('scheme', 'scheme --script %s')
-"        call SpaceVim#plugins#repl#reg('scheme', ['scheme', '--quiet'])
-"    endif
+    "    if executable('chez')
+    "        call SpaceVim#plugins#runner#reg_runner('scheme', 'chez --script %s')
+    "        call SpaceVim#plugins#repl#reg('scheme', ['chez', '--quiet'])
+    "    else
+    "        call SpaceVim#plugins#runner#reg_runner('scheme', 'scheme --script %s')
+    "        call SpaceVim#plugins#repl#reg('scheme', ['scheme', '--quiet'])
+    "    endif
 endfunction " }}}
 
 function! myspacevim#IncludePathHook(config) " {{{
@@ -435,14 +435,14 @@ function! s:setup_autocmd() " {{{
     augroup myspacevim_yaml
         autocmd!
         autocmd! BufNewFile,BufEnter *.ksy
-              \ :setlocal filetype=yaml
+                    \ :setlocal filetype=yaml
         autocmd! FileType yaml :setlocal shiftwidth=2 expandtab
     augroup END
 
     augroup myspacevim_private
         autocmd!
         autocmd! BufNewFile,BufEnter */private/*
-              \ :setlocal noswapfile noundofile nobackup writebackup backupdir=.
+                    \ :setlocal noswapfile noundofile nobackup writebackup backupdir=.
     augroup END
 endfunction
 " }}}
@@ -573,7 +573,7 @@ function! s:setup_plugin_after() " {{{
                     \| let b:fswitchfnames='/Spec$//'
 
         autocmd! FileType c,cpp,xml,rnc,haskell
-                       command! -buffer A :call FSwitch('%', '')
+        command! -buffer A :call FSwitch('%', '')
     augroup END
     "" }}}
 
@@ -627,14 +627,20 @@ function! s:setup_plugin_after() " {{{
 endfunction
 " }}}
 
+function! s:gotodef() abort
+    if SpaceVim#layers#isLoaded("telescope")
+        exec 'Telescope lsp_definitions'
+    endif
+endfunction
+
 function! s:build_make(program, args) abort " {{{
-  if a:program =~# '\$\*'
-    return substitute(a:program, '\$\*', a:args, 'g')
-  elseif empty(a:args)
-    return a:program
-  else
-    return a:program . ' ' . a:args
-  endif
+    if a:program =~# '\$\*'
+        return substitute(a:program, '\$\*', a:args, 'g')
+    elseif empty(a:args)
+        return a:program
+    else
+        return a:program . ' ' . a:args
+    endif
 endfunction
 " }}}
 
@@ -653,6 +659,7 @@ function! s:syntax_id()
     endfor
     echo join(s, ' -> ')
 endfunction
+
 command! SyntaxId call s:syntax_id()
 " }}}
 

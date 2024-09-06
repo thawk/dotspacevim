@@ -342,7 +342,9 @@ function! s:setup_plugin() " {{{
     "" }}}
 
     "" NERD_commenter.vim {{{
-    call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
+    if SpaceVim#layers#isLoaded('lang#c')
+        call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
+    endif
     "" }}}
 
     "" coc.nvim {{{
@@ -608,20 +610,24 @@ function! s:setup_plugin_after() " {{{
         call SpaceVim#mapping#def('nmap <silent>', '<Leader>fs', ':<C-U>Telescope lsp_dynamic_workspace_symbols<CR>', 'Telescope dynamic symbols', 'Find symbols')
 
         for l:lang in ['c', 'cpp']
-            call SpaceVim#mapping#gd#add(l:lang, function('s:gotodef'))
-            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['x'], ':Telescope lsp_references', 'show-reference', 1)
-            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['i'], ':Telescope lsp_implementations', 'implementation', 1)
+            if SpaceVim#layers#isLoaded('lang#c')
+                call SpaceVim#mapping#gd#add(l:lang, function('s:gotodef'))
+                call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['x'], ':Telescope lsp_references', 'show-reference', 1)
+                call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['i'], ':Telescope lsp_implementations', 'implementation', 1)
+            endif
         endfor
     endif
     "" }}}
 
     "" build/test mapping for c and cpp {{{
-    for l:lang in ['c', 'cpp', 'bbv2']
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['b'], 'make', 'build project', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['B'], 'Make', 'async build project', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['t'], 'make unittest', 'run unittest', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['T'], 'Make unittest', 'async run unittest', 1)
-    endfor
+    if SpaceVim#layers#isLoaded('lang#c')
+        for l:lang in ['c', 'cpp', 'bbv2']
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['b'], 'make', 'build project', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['B'], 'Make', 'async build project', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['t'], 'make unittest', 'run unittest', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['T'], 'Make unittest', 'async run unittest', 1)
+        endfor
+    endif
     "" }}}
 
 endfunction

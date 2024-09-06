@@ -341,12 +341,6 @@ function! s:setup_plugin() " {{{
     let g:CodeReviewer_reviewFile="review.rev"
     "" }}}
 
-    "" NERD_commenter.vim {{{
-    if SpaceVim#layers#isLoaded('lang#c')
-        call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
-    endif
-    "" }}}
-
     "" coc.nvim {{{
     if exists('*coc#config')
         call coc#config('coc.preferences', {
@@ -377,6 +371,18 @@ function! s:setup_plugin() " {{{
     let g:indentLine_setColors = 0
     let g:indentLine_fileTypeExclude = get(g:, 'indentLine_fileTypeExclude', [])
     call add(g:indentLine_fileTypeExclude, 'sml')
+    "" }}}
+
+    "" neovide (GUI for windows) {{{
+    if exists("g:neovide")
+        let g:neovide_position_animation_length = 0
+        let g:neovide_cursor_animation_length = 0.00
+        let g:neovide_cursor_trail_size = 0
+        let g:neovide_cursor_animate_in_insert_mode = false
+        let g:neovide_cursor_animate_command_line = false
+        let g:neovide_scroll_animation_far_lines = 0
+        let g:neovide_scroll_animation_length = 0.00
+    endif
     "" }}}
 endfunction
 " }}}
@@ -454,6 +460,12 @@ function! s:setup_plugin_after() " {{{
         call editorconfig#AddNewHook(function('myspacevim#IncludePathHook'))
     endif
 
+    "" NERD_commenter.vim {{{
+    if SpaceVim#layers#isLoaded('lang#c')
+        call SpaceVim#custom#SPC('nmap', ['c', 'c'], '<Plug>NERDCommenterToggle', 'comment or uncomment lines(aligned)', 0)
+    endif
+    "" }}}
+
     "" unite {{{
     if exists('*unite#filters#matcher_default#use')
         call unite#filters#matcher_default#use(['matcher_context'])
@@ -508,17 +520,19 @@ function! s:setup_plugin_after() " {{{
     " 可以用:A在.h/.cpp间切换
 
     for l:lang in ['c', 'cpp', 'xml', 'rnc', 'haskell']
-        call SpaceVim#custom#LangSPCGroupName(l:lang, ['j'], '+Jump/Switch')
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'a'], 'FSHere', 'switch and load it into current window', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'A'], 'FSSplitRight', 'switch and load it into a new window split on the right', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'l'], 'FSRight', 'switch and load it into the window on the right', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'L'], 'FSSplitRight', 'switch and load it into a new window split on the right', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'h'], 'FSLeft', 'switch and load it into the window on the left', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'H'], 'FSSplitLeft', 'switch and load it into a new window split on the left', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'k'], 'FSAbove', 'switch and load it into the window above', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'K'], 'FSSplitAbove', 'switch and load it into a new window split above', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'j'], 'FSBelow', 'switch and load it into the window above', 1)
-        call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'J'], 'FSSplitBelow', 'switch and load it into a new window split above', 1)
+        if SpaceVim#layers#isLoaded("lang#" . l:lang)
+            call SpaceVim#custom#LangSPCGroupName(l:lang, ['j'], '+Jump/Switch')
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'a'], 'FSHere', 'switch and load it into current window', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'A'], 'FSSplitRight', 'switch and load it into a new window split on the right', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'l'], 'FSRight', 'switch and load it into the window on the right', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'L'], 'FSSplitRight', 'switch and load it into a new window split on the right', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'h'], 'FSLeft', 'switch and load it into the window on the left', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'H'], 'FSSplitLeft', 'switch and load it into a new window split on the left', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'k'], 'FSAbove', 'switch and load it into the window above', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'K'], 'FSSplitAbove', 'switch and load it into a new window split above', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'j'], 'FSBelow', 'switch and load it into the window above', 1)
+            call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['j', 'J'], 'FSSplitBelow', 'switch and load it into a new window split above', 1)
+        endif
     endfor
 
     augroup myspacevim_fswitch
@@ -606,16 +620,16 @@ function! s:setup_plugin_after() " {{{
     "" }}}
 
     "" Telescope {{{
-    if SpaceVim#layers#isLoaded("telescope")
+    if exists(':Telescope')
         call SpaceVim#mapping#def('nmap <silent>', '<Leader>fs', ':<C-U>Telescope lsp_dynamic_workspace_symbols<CR>', 'Telescope dynamic symbols', 'Find symbols')
 
-        for l:lang in ['c', 'cpp']
-            if SpaceVim#layers#isLoaded('lang#c')
+        if SpaceVim#layers#isLoaded('lang#c')
+            for l:lang in ['c', 'cpp']
                 call SpaceVim#mapping#gd#add(l:lang, function('s:gotodef'))
                 call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['x'], ':Telescope lsp_references', 'show-reference', 1)
                 call SpaceVim#custom#LangSPC(l:lang, 'nmap', ['i'], ':Telescope lsp_implementations', 'implementation', 1)
-            endif
-        endfor
+            endfor
+        endif
     endif
     "" }}}
 
@@ -634,7 +648,7 @@ endfunction
 " }}}
 
 function! s:gotodef() abort
-    if SpaceVim#layers#isLoaded("telescope")
+    if exists(':Telescope')
         exec 'Telescope lsp_definitions'
     endif
 endfunction

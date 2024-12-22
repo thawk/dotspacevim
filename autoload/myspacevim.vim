@@ -405,26 +405,26 @@ function! s:setup_autocmd() " {{{
     augroup myspacevim_asciidoc
         autocmd!
         autocmd! FileType asciidoc
-                    \  :set foldlevel=0
+                    \  :setlocal foldlevel=0
     augroup END
 
     augroup myspacevim_markdown
         autocmd!
         autocmd! FileType markdown
-                    \  :set foldlevel=1 shiftwidth=2
+                    \  :setlocal foldlevel=1 shiftwidth=2
                     \| :command! -buffer -range=% ReBullet silent! %s/^\(  \(    \)*\)\* /\1- / <bar> silent! %s/^\(\(    \)*\)\- /\1* /
     augroup END
 
     augroup myspacevim_scss
         autocmd!
         autocmd! FileType scss
-                    \  :set shiftwidth=2
+                    \  :setlocal shiftwidth=2
     augroup END
 
     augroup myspacevim_haskell
         autocmd!
         autocmd! FileType haskell
-                    \  :set shiftwidth=2 expandtab
+                    \  :setlocal shiftwidth=2 expandtab
     augroup END
 
     " surround

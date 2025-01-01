@@ -1,5 +1,6 @@
 # All SpaceVim option below [option] section
 [options]
+    debug_level = 1
     checkinstall = 0
 
     bootstrap_before = "myspacevim#before"
@@ -124,8 +125,8 @@
     name = "ctrlspace"
     enable = false
 
-[[layers]]
-    name = 'incsearch'
+#[[layers]]
+#    name = 'incsearch'
 
 [[layers]]
     name = 'tools'

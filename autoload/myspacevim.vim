@@ -204,14 +204,14 @@ function! s:setup_mapping() " {{{
     cmap %/ <C-R>=escape(expand("%:p:h")."/", ' \')<CR>
 
     "" vim-mark <Leader>m {{{
-    let g:_spacevim_mappings.m = {'name' : '+vim-mark'}
-    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mm', '<Plug>MarkSet', 'Mark current word', 'MarkSet')
-    call SpaceVim#mapping#def('xmap <silent>', '<Leader>mm', '<Plug>MarkSet', 'Mark selected word', 'MarkSet')
-    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mr', '<Plug>MarkRegex', 'Mark using regex', 'MarkRegex')
-    call SpaceVim#mapping#def('xmap <silent>', '<Leader>mr', '<Plug>MarkRegex', 'Mark selection as regex','MarkRegex')
-    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mc', '<Plug>MarkClear', 'Clear current mark','MarkClear')
-    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mM', '<Plug>MarkToggle', 'Toggle marks', 'MarkToggle')
-    call SpaceVim#mapping#def('nmap <silent>', '<Leader>mC', '<Plug>MarkConfirmAllClear', 'Clear ALL marks','MarkAllClear')
+    call SpaceVim#custom#LeaderGroupName(['m'], '+vim-mark')
+    call SpaceVim#custom#leader('nnoremap <silent>', '<leader>mm', '<plug>MarkSet', 'Mark current word')
+    call SpaceVim#custom#leader('xnoremap <silent>', '<leader>mm', '<plug>MarkSet', 'Mark selected word')
+    call SpaceVim#custom#leader('nnoremap <silent>', '<leader>mr', '<plug>MarkRegex', 'Mark using regex', 'MarkRegex')
+    call SpaceVim#custom#leader('xnoremap <silent>', '<leader>mr', '<plug>MarkRegex', 'Mark selection as regex','MarkRegex')
+    call SpaceVim#custom#leader('nnoremap <silent>', '<leader>mc', '<plug>MarkClear', 'Clear current mark','MarkClear')
+    call SpaceVim#custom#leader('nnoremap <silent>', '<leader>mM', '<plug>MarkToggle', 'Toggle marks', 'MarkToggle')
+    call SpaceVim#custom#leader('nnoremap <silent>', '<leader>mC', '<plug>MarkConfirmAllClear', 'Clear ALL marks','MarkAllClear')
 
     " nmap <silent><unique> <Leader>mn <Plug>MarkSearchCurrentNext
     " nmap <silent><unique> <Leader>mp <Plug>MarkSearchCurrentPrev
@@ -388,13 +388,6 @@ endfunction
 " }}}
 
 function! s:setup_autocmd() " {{{
-    augroup myspacevim_jam
-        autocmd!
-        autocmd! FileType jam
-                    \  nnoremap <buffer> [SPC]lb :make<CR>
-                    \| nnoremap <buffer> [SPC]lt :make unittest<CR>
-    augroup END
-
     augroup myspacevim_cpp
         autocmd!
         autocmd! FileType c,cpp

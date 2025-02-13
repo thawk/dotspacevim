@@ -5,6 +5,13 @@
 " URL: https://spacevim.org
 " License: GPLv3
 "=============================================================================
+"
+function! SpaceVim#layers#lang#lilypond#health() abort
+  call SpaceVim#layers#lang#lilypond#plugins()
+  call SpaceVim#layers#lang#lilypond#config()
+  return 1
+endfunction
+
 function! SpaceVim#layers#lang#lilypond#plugins() abort
   let plugins = []
   " call add(plugins, ['gisraptor/vim-lilypond-integrator', {'merged' : 0}])

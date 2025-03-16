@@ -1,5 +1,5 @@
 snippet ver "\version" b
-\version "${1:2.18.2}"
+\version "${1:2.23.2}"
 endsnippet
 
 snippet paper "Paper setting" b
@@ -21,10 +21,10 @@ snippet paper "Paper setting" b
 ${0}
 endsnippet
 
-snippet bookpart "bookpart" b
+snippet book "bookpart" b
 \bookpart {
 	\header {
-		title = "${1}"
+		subtitle = "${1}"
 	}
 	$0
 }
@@ -138,107 +138,6 @@ snippet inote "include note"
 ${0}
 endsnippet
 
-snippet note "Notes" b
-"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
-"$1Opus" = ""
-"$1Composer" = ""
-"$1Singer" = ""
-"$1Key" = \\Key${3:C}
-
-"$1Pitches" = \relative ${4:c''}
-{
-	\time ${5:4/4}
-	\key `!p snip.rv = re.sub("[,']+", "", t[8])` ${9:\major}
-
-	${0}
-
-	\fine
-}
-
-"$1NotesC" =
-{
-	${6:\tempo 4 = ${7:60}}
-
-	\transpose ${8:c} c {
-		\"$1Pitches"
-	}
-}
-
-"$1Notes" =
-{
-	\transpose c \\"$1Key" {
-		\"$1NotesC"
-	}
-}
-
-"$1MelodyC" = \"$1NotesC"
-"$1Melody" = \"$1Notes"
-endsnippet
-
-snippet note "Notes with lyric" b
-"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
-"$1Opus" = ""
-"$1Composer" = ""
-"$1Singer" = ""
-"$1Key" = \\Key${3:C}
-
-melody = \relative ${4:c''}
-{
-	\time ${5:4/4}
-	\key `!p snip.rv = re.sub("[,']+", "", t[8])` ${9:\major}
-
-	${0}
-
-	\fine
-}
-
-verse = \lyricmode {
-}
-
-"$1Pitches" =
-{
-	<<
-		\new Voice = "melody" {
-			${6:\tempo 4 = ${7:60}}
-
-			\melody
-		}
-		\new Lyrics = "verse" \lyricsto "melody" {
-			\verse
-		}
-	>>
-}
-
-"$1NotesC" =
-{
-	\transpose ${8:c} c {
-		\"$1Pitches"
-	}
-}
-
-"$1Notes" =
-{
-	\transpose c \\"$1Key" {
-		\"$1NotesC"
-	}
-}
-
-"$1MelodyC" =
-{
-	\transpose $8 c {
-		$6
-		\melody
-	}
-}
-
-"$1Melody" =
-{
-	\transpose c \\"$1Key" {
-		\"$1MelodyC"
-	}
-}
-endsnippet
-
 snippet repeat "repeat" b
 \repeat volta ${1:2}
 {
@@ -302,242 +201,6 @@ snippet parallel "parallelMusic" b
 	\new Staff \\$1
 	\new Staff \\$2
 >>
-endsnippet
-
-snippet note "Parallel Notes (one staff)" b
-"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
-"$1Opus" = ""
-"$1Composer" = ""
-"$1Singer" = ""
-"$1Key" = \\Key${3:C}
-
-\parallelMusic #'(melody harmony) {
-
-	\time ${3:4/4}
-
-	${0}
-
-	\fine
-}
-
-"$1Pitches" =
-{
-	\new Staff <<
-		${4:\tempo 4 = ${5:108}}
-
-		\relative c'' \melody
-		\\\\
-		\relative c' \harmony
-	>>
-}
-
-"$1Notes" =
-{
-	\transpose c ${6:c} {
-		\key ${7:c} ${8:\major}
-		\"$1Pitches"
-	}
-}
-
-"$1Melody" = \"$1Notes"
-endsnippet
-
-snippet note "Parallel Notes (1 staffs with lyric)" b
-"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
-"$1Opus" = ""
-"$1Composer" = ""
-"$1Singer" = ""
-"$1Key" = \\Key${3:C}
-
-\parallelMusic #'(preludeM preludeH) {
-
-	\time $3
-
-	${0}
-
-}
-
-\parallelMusic #'(melody harmony) {
-
-	\time ${3:4/4}
-
-
-	\fine
-}
-
-grayVoice = {
-	\override Accidental.color = #(x11-color 'gray50)
-	\override Beam.color       = #(x11-color 'gray50)
-	\override Dots.color       = #(x11-color 'gray50)
-	\override NoteHead.color   = #(x11-color 'gray50)
-	\override Rest.color       = #(x11-color 'gray50)
-	\override Stem.color       = #(x11-color 'gray50)
-	\override Tie.color        = #(x11-color 'gray50)
-}
-
-"$1Pitches" =
-{
-	<<
-		\new Voice = "melody" {
-			${4:\tempo 4 = ${5:60}}
-
-			<<
-				\new Voice {
-					\voiceThree
-					\relative c'' {
-						\preludeM
-					}
-				}
-				\new Voice {
-					\voiceFour
-					\grayVoice
-					\relative c' {
-						\preludeH
-					}
-				}
-				{
-					\voiceOne
-					\relative c'' {
-						\melody
-					}
-				}
-				\new Voice {
-					\voiceTwo
-					\grayVoice
-					\relative c' {
-						\harmony
-					}
-				}
-			>>
-		}
-
-		\new Lyrics="firstVerse" \lyricsto "melody" {
-		}
-		\new Lyrics="secondVerse" \lyricsto "melody" {
-			\repeat unfold 4 { \skip 1 }
-		}
-	>>
-}
-
-"$1Notes" =
-{
-	\transpose c ${6:c} {
-		\key ${7:c} ${8:\major}
-		\"$1Pitches"
-	}
-}
-
-"$1Melody" =
-{
-	<<
-		\new Voice = "melody" {
-			$4
-
-			<<
-				\new Voice {
-					\voiceThree
-					\relative c'' {
-						\preludeM
-					}
-				}
-				{
-					\voiceOne
-					\relative c'' {
-						\melody
-					}
-				}
-			>>
-		}
-		\new Lyrics \lyricsto "melody" {
-			\verse
-		}
-	>>
-}
-endsnippet
-
-snippet note "Parallel Notes (two staffs)" b
-"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
-"$1Opus" = ""
-"$1Composer" = ""
-"$1Singer" = ""
-"$1Key" = \\Key${3:C}
-
-\parallelMusic #'(melody harmony) {
-
-	\time ${3:4/4}
-
-	${0}
-
-	\fine
-}
-
-"$1Pitches" =
-{
-	\new Staff <<
-		${4:\tempo 4 = ${5:108}}
-
-		\relative c'' {
-			\melody
-		}
-		\\\\
-		\relative c' {
-			\grayNotes
-
-			\harmony
-		}
-	>>
-}
-
-"$1Notes" =
-{
-	\transpose c ${6:c} {
-		\key ${7:c} ${8:\major}
-		\"$1Pitches"
-	}
-}
-
-"$1Melody" = \"$1Notes"
-endsnippet
-
-snippet note "Parallel Notes (two staffs separated)" b
-"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
-"$1Opus" = ""
-"$1Composer" = ""
-"$1Singer" = ""
-"$1Key" = \\Key${3:C}
-
-\parallelMusic #'(melody harmony) {
-
-	\time ${3:4/4}
-
-	${0}
-
-	\fine
-}
-
-"$1Pitches" =
-{
-	\new StaffGroup <<
-		\new Staff {
-			${4:\tempo 4 = ${5:108}}
-
-			\relative c'' \melody
-		}
-		\new Staff {
-			\relative c' \harmony 
-		}
-	>>
-}
-
-"$1Notes" =
-{
-	\transpose c ${6:c} {
-		\key ${7:c} ${8:\major}
-		\"$1Pitches"
-	}
-}
-
-"$1Melody" = \"$1Notes"
 endsnippet
 
 snippet color "override colors"
@@ -637,3 +300,55 @@ snippet grace "后装饰音"
 \afterGrace $1 { $2 } $0
 endsnippet
 
+snippet 装饰音 "装饰音"
+\grace { $1 } $0
+endsnippet
+
+snippet 装饰音 "短倚音"
+\acciaccatura { $1 } $0
+endsnippet
+
+snippet 装饰音 "长倚音"
+\appoggiatura { $1 } $0
+endsnippet
+
+snippet 装饰音 "后装饰音"
+\afterGrace $1 { $2 } $0
+endsnippet
+
+snippet score "带高低音部和和弦" b
+\score {
+	\header {
+		piece = "${1:示例曲谱}"
+	}
+
+	\new GrandStaff <<
+		\chords {
+			% 和弦功能
+			\set noChordSymbol = ""
+
+			${0}
+		}
+		\new Staff {
+			\relative c' {
+				\clef "treble"
+				\key c \major
+				\time 4/4
+				% 高音部
+				
+				\bar "|."
+			}
+		}
+		\new Staff {
+			\relative c {
+				\clef "bass"
+				\key c \major
+				\time 4/4
+				% 低音部
+				
+				\bar "|."
+			}
+		}
+	>>
+}
+endsnippet

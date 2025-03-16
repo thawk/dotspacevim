@@ -1,5 +1,5 @@
 snippet skel "简单嵌入模板" b
-\version "2.18.0"
+\version "2.23.2"
 \paper {
 	ragged-right = ##t
 }
@@ -13,7 +13,7 @@ snippet skel "非复调 普通钢琴作品通用模板" b
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 非复调 普通钢琴作品通用模板
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\version "2.18.2"
+\version "2.23.2"
 
 showTN = { \override TupletNumber #'transparent = ##f }
 hideTN = { \override TupletNumber #'transparent = ##t }
@@ -37,8 +37,6 @@ RH = \relative c''
 
 }
 
-
-
 %%%%%%%%%%%%%%
 %  左手部分  %
 %%%%%%%%%%%%%%
@@ -50,7 +48,6 @@ LH = \relative c
 	%TODO: 下面开始写左手部分
 
 }
-
 
 \score
 {
@@ -79,7 +76,7 @@ snippet skel "复调钢琴作品模板" b
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 复调模板
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\version "2.18.2"
+\version "2.23.2"
 
 showTN = { \override TupletNumber #'transparent = ##f }
 hideTN = { \override TupletNumber #'transparent = ##t }
@@ -105,10 +102,7 @@ A = \relative c'
 B = \relative c'
 {
 
-
-
 }
-
 
 %%%%%%%%%%%%%%
 %    down    %
@@ -123,10 +117,7 @@ C = \relative c
 D = \relative c
 {
 
-
-
 }
-
 
 \score
 {
@@ -157,5 +148,401 @@ D = \relative c
 		}
 	}
 }
+endsnippet
+
+snippet skel "Notes" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
+
+"$1Pitches" = \relative ${4:c''}
+{
+	\time ${5:4/4}
+	\key `!p snip.rv = re.sub("[,']+", "", t[8])` ${9:\major}
+
+	${0}
+
+	\fine
+}
+
+"$1NotesC" =
+{
+	${6:\tempo 4 = ${7:60}}
+
+	\transpose ${8:c} c {
+		\"$1Pitches"
+	}
+}
+
+"$1Notes" =
+{
+	\transpose c \\"$1Key" {
+		\"$1NotesC"
+	}
+}
+
+"$1MelodyC" = \"$1NotesC"
+"$1Melody" = \"$1Notes"
+endsnippet
+
+snippet skel "Notes with lyric" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
+
+melody = \relative ${4:c''}
+{
+	\time ${5:4/4}
+	\key `!p snip.rv = re.sub("[,']+", "", t[8])` ${9:\major}
+
+	${0}
+
+	\fine
+}
+
+verse = \lyricmode {
+}
+
+"$1Pitches" =
+{
+	<<
+		\new Voice = "melody" {
+			${6:\tempo 4 = ${7:60}}
+
+			\melody
+		}
+		\new Lyrics = "verse" \lyricsto "melody" {
+			\verse
+		}
+	>>
+}
+
+"$1NotesC" =
+{
+	\transpose ${8:c} c {
+		\"$1Pitches"
+	}
+}
+
+"$1Notes" =
+{
+	\transpose c \\"$1Key" {
+		\"$1NotesC"
+	}
+}
+
+"$1MelodyC" =
+{
+	\transpose $8 c {
+		$6
+		\melody
+	}
+}
+
+"$1Melody" =
+{
+	\transpose c \\"$1Key" {
+		\"$1MelodyC"
+	}
+}
+endsnippet
+
+snippet skel "Parallel Notes (one staff)" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
+
+\parallelMusic #'(melody harmony) {
+
+	\time ${3:4/4}
+
+	${0}
+
+	\fine
+}
+
+"$1Pitches" =
+{
+	\new Staff <<
+		${4:\tempo 4 = ${5:108}}
+
+		\relative c'' \melody
+		\\\\
+		\relative c' \harmony
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
+		\"$1Pitches"
+	}
+}
+
+"$1Melody" = \"$1Notes"
+endsnippet
+
+snippet skel "Parallel Notes (1 staffs with lyric)" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
+
+\parallelMusic #'(preludeM preludeH) {
+
+	\time $3
+
+	${0}
+
+}
+
+\parallelMusic #'(melody harmony) {
+
+	\time ${3:4/4}
+
+
+	\fine
+}
+
+grayVoice = {
+	\override Accidental.color = #(x11-color 'gray50)
+	\override Beam.color       = #(x11-color 'gray50)
+	\override Dots.color       = #(x11-color 'gray50)
+	\override NoteHead.color   = #(x11-color 'gray50)
+	\override Rest.color       = #(x11-color 'gray50)
+	\override Stem.color       = #(x11-color 'gray50)
+	\override Tie.color        = #(x11-color 'gray50)
+}
+
+"$1Pitches" =
+{
+	<<
+		\new Voice = "melody" {
+			${4:\tempo 4 = ${5:60}}
+
+			<<
+				\new Voice {
+					\voiceThree
+					\relative c'' {
+						\preludeM
+					}
+				}
+				\new Voice {
+					\voiceFour
+					\grayVoice
+					\relative c' {
+						\preludeH
+					}
+				}
+				{
+					\voiceOne
+					\relative c'' {
+						\melody
+					}
+				}
+				\new Voice {
+					\voiceTwo
+					\grayVoice
+					\relative c' {
+						\harmony
+					}
+				}
+			>>
+		}
+
+		\new Lyrics="firstVerse" \lyricsto "melody" {
+		}
+		\new Lyrics="secondVerse" \lyricsto "melody" {
+			\repeat unfold 4 { \skip 1 }
+		}
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
+		\"$1Pitches"
+	}
+}
+
+"$1Melody" =
+{
+	<<
+		\new Voice = "melody" {
+			$4
+
+			<<
+				\new Voice {
+					\voiceThree
+					\relative c'' {
+						\preludeM
+					}
+				}
+				{
+					\voiceOne
+					\relative c'' {
+						\melody
+					}
+				}
+			>>
+		}
+		\new Lyrics \lyricsto "melody" {
+			\verse
+		}
+	>>
+}
+endsnippet
+
+snippet skel "Parallel Notes (two staffs)" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
+
+\parallelMusic #'(melody harmony) {
+
+	\time ${3:4/4}
+
+	${0}
+
+	\fine
+}
+
+"$1Pitches" =
+{
+	\new Staff <<
+		${4:\tempo 4 = ${5:108}}
+
+		\relative c'' {
+			\melody
+		}
+		\\\\
+		\relative c' {
+			\grayNotes
+
+			\harmony
+		}
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
+		\"$1Pitches"
+	}
+}
+
+"$1Melody" = \"$1Notes"
+endsnippet
+
+snippet skel "Parallel Notes (two staffs separated)" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
+
+\parallelMusic #'(melody harmony) {
+
+	\time ${3:4/4}
+
+	${0}
+
+	\fine
+}
+
+"$1Pitches" =
+{
+	\new StaffGroup <<
+		\new Staff {
+			${4:\tempo 4 = ${5:108}}
+
+			\relative c'' \melody
+		}
+		\new Staff {
+			\relative c' \harmony 
+		}
+	>>
+}
+
+"$1Notes" =
+{
+	\transpose c ${6:c} {
+		\key ${7:c} ${8:\major}
+		\"$1Pitches"
+	}
+}
+
+"$1Melody" = \"$1Notes"
+endsnippet
+
+snippet skel "普通高低音部，带和弦和歌词" b
+"${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
+"$1Opus" = ""
+"$1Composer" = ""
+"$1Singer" = ""
+"$1Key" = \\Key${3:C}
+
+"$1Up" = \relative ${4:c''}
+{
+	\time ${5:4/4}
+	\key `!p snip.rv = re.sub("[,']+", "", t[9])` ${10:\major}
+
+	${0}
+
+	\fine
+}
+
+"$1Down" = \relative ${6:c}
+{
+	\time $5
+	\key `!p snip.rv = re.sub("[,']+", "", t[8])` $9
+
+	${0}
+
+	\fine
+}
+
+
+"$1Pitches" =
+{
+	\new StaffGroup <<
+		\new Staff {
+			${7:\tempo 4 = ${8:108}}
+
+			\relative c'' \"$1Up"
+		}
+		\new Staff {
+			\relative c' \"$1Down"
+		}
+	>>
+}
+
+"$1NotesC" =
+{
+	\transpose ${9:c} c {
+		\"$1Pitches"
+	}
+}
+
+"$1Notes" =
+{
+	\transpose c \\"$1Key" {
+		\"$1NotesC"
+	}
+}
+
+"$1Melody" = \"$1Notes"
 endsnippet
 

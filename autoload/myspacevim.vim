@@ -445,6 +445,15 @@ function! s:setup_autocmd() " {{{
         autocmd! BufNewFile,BufEnter */private/*
                     \ :setlocal noswapfile noundofile nobackup writebackup backupdir=.
     augroup END
+
+    augroup myspacevim_lilypond
+        autocmd!
+        autocmd! FileType lilypond
+                    \  setlocal tabstop=2
+                    \| setlocal softtabstop=2
+                    \| setlocal shiftwidth=2
+    augroup END
+
 endfunction
 " }}}
 

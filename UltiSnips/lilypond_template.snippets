@@ -204,9 +204,6 @@ melody = \relative ${4:c''}
 	\fine
 }
 
-verse = \lyricmode {
-}
-
 "$1Pitches" =
 {
 	<<
@@ -215,8 +212,10 @@ verse = \lyricmode {
 
 			\melody
 		}
-		\new Lyrics = "verse" \lyricsto "melody" {
-			\verse
+		\new Lyrics="verse" \lyricsto "melody" {
+		}
+		\new Lyrics="secondVerse" \lyricsto "melody" {
+			\repeat unfold 4 { \skip 1 }
 		}
 	>>
 }

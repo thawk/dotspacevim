@@ -154,7 +154,9 @@ snippet skel "Notes" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
-"$1Singer" = ""
+"$1Performer" = ""
+"$1Lyricist" = ""
+"$1Subtitle" = ""
 "$1Key" = \\Key${3:C}
 
 "$1Pitches" = \relative ${4:c''}
@@ -191,7 +193,9 @@ snippet skel "Notes with lyric" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
-"$1Singer" = ""
+"$1Performer" = ""
+"$1Lyricist" = ""
+"$1Subtitle" = ""
 "$1Key" = \\Key${3:C}
 
 melody = \relative ${4:c''}
@@ -254,7 +258,9 @@ snippet skel "Parallel Notes (one staff)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
-"$1Singer" = ""
+"$1Performer" = ""
+"$1Lyricist" = ""
+"$1Subtitle" = ""
 "$1Key" = \\Key${3:C}
 
 \parallelMusic #'(melody harmony) {
@@ -292,7 +298,9 @@ snippet skel "Parallel Notes (1 staffs with lyric)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
-"$1Singer" = ""
+"$1Performer" = ""
+"$1Lyricist" = ""
+"$1Subtitle" = ""
 "$1Key" = \\Key${3:C}
 
 \parallelMusic #'(preludeM preludeH) {
@@ -405,7 +413,9 @@ snippet skel "Parallel Notes (two staffs)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
-"$1Singer" = ""
+"$1Performer" = ""
+"$1Lyricist" = ""
+"$1Subtitle" = ""
 "$1Key" = \\Key${3:C}
 
 \parallelMusic #'(melody harmony) {
@@ -449,7 +459,9 @@ snippet skel "Parallel Notes (two staffs separated)" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
-"$1Singer" = ""
+"$1Performer" = ""
+"$1Lyricist" = ""
+"$1Subtitle" = ""
 "$1Key" = \\Key${3:C}
 
 \parallelMusic #'(melody harmony) {
@@ -490,7 +502,9 @@ snippet skel "普通高低音部，带和弦和歌词" b
 "${1:`!v expand("%:t:r")`}Piece" = "${2:$1}"
 "$1Opus" = ""
 "$1Composer" = ""
-"$1Singer" = ""
+"$1Performer" = ""
+"$1Lyricist" = ""
+"$1Subtitle" = ""
 "$1Key" = \\Key${3:C}
 
 "$1Up" = \relative ${4:c''}
